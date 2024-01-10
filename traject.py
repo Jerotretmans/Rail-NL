@@ -6,7 +6,7 @@ class Traject:
 
 if __name__ == "__main__":
     traject = Traject(1, 3)
-    print(traject.afstand)\
+    print(traject.afstand)
     
 
     print("hallo")
