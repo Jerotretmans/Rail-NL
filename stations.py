@@ -1,6 +1,47 @@
+import csv
+
 class Station:
-    def __init__(self, name, x, y, connections):
+    def __init__(self, name, y, x, station1, station2):
         self.name = name
-        self.x = x
         self.y = y
-        self.connections = connections
+        self.x = x
+        # self.connections =
+    
+    def create_connections(self):
+        connections = {}
+        with open('ConnectiesHolland.csv') as connections_file:
+            connections = csv.reader(connections_file)
+            header = next(connections)
+            for row in connections:
+                station1 = row[0]
+                station2 = row[1]
+                time = row[2]
+                if station1 == self.name:
+                    
+
+if __name__ == "__main__":
+    rows = []
+    station_objects = []
+  
+    with open('StationsHolland.csv') as stations_file:
+        stations = csv.reader(stations_file)
+        header = next(stations)
+        for row in stations:
+            name = row[0]
+            y = row[1]
+            x = row[2]
+            station = Station(name, y, x)
+            station_objects.append(stations)
+
+    with open('ConnectiesHolland.csv') as connections_file:
+        connections = csv.reader(connections_file)
+        header = next(connections)
+        for row in connections:
+            station1 = row[0]
+            station2 = row[1]
+            time = row[2]
+            stations = Station
+            stations.connections(station1, station2, time)
+            station_objects.append(stations)
+
+    print(station_objects)
