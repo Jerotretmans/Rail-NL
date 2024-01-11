@@ -46,5 +46,7 @@ if __name__ == "__main__":
     #         stations.connections(station1, station2, time)
     #         station_objects.append(stations)
 
-    for station in station_objects:
-        print(f"Station: {station.name}, Connections: {station.connections}")
+    print(station_objects)
+
+    # for station in station_objects:
+    #     print(f"Station: {station.name}, Connections: {station.connections}")
