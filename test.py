@@ -8,3 +8,7 @@ with open('StationsHolland.csv') as stations_file:
 
 print(header)
 print(rows)
+ 
+
+
+ 
