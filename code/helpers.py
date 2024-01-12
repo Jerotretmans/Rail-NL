@@ -8,7 +8,3 @@ def read_csv_file(filename) -> None:
         for row in stations:
             rows.append(row)
     return rows
-
-
-
-

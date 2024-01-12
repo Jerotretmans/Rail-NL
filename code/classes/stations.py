@@ -15,7 +15,7 @@ class Station:
             station1 = row[0]
             station2 = row[1]
             time = row[2]
-            print(station1, station2, time)
+            # print(station1, station2, time)
             if station1 == self.name:
                 self.connections[station2] = time
             elif station2 == self.name:
@@ -35,5 +35,5 @@ if __name__ == "__main__":
         station.create_connections()
         station_objects.append(station)
     
-    # for station in station_objects:
-    #     print(f"Station: {station.name}, Connections: {station.connections}")
+    for station in station_objects:
+        print(f"Station: {station.name}, Connections: {station.connections}")
