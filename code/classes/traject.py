@@ -1,4 +1,6 @@
 from stations import Station
+import sys
+sys.path.append('../')
 from helpers import read_csv_file
 
 class Traject:
@@ -11,7 +13,7 @@ class Traject:
 
         
 if __name__ == "__main__":
-    stations = read_csv_file('StationsHolland.csv')
+    stations = read_csv_file('../../data/StationsHolland.csv')
     station_objects = []
     
     for row in stations:
