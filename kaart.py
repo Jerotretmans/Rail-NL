@@ -10,19 +10,19 @@ names = []
 x_coords = []
 y_coords = []
 
-
 for station in stations[1]:
     names.append(station[0])
     x_coords.append(station[2])
     y_coords.append(station[1])
 
-print(names)
-print(x_coords)
-print(y_coords)
+x_list = [float(x) for x in x_coords]
+y_list = [float(y) for y in y_coords]
 
-plt.scatter(x_coords, y_coords, color='blue')
-plt.xlabel('Lengtebreedte')
-plt.ylabel('Hoogtebreedte')
+plt.scatter(x_list, y_list, color='blue')
+plt.xlim(4.0, 5.4)
+plt.xlabel('Lengtegraden')
+plt.ylabel('Breedtegraden')
 
 plt.grid(True)
+plt.tight_layout()
 plt.show()
