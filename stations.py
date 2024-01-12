@@ -23,17 +23,20 @@ class Station:
 
 if __name__ == "__main__":
     rows = []
-    station_objects = []
-  
-    with open('StationsHolland.csv') as stations_file:
-        stations = csv.reader(stations_file)
-        header = next(stations)
-        for row in stations:
+    with open('StationsHolland.csv', 'r') as stations_file:
+        stations_reader = csv.reader(stations_file)
+        header = next(stations_reader)
+        station_objects = []
+        for row in stations_reader:
             name = row[0]
             y = row[1]
             x = row[2]
+        
+            # Create a Station object and append it to the list
             station = Station(name, y, x)
-            station_objects.append(stations)
+            station_objects.append(station)
+
+    station.create_connections
 
     # with open('ConnectiesHolland.csv') as connections_file:
     #     connections = csv.reader(connections_file)
@@ -46,7 +49,7 @@ if __name__ == "__main__":
     #         stations.connections(station1, station2, time)
     #         station_objects.append(stations)
 
-    print(station_objects)
+    
 
-    # for station in station_objects:
-    #     print(f"Station: {station.name}, Connections: {station.connections}")
+    for station in station_objects:
+        print(f"Station: {station.name}, Connections: {station.connections}")
