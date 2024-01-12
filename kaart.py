@@ -1,10 +1,10 @@
-from helpers import read_file
+from helpers import read_csv_file
 import matplotlib
 matplotlib.use('Qt5Agg')
 import matplotlib.pyplot as plt
 
 
-stations = read_file('StationsHolland.csv')
+stations = read_csv_file('StationsHolland.csv')
 
 names = []
 x_coords = []
