@@ -7,6 +7,7 @@ class Traject:
         self.stations = []
     
     def create_traject(self):
+        pass
 
         
 if __name__ == "__main__":
