@@ -1,10 +1,13 @@
+import sys
+sys.path.append('../')
 from helpers import read_file
+
 import matplotlib
 matplotlib.use('Qt5Agg')
 import matplotlib.pyplot as plt
 
 
-stations = read_file('StationsHolland.csv')
+stations = read_file('../../data/StationsHolland.csv')
 
 names = []
 x_coords = []
