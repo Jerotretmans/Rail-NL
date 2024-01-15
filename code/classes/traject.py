@@ -6,17 +6,20 @@ from helpers import read_csv_file
 class Traject:
     def __init__(self, name):
         self.name = name
-        self.stations = []
-        # self.time = 0
+        self.stations_in_traject = []
+        self.time = 0
     
-    def add_station(self, other_station):
-        self.stations.append(other_station)
+    def add_station(self, station):
+        self.stations_in_traject.append(station)
+        for connected_station, time in station.connections.items():
+            self.time += time
 
-    # def get_connection(self, other_station):
-    #     return self.stations.name
-    
-    # def get_time(self, other_station):
-    #     return self.stations[other_station.time]
+    def print_stations_details(self):
+        print(f"Details for Traject {self.name}:")
+        for station in self.stations_in_traject:
+            print(f"Station {station.name}:")
+            print(f" - Name: {station.name}")
+            print(f" - Connections: {station.connections}")
 
 
 if __name__ == "__main__":
@@ -35,16 +38,21 @@ if __name__ == "__main__":
         time = row[2]
 
         for station in test_stations:
-            if station1.name == main_station:
-                station1.create_connection(connected_station, time)
-            elif station1.name == connected_station:
-                station1.create_connection(main_station, time)
+            if station.name == main_station:
+                station.create_connection(connected_station, time)
+            elif station.name == connected_station:
+                station.create_connection(main_station, time)
+    
+    name = "traject1"
+    traject1 = Traject(name)
+    
+    for station in test_stations:
+        station.print_station_name()
+        traject1.add_station(station)
+        
+    # traject1.print_stations_details()
 
-
-    traject1 = Traject(station1)
-    traject1.add_station(station)
-
-    print(f"{traject1.name}, {traject1.stations}")
+    # print(f"{traject1.name}, {traject1.stations}")
 
 
     

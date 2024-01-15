@@ -9,6 +9,15 @@ class Station:
 
     def create_connection(self, other_station, time):
         self.connections[other_station] = time
+
+    def get_connection(self, other_station):
+        if other_station in self.connections:
+            return True
+        else:
+            return False
+        
+    def print_station_name(self):
+        print(self.name)
         
 
 if __name__ == "__main__":
