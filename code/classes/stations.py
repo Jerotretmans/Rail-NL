@@ -3,6 +3,10 @@ sys.path.append('../')
 from helpers import read_csv_file
 
 class Station:
+    """
+    Bevat de naam van stations en een dictionary met alle connecties van de stations.
+    """
+
     def __init__(self, name):
         self.name = name
         self.connections = {}
@@ -21,6 +25,10 @@ class Station:
         
 
 if __name__ == "__main__":
+    """
+    Test functie voordat we in main.py bezig gaan.
+    """
+
     stations = read_csv_file('../../data/StationsHolland.csv')
     connections = read_csv_file('../../data/ConnectiesHolland.csv')
     
@@ -38,7 +46,7 @@ if __name__ == "__main__":
         for station in station_objects:
             if station.name == main_station:
                 station.create_connection(connected_station, time)
-            elif station.name == connected_station:
+            elif station.name == connected_station: # Garandeert unieke stations, geen dubbelen
                 station.create_connection(main_station, time)   
     
     for station in station_objects:

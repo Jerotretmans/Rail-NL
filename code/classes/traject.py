@@ -4,6 +4,13 @@ sys.path.append('../')
 from helpers import read_csv_file
 
 class Traject:
+    """
+    Returnt een lijst met namen van stations die aan elkaar verbonden zijn.
+    Telt de totale duur van het traject op. 
+
+    Constraint: max 120 min per traject
+    """
+    
     def __init__(self, name) -> None:
         self.name = name
         self.stations_in_traject = []
@@ -19,6 +26,9 @@ class Traject:
 
 
 if __name__ == "__main__":
+    """
+    Test functie voordat we in main.py bezig gaan.
+    """
 
     connections = read_csv_file('../../data/ConnectiesHolland.csv')
     # print(connections)
