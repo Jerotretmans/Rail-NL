@@ -12,7 +12,7 @@ names = []
 x_coords = []
 y_coords = []
 
-for station in stations[1]:
+for station in stations:
     names.append(station[0])
     x_coords.append(station[2])
     y_coords.append(station[1])

@@ -16,8 +16,8 @@ class Station:
         else:
             return False
         
-    def print_station_name(self):
-        print(self.name)
+    def get_name(self):
+        return self.name
         
 
 if __name__ == "__main__":
@@ -42,4 +42,4 @@ if __name__ == "__main__":
                 station.create_connection(main_station, time)   
     
     for station in station_objects:
-        print(f"Station: {station.name}, Connections: {station.connections}")
+        print(f"Station: {station.name}, Connections: {station.connections} \n")

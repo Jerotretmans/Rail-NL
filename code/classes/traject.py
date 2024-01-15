@@ -4,27 +4,24 @@ sys.path.append('../')
 from helpers import read_csv_file
 
 class Traject:
-    def __init__(self, name):
+    def __init__(self, name) -> None:
         self.name = name
         self.stations_in_traject = []
         self.time = 0
     
-    def add_station(self, station):
-        self.stations_in_traject.append(station)
-        for connected_station, time in station.connections.items():
-            self.time += time
+    def add_station(self, station) -> None:
+        for station, time in station.connections.items():
+            self.stations_in_traject.append(station)
+            self.time += int(time)
 
-    def print_stations_details(self):
-        print(f"Details for Traject {self.name}:")
-        for station in self.stations_in_traject:
-            print(f"Station {station.name}:")
-            print(f" - Name: {station.name}")
-            print(f" - Connections: {station.connections}")
+    def __repr__(self):
+        return f"{self.name}: {self.stations_in_traject}"
 
 
 if __name__ == "__main__":
 
     connections = read_csv_file('../../data/ConnectiesHolland.csv')
+    # print(connections)
     
     test_stations = []
     station1 = Station('Hoorn')
@@ -43,14 +40,15 @@ if __name__ == "__main__":
             elif station.name == connected_station:
                 station.create_connection(main_station, time)
     
-    name = "traject1"
+    name = "Track1"
     traject1 = Traject(name)
     
     for station in test_stations:
-        station.print_station_name()
+        print(station.get_name())
         traject1.add_station(station)
+        print(traject1)
         
-    # traject1.print_stations_details()
+    # traject1.print_details()
 
     # print(f"{traject1.name}, {traject1.stations}")
 
