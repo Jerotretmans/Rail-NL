@@ -8,19 +8,23 @@ class Station:
     """
 
     def __init__(self, name):
+        # Initialize een station object met een naam en mogelijke verbindingen
         self.name = name
         self.connections = {}
 
     def create_connection(self, other_station, time):
+        # Maak de verbindingen met stations met een bepaalde tijd
         self.connections[other_station] = time
 
     def get_connection(self, other_station):
+        # Check of er een verbinding is met een bepaald station
         if other_station in self.connections:
             return self.connections
         else:
             return False
         
     def get_name(self):
+        # Krijg de naam van een station
         return self.name
         
 
@@ -29,15 +33,18 @@ if __name__ == "__main__":
     Test functie voordat we in main.py bezig gaan.
     """
 
+    # Lees de locatue en connecties tussen stations vanuit csn bestanden
     stations = read_csv_file('../../data/StationsHolland.csv')
     connections = read_csv_file('../../data/ConnectiesHolland.csv')
     
+    # Maak stations objecten voor elk station in de csv bestanden
     station_objects = []
     for row in stations:
         name = row[0]
         station = Station(name)
         station_objects.append(station)
 
+    # Maak de verbindingen tussen stations uit het csv bestand en onthoud de tijd voor elke verbinding
     for row in connections:
         main_station = row[0]
         connected_station = row[1]
@@ -49,5 +56,6 @@ if __name__ == "__main__":
             elif station.name == connected_station: # Garandeert unieke stations, geen dubbelen
                 station.create_connection(main_station, time)   
     
+    # Print de details voor elk station (Lijst van alle connecties en bijbehorende tijd)
     for station in station_objects:
         print(f"Station: {station.name}, Connections: {station.connections} \n")

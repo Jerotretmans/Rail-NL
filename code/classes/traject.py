@@ -12,6 +12,7 @@ class Traject:
     """
     
     def __init__(self, name) -> None:
+        # Initializeer het traject object, met een naam, een lijst stations en de totale tijd
         self.name = name
         self.stations_in_traject = []
         self.station_counter = 0
@@ -51,8 +52,8 @@ if __name__ == "__main__":
     Test functie voordat we in main.py bezig gaan.
     """
 
+    # Lees verbindingen van CSV bestand
     connections = read_csv_file('../../data/ConnectiesHolland.csv')
-    # print(connections)
     
     test_stations = []
     station1 = Station('Hoorn')
