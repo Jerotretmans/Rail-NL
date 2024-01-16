@@ -16,7 +16,7 @@ class Station:
 
     def get_connection(self, other_station):
         if other_station in self.connections:
-            return True
+            return self.connections
         else:
             return False
         

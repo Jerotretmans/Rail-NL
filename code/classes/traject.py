@@ -14,15 +14,35 @@ class Traject:
     def __init__(self, name) -> None:
         self.name = name
         self.stations_in_traject = []
+        self.station_counter = 0
         self.time = 0
+        self.current_station = None
+        
     
-    def add_station(self, station) -> None:
-        for station, time in station.connections.items():
+    def add_station(self, new_station) -> None:
+        if self.station_counter == 0:
             self.stations_in_traject.append(station)
-            self.time += int(time)
+            self.current_station = new_station
+            self.station_counter += 1
+        else:
+            # for connected_station_name, time in station.connections.items():
+            print("succes")
+            if station.get_name in self.current_station.connections:
+                print("succes2")
+
+                # connection exists & station can be added to track.        
+
+        # print(station.connections.items())
+        for stations_with_connection, time in station.connections.items():
+            print(f"1: {station.get_name()}")
+            print(f"2: {stations_with_connection}")
+            
+            # if station.get_name()  stations_with_connection:
+            #     self.stations_in_traject.append(station)
+            #     self.time += int(time)
 
     def __repr__(self):
-        return f"{self.name}: {self.stations_in_traject}"
+        return f"{self.name}: {self.stations_in_traject}, Time: {self.time}"
 
 
 if __name__ == "__main__":
@@ -54,13 +74,11 @@ if __name__ == "__main__":
     traject1 = Traject(name)
     
     for station in test_stations:
-        print(station.get_name())
+        print(f"Name: {station.get_name()}")
         traject1.add_station(station)
-        print(traject1)
-        
-    # traject1.print_details()
+    
+    # print(traject1)
 
-    # print(f"{traject1.name}, {traject1.stations}")
 
 
     
