@@ -20,26 +20,27 @@ class Traject:
         
     
     def add_station(self, new_station) -> None:
+        # als er nog geen station in de trajectlijst staat:
         if self.station_counter == 0:
-            self.stations_in_traject.append(station)
+            self.stations_in_traject.append(new_station)
             self.current_station = new_station
             self.station_counter += 1
+        # als er wel een station in staat moet er worden gecheckt of er een verbinding bestaat tussen de stations
         else:
-            # for connected_station_name, time in station.connections.items():
-            print("succes")
-            if station.get_name in self.current_station.connections:
-                print("succes2")
-
-                # connection exists & station can be added to track.        
-
-        # print(station.connections.items())
-        for stations_with_connection, time in station.connections.items():
-            print(f"1: {station.get_name()}")
-            print(f"2: {stations_with_connection}")
-            
-            # if station.get_name()  stations_with_connection:
-            #     self.stations_in_traject.append(station)
-            #     self.time += int(time)
+            # checkt voor nieuw station alle verbindingen
+            for connected_station_name, time in station.connections.items():
+                # als een van de verbindingen van nieuw station het huidige station is
+                if connected_station_name == self.current_station.get_name():
+                    # station toevoegen aan traject lijst
+                    self.stations_in_traject.append(new_station)
+                    # nieuw station wordt huidig station
+                    self.current_station = new_station
+                    time = int(time)
+                    # totale trajecttijd wordt bij elkaar opgeteld
+                    self.time += time
+                else:
+                    print("geen verbinding tussen nieuw en huidig station")
+            print(self.time)
 
     def __repr__(self):
         return f"{self.name}: {self.stations_in_traject}, Time: {self.time}"
@@ -56,8 +57,13 @@ if __name__ == "__main__":
     test_stations = []
     station1 = Station('Hoorn')
     station2 = Station('Alkmaar')
+    station3 = Station('Den Helder')
+    station4 = Station('Gouda')
+
     test_stations.append(station1)
     test_stations.append(station2)
+    test_stations.append(station3)
+    test_stations.append(station4)
 
     for row in connections:
         main_station = row[0]
@@ -76,8 +82,6 @@ if __name__ == "__main__":
     for station in test_stations:
         print(f"Name: {station.get_name()}")
         traject1.add_station(station)
-    
-    # print(traject1)
 
 
 
