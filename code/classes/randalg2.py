@@ -3,7 +3,7 @@ import sys
 sys.path.append('../')
 from helpers import read_csv_file
 import random
-# from classes.stations import Station
+from station
 from traject import Traject
 from dienstregeling import Regeling
 
@@ -21,17 +21,6 @@ if __name__ == "__main__":
 
     
     random_station = (random.choice(stations_name_list))
+    station = Station('random_station')
     
     print(random_station)
-
-
-
-
-
-    
-
-
-
-
-
-    
