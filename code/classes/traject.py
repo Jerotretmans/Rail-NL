@@ -15,6 +15,7 @@ class Traject:
         # Initializeer het traject object, met een naam, een lijst stations en de totale tijd
         self.name = name
         self.stations_in_traject = []
+        self.stations_in_traject_name_only = []
         self.station_counter = 0
         self.time = 0
         self.current_station = None
@@ -43,8 +44,16 @@ class Traject:
                     print("geen verbinding tussen nieuw en huidig station")
             print(self.time)
 
+    def get_name(self):
+        return f"{self.name}"
+    
+    def get_names(self):
+        for station in self.stations_in_traject:
+            self.stations_in_traject_name_only.append(station.get_name())
+        return(self.stations_in_traject_name_only)
+    
     def __repr__(self):
-        return f"{self.name}: {self.stations_in_traject}, Time: {self.time}"
+        return f"{self.name}, {self.get_names()}"
 
 
 if __name__ == "__main__":
@@ -83,6 +92,8 @@ if __name__ == "__main__":
     for station in test_stations:
         print(f"Name: {station.get_name()}")
         traject1.add_station(station)
+    
+    print(traject1.get_names())
 
 
 

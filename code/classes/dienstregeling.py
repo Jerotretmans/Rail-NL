@@ -50,6 +50,7 @@ class Regeling:
         K = self.p*10000 - (self.T*100 + self.Min)
         return K
     
+    
     def export_output(self):
         csv_file_path = '../../output.csv'  
         
@@ -58,9 +59,8 @@ class Regeling:
             csv_writer = csv.writer(csvfile)
 
             # Write the header
-            csv_writer.writerow(["train, stations"])
-
-            csv_writer.writerow(self.name)
+            csv_writer.writerow(["train", "stations"])
+            csv_writer.writerow(self.trajecten_in_regeling)
         
         print(f"Output has been exported to {csv_file_path}")
 
@@ -96,14 +96,14 @@ if __name__ == "__main__":
             elif station.name == connected_station:
                 station.create_connection(main_station, time)
     
-    name = "Track1"
+    name = "Train_1"
     traject1 = Traject(name)
     
     for station in test_stations:
         print(f"Name: {station.get_name()}")
         traject1.add_station(station)
 
-    regeling1 = Regeling("train1")
+    regeling1 = Regeling("Regeling_1")
     regeling1.add_traject(traject1)
     print(regeling1.calculate_T())
     regeling1.export_output()
