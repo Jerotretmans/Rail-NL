@@ -38,5 +38,3 @@ plt.tick_params(axis='y', which='both', labelsize=10)
 plt.grid(True)
 plt.tight_layout()
 plt.show()
-
-#test
