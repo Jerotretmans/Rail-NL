@@ -29,7 +29,7 @@ class Traject:
         # als er wel een station in staat moet er worden gecheckt of er een verbinding bestaat tussen de stations
         else:
             # checkt voor nieuw station alle verbindingen
-            for connected_station_name, time in station.connections.items():
+            for connected_station_name, time in new_station.connections.items():
                 # als een van de verbindingen van nieuw station het huidige station is
                 if connected_station_name == self.current_station.get_name():
                     # station toevoegen aan traject lijst
