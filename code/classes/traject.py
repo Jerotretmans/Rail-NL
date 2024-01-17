@@ -69,11 +69,13 @@ if __name__ == "__main__":
     station2 = Station('Alkmaar')
     station3 = Station('Den Helder')
     station4 = Station('Gouda')
+    station5 = Station('Alkmaar')
 
     test_stations.append(station1)
     test_stations.append(station2)
     test_stations.append(station3)
     test_stations.append(station4)
+ 
 
     for row in connections:
         main_station = row[0]

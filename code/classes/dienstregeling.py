@@ -4,6 +4,7 @@ import sys
 sys.path.append('../')
 from helpers import read_csv_file
 import csv
+from collections import Counter
 
 class Regeling:
     """
@@ -27,6 +28,8 @@ class Regeling:
         if self.traject_counter < 8:
             self.trajecten_in_regeling.append(new_traject)
             self.traject_counter += 1
+            # print(f"totale tijd nieuwe traject: {new_traject.time}")
+            self.total_time += new_traject.time
             # self.current_traject = new_traject
         else:
             print("maximaal aantal trajecten bereikt")
@@ -35,19 +38,34 @@ class Regeling:
     #     return f"{self.name}: {self.trajecten_in_regeling}, Time: {self.total_time}"
 
     def calculate_p(self):
-        pass
+        unique_stations = set()
+        for traject in self.trajecten_in_regeling:
+            for station in traject.get_names():
+                unique_stations.add(station)
+
+        stations_reached = (len(unique_stations))
+        p = stations_reached / 22
+        return p
+        
 
     def calculate_T(self):
         # returnt aantal trajecten
-        self.T = self.traject_counter
-        return self.T
+        t = self.traject_counter
+        return t
 
     def calculate_min(self):
-        self.Min = self.total_time
-        return self.Min
+        min = self.total_time
+        return min
 
     def calculate_score(self):
-        K = self.p*10000 - (self.T*100 + self.Min)
+        p = self.calculate_p()
+        # print(p)
+        t = self.calculate_T()
+        # print(t)
+        min = self.calculate_min()
+        # print(min)
+        
+        K = p*10000 - (t*100 + min)
         return K
     
     
@@ -61,6 +79,7 @@ class Regeling:
             # Write the header
             csv_writer.writerow(["train", "stations"])
             csv_writer.writerow(self.trajecten_in_regeling)
+            csv_writer.writerow(["score",  self.calculate_score()])
         
         print(f"Output has been exported to {csv_file_path}")
 
@@ -79,11 +98,13 @@ if __name__ == "__main__":
     station2 = Station('Alkmaar')
     station3 = Station('Den Helder')
     station4 = Station('Gouda')
+    station5 = Station('Alkmaar')
 
     test_stations.append(station1)
     test_stations.append(station2)
     test_stations.append(station3)
     test_stations.append(station4)
+    test_stations.append(station5)
 
     for row in connections:
         main_station = row[0]
@@ -105,8 +126,9 @@ if __name__ == "__main__":
 
     regeling1 = Regeling("Regeling_1")
     regeling1.add_traject(traject1)
-    print(regeling1.calculate_T())
+    # print(regeling1.calculate_T())
     regeling1.export_output()
+    # print(regeling1.calculate_score())
 
     
     
