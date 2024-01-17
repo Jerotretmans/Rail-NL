@@ -3,6 +3,7 @@ import sys
 sys.path.append('../')
 from helpers import read_csv_file
 
+
 class Traject:
     """
     Returnt een lijst met namen van stations die aan elkaar verbonden zijn.
