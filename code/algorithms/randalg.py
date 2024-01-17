@@ -24,10 +24,6 @@ if __name__ == "__main__":
     
     print(random_station)
 
-    Test
-    Test2
-
-
 
 
 
