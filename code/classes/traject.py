@@ -41,9 +41,10 @@ class Traject:
                     time = int(time)
                     # totale trajecttijd wordt bij elkaar opgeteld
                     self.time += time
-                else:
-                    print("geen verbinding tussen nieuw en huidig station")
-            print(self.time)
+                    self.station_counter += 1
+            #     else:
+            #         print("geen verbinding tussen nieuw en huidig station")
+            # print(self.time)
 
     def get_name(self):
         return f"{self.name}"
@@ -52,6 +53,9 @@ class Traject:
         for station in self.stations_in_traject:
             self.stations_in_traject_name_only.append(station.get_name())
         return(self.stations_in_traject_name_only)
+    
+    def get_time(self):
+        return self.time
     
     def __repr__(self):
         return f"{self.name}, {self.get_names()}"

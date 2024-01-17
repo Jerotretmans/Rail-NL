@@ -130,5 +130,6 @@ if __name__ == "__main__":
     regeling1.export_output()
     # print(regeling1.calculate_score())
 
+
     
     
