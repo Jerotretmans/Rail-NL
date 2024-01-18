@@ -28,7 +28,7 @@ y_min, y_max = 50.6, 53.7
 plt.imshow(background_image, zorder=0, extent=[3.2, 7.35, y_min, y_max], aspect='auto')
 plt.scatter(x_list, y_list, color='blue')
 plt.xlim(3.2, 7.2)
-plt.ylim(y_min + 0.2, y_max - 0.2)
+plt.ylim(y_min, y_max)
 plt.xlabel('Lengtegraden')
 plt.ylabel('Breedtegraden')
 
