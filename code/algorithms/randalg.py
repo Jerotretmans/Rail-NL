@@ -2,11 +2,12 @@ import sys
 sys.path.append('../')
 from helpers import read_csv_file
 import random
+sys.path.append('../classes')
 from stations import Station
 from traject import Traject
 from dienstregeling import Regeling
 
-if __name__ == "__main__":
+def run_randalg():
 
     # Random aantal trajecten
     aantal_trajecten = random.randint(1, 7)
@@ -14,16 +15,20 @@ if __name__ == "__main__":
     # Maximale tijd per traject
     max_tijd_per_traject = 120 
 
+    # Minimale tijd per traject
+    # min_tijd_per_traject = 1
+
     # Data lezen
     stations_data = read_csv_file('../../data/StationsHolland.csv')
     connections_data = read_csv_file('../../data/ConnectiesHolland.csv')
 
-    # Initialize station objects and set connections
+    # Maak stations object and connecties
     station_objects = {}
     for row in stations_data:
         station_name = row[0]
         station_objects[station_name] = Station(station_name)
     
+    # Voeg een tweede station toe om er zeker van te zijn dat er altijd 1 verbinding is
     for row in connections_data:
         main_station_name = row[0]
         connected_station_name = row[1]
@@ -31,38 +36,46 @@ if __name__ == "__main__":
         station_objects[main_station_name].create_connection(connected_station_name, time)
         station_objects[connected_station_name].create_connection(main_station_name, time)
 
-    # Initialize a list to hold the generated trajects
+    # Maak een lijst trajecten
     trajects = []
 
     for i in range(aantal_trajecten):
-        # Choose a random station to start the traject
+        # random start station
         random_station_name = random.choice(list(station_objects.keys()))
         random_station = station_objects[random_station_name]
         
-        # Initialize a new traject
+        # begin een traject
         traject = Traject(f"Traject_{i+1}")
         
-        # Start constructing the traject from the random station
+        # begin met het maken van een traject
         traject.add_station(random_station)
         
-        # Continue adding stations until the maximum time is reached
+        # Voeg een eerste verbinding toe zodat er nooit 0 verbindingen zijn
+        connected_stations = list(random_station.connections.keys())
+        if connected_stations:  # Ensure there is at least one connected station
+            next_station_name = random.choice(connected_stations)
+            next_station = station_objects[next_station_name]
+            traject.add_station(next_station)
+            random_station = next_station
+        
+        # blijf stations toevoegen totdat de maximale tijd is bereikt
         while traject.time < max_tijd_per_traject:
             connected_stations = list(random_station.connections.keys())
             if not connected_stations:
-                break  # No more connected stations to add
+                break
             
-            # Choose a random connected station to add to the traject
+            # Voeg random station aan traject
             next_station_name = random.choice(connected_stations)
             next_station = station_objects[next_station_name]
             
-            # Check the time before actually adding the station to ensure it doesn't exceed the max time
+            # Check de tijd voordat je weer een station toevoegt 
             additional_time = int(random_station.connections[next_station_name])
             if traject.time + additional_time > max_tijd_per_traject:
-                break  # Adding this station would exceed the max time, so end this traject
+                break
             
-            # Add the station to the traject
+            # voeg station toe
             traject.add_station(next_station)
-            print(traject.station_counter)
+            # print(traject.station_counter)
             if traject.station_counter > 0:
                 max_tijd_per_traject = random.randint(1, 120)
             # print(traject)
@@ -75,3 +88,16 @@ if __name__ == "__main__":
     # Print the details of each constructed traject
     for traject in trajects:
         print(f"{traject.name}: {traject.get_names()} with total time {traject.time} minutes")
+
+
+    # return score
+        
+
+N = 10000
+
+def run_randalg_N_times(N):
+    hist_list = []
+    score = run_randalg()
+    hist_list.append(score)
+
+    return hist_list
