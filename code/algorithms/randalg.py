@@ -39,6 +39,9 @@ def run_randalg():
     # Maak een lijst trajecten
     trajects = []
 
+    # Maak een set voor unieke verbindingen
+    unieke_connections = set()
+
     for i in range(aantal_trajecten):
         # random start station
         random_station_name = random.choice(list(station_objects.keys()))
@@ -86,25 +89,44 @@ def run_randalg():
         trajects.append(traject)
     # random_station = (random.choice(stations_name_list))
     
-    print(random_station)
+    # print(random_station)
+
+    for traject in trajects:
+        #
+        stations = traject.stations_in_traject
+        for i in range(len(stations) - 1):
+            connection = frozenset([stations[i].get_name(), stations[i+1].get_name()])
+            unieke_connections.add(connection)
 
 
-
-
+    p = len(unieke_connections) / 28
+    # print(p)
+    T = len(trajects)
+    # print(T)
+    Min = sum(traject.time for traject in trajects)
+    # print(Min)
+    # Bereken de score
+    K = round(p * 10000 - (T * 100 + Min))
     
     # Print the details of each constructed traject
-    for traject in trajects:
-        print(f"{traject.name}: {traject.get_names()} with total time {traject.time} minutes")
+    # for traject in trajects:
+    #     print(f"{traject.name}: {traject.get_names()} with total time {traject.time} minutes")
 
+    # print(f"Score of the Regeling: {K}")
+
+    return K
 
     # return score
         
-
-N = 10000
+run_randalg()
+N = 100
 
 def run_randalg_N_times(N):
     hist_list = []
-    score = run_randalg()
-    hist_list.append(score)
+    for i in range(N):
+        score = run_randalg()
+        hist_list.append(score)
 
     return hist_list
+
+print(run_randalg_N_times(N))
