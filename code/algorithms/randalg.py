@@ -71,6 +71,13 @@ if __name__ == "__main__":
         
         # Add the constructed traject to the list of trajects
         trajects.append(traject)
+    # random_station = (random.choice(stations_name_list))
+    
+    print(random_station)
+
+
+
+
     
     # Print the details of each constructed traject
     for traject in trajects:
