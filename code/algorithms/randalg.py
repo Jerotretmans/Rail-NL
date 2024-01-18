@@ -100,19 +100,19 @@ def run_randalg():
 
 
     p = len(unieke_connections) / 28
-    print(p)
+    # print(p)
     T = len(trajects)
-    print(T)
+    # print(T)
     Min = sum(traject.time for traject in trajects)
-    print(Min)
+    # print(Min)
     # Bereken de score
     K = round(p * 10000 - (T * 100 + Min))
     
     # Print the details of each constructed traject
-    for traject in trajects:
-        print(f"{traject.name}: {traject.get_names()} with total time {traject.time} minutes")
+    # for traject in trajects:
+    #     print(f"{traject.name}: {traject.get_names()} with total time {traject.time} minutes")
 
-    print(f"Score of the Regeling: {K}")
+    # print(f"Score of the Regeling: {K}")
 
     return K
 
