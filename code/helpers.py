@@ -1,4 +1,5 @@
 import csv
+import json
 
 def read_csv_file(filename) -> None:
     rows = []
@@ -8,3 +9,8 @@ def read_csv_file(filename) -> None:
         for row in stations:
             rows.append(row)
     return rows
+
+def read_GeoJSON_file(filename):
+    with open(filename, 'r') as file:
+        data = json.load(file)
+    return data
