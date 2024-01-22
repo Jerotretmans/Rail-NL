@@ -1,11 +1,6 @@
-import sys
-sys.path.append('./code/classes')
-sys.path.append('./code/algorithms')
-from stations import Station
-from traject import Traject
-from dienstregeling import Regeling
+from code.classes import stations, traject, dienstregeling
 
-from randalg import test_func
+from code.algorithms import randalg as rand
 
-test = test_func()
-
+station1 = stations.Station()
+print(station1)
