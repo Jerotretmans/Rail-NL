@@ -35,9 +35,10 @@ def run_randalg():
         time = row[2]
         station_objects[main_station_name].create_connection(connected_station_name, time)
         station_objects[connected_station_name].create_connection(main_station_name, time)
+    print(station_objects)
 
     # Maak een lijst trajecten
-    trajects = []
+    trajects_list = []
 
     # Maak een set voor unieke verbindingen
     unieke_connections = set()
@@ -86,12 +87,12 @@ def run_randalg():
             random_station = next_station
         
         # Add the constructed traject to the list of trajects
-        trajects.append(traject)
+        trajects_list.append(traject)
     # random_station = (random.choice(stations_name_list))
     
     # print(random_station)
 
-    for traject in trajects:
+    for traject in trajects_list:
         #
         stations = traject.stations_in_traject
         for i in range(len(stations) - 1):
@@ -101,15 +102,15 @@ def run_randalg():
 
     p = len(unieke_connections) / 28
     # print(p)
-    T = len(trajects)
+    T = len(trajects_list)
     # print(T)
-    Min = sum(traject.time for traject in trajects)
+    Min = sum(traject.time for traject in trajects_list)
     # print(Min)
     # Bereken de score
     K = round(p * 10000 - (T * 100 + Min))
     
     # Print the details of each constructed traject
-    # for traject in trajects:
+    # for traject in trajects_list:
     #     print(f"{traject.name}: {traject.get_names()} with total time {traject.time} minutes")
 
     # print(f"Score of the Regeling: {K}")
@@ -129,4 +130,9 @@ def run_randalg_N_times(N):
 
     return hist_list
 
-# print(run_randalg_N_times(N))
+score_list = (run_randalg_N_times(N))
+
+highest_score  = max(score_list)
+
+print(f"Highest score: {highest_score}")
+

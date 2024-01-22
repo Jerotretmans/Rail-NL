@@ -44,15 +44,15 @@ class Traject:
                     self.station_counter += 1
             #     else:
             #         print("geen verbinding tussen nieuw en huidig station")
-            # print(self.time)
 
     def get_name(self):
         return f"{self.name}"
     
     def get_names(self):
+        station_names = []
         for station in self.stations_in_traject:
-            self.stations_in_traject_name_only.append(station.get_name())
-        return(self.stations_in_traject_name_only)
+            station_names.append(station.get_name())
+        return(station_names)
     
     def get_time(self):
         return self.time
