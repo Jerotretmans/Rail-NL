@@ -10,25 +10,30 @@ from dienstregeling import Regeling
 
 def calculate_score(traject_list):
     unieke_connections = set()
+    traject_counter = 0
+    Min = 0
+    print(traject_list)
     for traject in traject_list:
-        #
+        traject_counter += 1
+        print(f"tijd per traject: {traject.time}")
+        Min += traject.time
+        print(Min)
         stations = traject.stations_in_traject
         for i in range(len(stations) - 1):
             connection = frozenset([stations[i].get_name(), stations[i+1].get_name()])
             unieke_connections.add(connection)
 
-    print(f"unieke connecties: {len(unieke_connections)}")
+    print("Calculate score:")
+    # print(f"unieke connecties: {len(unieke_connections)}")
     p = len(unieke_connections) / 28
-    print(p)
-    T = len(traject_list)
-    print(T)
-    Min = sum(traject.time for traject in traject_list)
-    print(Min)
-    # Bereken de score
-    K = round(p * 10000 - (T * 100 + Min))
-
+    print(f"p = {p}")
+    T = traject_counter
+    print(f"T = {T}")
+    # Min = sum(traject.time for traject in traject_list)
+    print(f"Min = {Min}")
+    # # Bereken de score
+    K = round(p * 10000 - (T * 100 + Min))     
     return K
-
 
 class Algorithm:
     def __init__(self):
@@ -122,12 +127,13 @@ class Algorithm:
 
             
             # print(f"Lijst met trajecten: {self.traject_list}")
-        return self.traject_list
+        score = calculate_score(self.traject_list)
+        return score
+        
     
     def run_greedy(self):
         self.aantal_trajecten = 7
         self.max_tijd_per_traject = 120
-        unieke_stations = set()
 
         for i in range(self.aantal_trajecten):
             random_station_name = random.choice(list(self.station_objects.keys()))
@@ -147,42 +153,70 @@ class Algorithm:
             if traject.station_counter == 1:
                 current_station = random_station
                 print(f"current_station: {current_station.get_name()}")
-
-            unieke_stations.add(current_station)
             
             while traject.time < self.max_tijd_per_traject:
-                next_station, time_to_next = self.find_best_connection(current_station, unieke_stations)
-
+                best_time = float('inf')
+                best_station = None
+     
+                for connected_station_name, time in current_station.connections.items():
+                    time = float(time)
+                    if connected_station_name not in traject.get_names() and time < best_time:
+                        best_time = time
+                        best_station = connected_station_name
 
                 # Check de tijd voordat je weer een station toevoegt 
-                additional_time = int(random_station.connections[next_station_name])
-                if traject.time + additional_time > self.max_tijd_per_traject:
+                if traject.time + best_time > self.max_tijd_per_traject:
                     break
 
-            # next_station_name = random.choice(connected_stations)
-        #     next_station = self.station_objects[next_station_name]
-        #     traject.add_station(next_station)
-        #     random_station = next_station
+                next_station_name = best_station
+                next_station = self.station_objects[next_station_name]
+                traject.add_station(next_station)
 
-    def find_best_connection(new_station, unieke_stations):
-        best_time = float('inf')
-        best_station = None
-
-        for connected_station, time in new_station.connections.items():
-            if connected_station not in unieke_stations and time < best_time:
-                best_time = time
-                best_station = connected_station
-
-        return best_station, best_time
+                current_station = next_station
 
 
+                print(traject)
+                print(traject.time)
+            self.traject_list.append(traject)
+        
+        score = calculate_score(self.traject_list)
+        return score
 
-randomm = Algorithm()
-randomm.create_station_objects()
-# traject_list = randomm.run_random()
-traject_list = randomm.run_greedy()
+    
 
-# print(calculate_score(traject_list))
+
+
+
+# traject_list = algorithm.run_random()
+# score = algorithm.run_greedy()
+# print(score)
+
+
+N = 1000
+
+def run_alg_N_times(N):
+    hist_list = []
+    for i in range(N):
+
+        algorithm = Algorithm()
+        algorithm.create_station_objects()
+
+        # to run random alg N times
+        score = algorithm.run_random()
+        # to run greedy alg N times
+        # score = algorithm.run_greedy()
+
+        hist_list.append(score)
+
+    return hist_list
+
+score_list = (run_alg_N_times(N))
+print(score_list)
+highest_score  = max(score_list)
+
+print(f"Highest score: {highest_score}")
+
+
 
 
 
