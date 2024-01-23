@@ -44,6 +44,18 @@ class Traject:
                     self.station_counter += 1
             #     else:
             #         print("geen verbinding tussen nieuw en huidig station")
+                    
+    def delete_station(self):
+        current_station = self.stations_in_traject[self.station_counter - 1]
+
+        for connected_station_name, time in current_station.connections.items():
+            if self.stations_in_traject[self.station_counter - 2].get_name() == connected_station_name:
+                del self.stations_in_traject[self.station_counter - 1]
+                time = int(time)
+                self.time -= time
+                self.station_counter -= 1
+                # print("station deleted")
+
 
     def get_name(self):
         return f"{self.name}"

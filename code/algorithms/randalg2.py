@@ -12,25 +12,25 @@ def calculate_score(traject_list):
     unieke_connections = set()
     traject_counter = 0
     Min = 0
-    print(traject_list)
+
     for traject in traject_list:
         traject_counter += 1
-        print(f"tijd per traject: {traject.time}")
+        # print(f"tijd per traject: {traject.time}")
         Min += traject.time
-        print(Min)
+        # print(Min)
         stations = traject.stations_in_traject
         for i in range(len(stations) - 1):
             connection = frozenset([stations[i].get_name(), stations[i+1].get_name()])
             unieke_connections.add(connection)
 
-    print("Calculate score:")
+    # print("Calculate score:")
     # print(f"unieke connecties: {len(unieke_connections)}")
     p = len(unieke_connections) / 28
-    print(f"p = {p}")
+    # print(f"p = {p}")
     T = traject_counter
-    print(f"T = {T}")
+    # print(f"T = {T}")
     # Min = sum(traject.time for traject in traject_list)
-    print(f"Min = {Min}")
+    # print(f"Min = {Min}")
     # # Bereken de score
     K = round(p * 10000 - (T * 100 + Min))     
     return K
@@ -127,15 +127,15 @@ class Algorithm:
 
             
             # print(f"Lijst met trajecten: {self.traject_list}")
-        score = calculate_score(self.traject_list)
-        return score
+        return self.traject_list
         
     
-    def run_greedy(self):
-        self.aantal_trajecten = 7
-        self.max_tijd_per_traject = 120
+    def run_random_greedy(self):
+        self.aantal_trajecten = random.randint(4, 5)
+        
 
         for i in range(self.aantal_trajecten):
+            self.max_tijd_per_traject = random.randint(40, 120)
             random_station_name = random.choice(list(self.station_objects.keys()))
             print(f"Begin station: {random_station_name}")
             random_station = self.station_objects[random_station_name]
@@ -179,21 +179,88 @@ class Algorithm:
                 print(traject.time)
             self.traject_list.append(traject)
         
-        score = calculate_score(self.traject_list)
-        return score
+        return self.traject_list
 
-    
+    def run_hill_climber(self):
+        states_saved = []
+        # geldige oplossing als input van het algoritme
+        start_state = self.run_random_greedy()
+        score_start_state = calculate_score(start_state)
+        # print(score_start_state)
+        print(f"Start score: {score_start_state}")
+        states_saved.append(start_state)
+        
+        if len(states_saved) == 1:
+            best_state = start_state
+
+        test_state = start_state
+
+        for traject in test_state:
+            print("Oude trajecten:")
+            print(traject)
+            print(f"Aantal stations in traject: {traject.station_counter}")
+            print(traject.time)
+            print()
+
+            cut = random.randint(1, traject.station_counter)
+            number_of_deletions = traject.station_counter - cut
+            # print(f"number of deletetions: {number_of_deletions}")
+            
+            # del traject.stations_in_traject[cut:traject.station_counter]
+            for i in range(0, number_of_deletions):
+                traject.delete_station()
+
+            current_station = traject.stations_in_traject[cut - 1]
+            # print(current_station.get_name())
+            
+            while traject.time < self.max_tijd_per_traject:
+                connected_stations = list(current_station.connections.keys())
+                # print(f"stations met connectie aan huidig: {connected_stations}")
+ 
+                if not connected_stations:
+                    break
+
+                # Voeg random station toe aan traject
+                next_station_name = random.choice(connected_stations)
+                next_station = self.station_objects[next_station_name]
+
+                # Check de tijd voordat je weer een station toevoegt 
+                additional_time = int(current_station.connections[next_station_name])
+                if traject.time + additional_time > self.max_tijd_per_traject:
+                    break
+                
+                # voeg station toe
+                # print(f"Huidig traject voor toevoegen station: {traject}")
+                traject.add_station(next_station)
+                current_station = next_station
+            
+
+            
+            print("Nieuwe trajecten:")
+            print(traject)
+            print(f"Aantal stations in traject: {traject.station_counter}")
+            print(traject.time)
+            print()
+
+            score_test_state = calculate_score(test_state)
+            score_best_state = calculate_score(best_state)
+            print(f"Test: {score_test_state}")
+            print(f"Best: {score_best_state}")
+
+
+            if score_test_state >= score_best_state:
+                best_state = test_state
+                print("New best state")
+
+            print(f"New traject: {score_test_state}")
+
+        # print(start_state)
+        return best_state
 
 
 
 
-# traject_list = algorithm.run_random()
-# score = algorithm.run_greedy()
-# print(score)
-
-
-N = 1000
-
+N = 3
 def run_alg_N_times(N):
     hist_list = []
     for i in range(N):
@@ -202,9 +269,15 @@ def run_alg_N_times(N):
         algorithm.create_station_objects()
 
         # to run random alg N times
-        score = algorithm.run_random()
+        # score = algorithm.run_random()
+
         # to run greedy alg N times
-        # score = algorithm.run_greedy()
+        # state = algorithm.run_random_greedy()
+        # score = calculate_score(state)
+
+        # to run hill_climber N times
+        state = algorithm.run_hill_climber()
+        score = calculate_score(state)
 
         hist_list.append(score)
 
