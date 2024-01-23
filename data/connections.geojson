@@ -1,0 +1,537 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            4.739722252,
+            52.63777924
+          ],
+          [
+            5.055555344,
+            52.64472198
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Alkmaar -> Hoorn"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            4.739722252,
+            52.63777924
+          ],
+          [
+            4.761111259,
+            52.95527649
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Alkmaar -> Den Helder"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            4.917778015,
+            52.34666824
+          ],
+          [
+            4.872356,
+            52.338889
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Amsterdam Amstel -> Amsterdam Zuid"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            4.917778015,
+            52.34666824
+          ],
+          [
+            4.900277615,
+            52.37888718
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Amsterdam Amstel -> Amsterdam Centraal"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            4.900277615,
+            52.37888718
+          ],
+          [
+            4.837777615,
+            52.38888931
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Amsterdam Centraal -> Amsterdam Sloterdijk"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            4.837777615,
+            52.38888931
+          ],
+          [
+            4.638333321,
+            52.38777924
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Amsterdam Sloterdijk -> Haarlem"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            4.837777615,
+            52.38888931
+          ],
+          [
+            4.813611031,
+            52.43888855
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Amsterdam Sloterdijk -> Zaandam"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            4.872356,
+            52.338889
+          ],
+          [
+            4.837777615,
+            52.38888931
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Amsterdam Zuid -> Amsterdam Sloterdijk"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            4.872356,
+            52.338889
+          ],
+          [
+            4.761944294,
+            52.30944443
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Amsterdam Zuid -> Schiphol Airport"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            4.656666756,
+            52.47833252
+          ],
+          [
+            4.658611298,
+            52.54583359
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Beverwijk -> Castricum"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            4.658611298,
+            52.54583359
+          ],
+          [
+            4.739722252,
+            52.63777924
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Castricum -> Alkmaar"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            4.356389046,
+            52.00666809
+          ],
+          [
+            4.324999809,
+            52.08027649
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Delft -> Den Haag Centraal"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            4.324999809,
+            52.08027649
+          ],
+          [
+            4.704444408,
+            52.01750183
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Den Haag Centraal -> Gouda"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            4.324999809,
+            52.08027649
+          ],
+          [
+            4.481666565,
+            52.16611099
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Den Haag Centraal -> Leiden Centraal"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            4.66833353,
+            51.80722046
+          ],
+          [
+            4.46888876,
+            51.92499924
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Dordrecht -> Rotterdam Centraal"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            4.704444408,
+            52.01750183
+          ],
+          [
+            4.657777786,
+            52.12444305
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Gouda -> Alphen a/d Rijn"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            4.638333321,
+            52.38777924
+          ],
+          [
+            4.656666756,
+            52.47833252
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Haarlem -> Beverwijk"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            4.606666565,
+            52.35916519
+          ],
+          [
+            4.638333321,
+            52.38777924
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Heemstede-Aerdenhout -> Haarlem"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            4.481666565,
+            52.16611099
+          ],
+          [
+            4.606666565,
+            52.35916519
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Leiden Centraal -> Heemstede-Aerdenhout"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            4.481666565,
+            52.16611099
+          ],
+          [
+            4.657777786,
+            52.12444305
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Leiden Centraal -> Alphen a/d Rijn"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            4.481666565,
+            52.16611099
+          ],
+          [
+            4.761944294,
+            52.30944443
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Leiden Centraal -> Schiphol Airport"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            4.553611279,
+            51.95194626
+          ],
+          [
+            4.704444408,
+            52.01750183
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Rotterdam Alexander -> Gouda"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            4.46888876,
+            51.92499924
+          ],
+          [
+            4.408993721,
+            51.92124381
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Rotterdam Centraal -> Schiedam Centrum"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            4.46888876,
+            51.92499924
+          ],
+          [
+            4.553611279,
+            51.95194626
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Rotterdam Centraal -> Rotterdam Alexander"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            4.408993721,
+            51.92124381
+          ],
+          [
+            4.356389046,
+            52.00666809
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Schiedam Centrum -> Delft"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            4.813611031,
+            52.43888855
+          ],
+          [
+            4.658611298,
+            52.54583359
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Zaandam -> Castricum"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            4.813611031,
+            52.43888855
+          ],
+          [
+            4.656666756,
+            52.47833252
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Zaandam -> Beverwijk"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            4.813611031,
+            52.43888855
+          ],
+          [
+            5.055555344,
+            52.64472198
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Zaandam -> Hoorn"
+      }
+    }
+  ]
+}
