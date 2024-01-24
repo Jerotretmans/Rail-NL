@@ -22,21 +22,38 @@ en op landelijk niveau. Gebruik makende van Bokeh als visualisatietool en
 een eigen geschreven GeoJSON bestand voor de connecties.
 """
 
-# Lees de csv bestanden voor 
+# Lees de csv bestanden
 my_stations = read_csv_file('../../data/StationsHolland.csv')
+my_stations_nl = read_csv_file('../../data/StationsNationaal.csv')
 my_connections = read_csv_file('../../data/ConnectiesHolland.csv')
+my_connections_nl = read_csv_file('../../data/ConnectiesNationaal.csv')
 
-class Visualise:
+# class Visualise:
 
-    def __init__(self):
-        pass
+#     def __init__(self):
+#         self.stations_dict = {}
+#         self.connections_dict = {}
+
+#     def create_stations_dict(self, file):
+#         for row in my_stations:
+#             name = row[0]
+#             self.station = Station(name)
+#             x = float(row[2])
+#             y = float(row[1])
+#             stations_dict[name] = [x, y]
+    
+#     def create_connections(self, file):
+#         for row in my_connections:
+#             station1 = Station(row[0])
+#             station2 = Station(row[1])
+#             time = row[2]
+#             connections_dict[station1] = station2
 
 
 # Voeg de coördinaten toe aan een dictionary
 stations_dict = {}
 for row in my_stations:
     name = row[0]
-    station = Station(name)
     x = float(row[2])
     y = float(row[1])
     stations_dict[name] = [x, y]
@@ -91,7 +108,10 @@ connection_data = read_GeoJSON_file('../../data/connections.geojson')
 
 # Laadd csv bestanden
 stations = pd.read_csv('../../data/StationsHolland.csv')
+stations_nl = pd.read_csv('../../data/StationsNationaal.csv')
 connections = pd.read_csv('../../data/ConnectiesHolland.csv')
+connections_nl = pd.read_csv('../../data/ConnectiesNationaal.csv')
+
 
 
 # Geef kleurtjes aan de provincies
@@ -126,3 +146,4 @@ color_mapper = linear_cmap(field_name='index', palette=Viridis256, low=0, high=l
 p.multi_line('xs', 'ys', line_color='blue', line_width=2, source=connection_geo_source)
 
 show(p)
+
