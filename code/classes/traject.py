@@ -36,6 +36,7 @@ class Traject:
                 if connected_station_name == self.current_station.get_name():
                     # station toevoegen aan traject lijst
                     self.stations_in_traject.append(new_station)
+                    self.stations_in_traject_name_only.append(new_station.get_name())
                     # nieuw station wordt huidig station
                     self.current_station = new_station
                     time = int(time)
