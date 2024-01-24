@@ -59,16 +59,16 @@ class Algorithm:
 
     def run_random(self):
         self.aantal_trajecten = random.randint(1, 7)
-        print(f"aantal trajecten: {self.aantal_trajecten}")
+        # print(f"aantal trajecten: {self.aantal_trajecten}")
         
 
         for i in range(self.aantal_trajecten):
             self.max_tijd_per_traject = random.randint(1, 120)
-            print(f"Max tijd voor traject {i}: {self.max_tijd_per_traject}")
+            # print(f"Max tijd voor traject {i}: {self.max_tijd_per_traject}")
 
             # random start station
             random_station_name = random.choice(list(self.station_objects.keys()))
-            print(f"Begin station: {random_station_name}")
+            # print(f"Begin station: {random_station_name}")
             random_station = self.station_objects[random_station_name]
         
             # begin een traject
@@ -86,14 +86,14 @@ class Algorithm:
             next_station = self.station_objects[next_station_name]
             traject.add_station(next_station)
             random_station = next_station
-            print(f"Traject na 1 verbinding: {traject}")
-            print(f"Traject tijd na 1 verbinding: {traject.time}")
+            # print(f"Traject na 1 verbinding: {traject}")
+            # print(f"Traject tijd na 1 verbinding: {traject.time}")
             
             # blijf stations toevoegen totdat de maximale tijd is bereikt
             while traject.time < self.max_tijd_per_traject:
 
                 connected_stations = list(random_station.connections.keys())
-                print(f"stations met connectie aan huidig: {connected_stations}")
+                # print(f"stations met connectie aan huidig: {connected_stations}")
  
                 if not connected_stations:
                     break
@@ -108,14 +108,14 @@ class Algorithm:
                     break
                 
                 # voeg station toe
-                print(f"Huidig traject voor toevoegen station: {traject}")
+                # print(f"Huidig traject voor toevoegen station: {traject}")
                 traject.add_station(next_station)
                 random_station = next_station
-                print(f"Station dat zojuist is toegevoegd:{next_station_name}")
-                print(f"tijd van de connectie: {additional_time}")
+                # print(f"Station dat zojuist is toegevoegd:{next_station_name}")
+                # print(f"tijd van de connectie: {additional_time}")
 
-                print(f"Huidig traject na toevoegen station: {traject}")
-                print(f"Totale Trajecttijd na toevoegen station: {traject.time}")
+                # print(f"Huidig traject na toevoegen station: {traject}")
+                # print(f"Totale Trajecttijd na toevoegen station: {traject.time}")
 
                 
 
@@ -137,7 +137,7 @@ class Algorithm:
 
         for i in range(self.aantal_trajecten):
             random_station_name = random.choice(list(self.station_objects.keys()))
-            print(f"Begin station: {random_station_name}")
+            # print(f"Begin station: {random_station_name}")
             random_station = self.station_objects[random_station_name]
 
             # begin een traject
@@ -148,11 +148,11 @@ class Algorithm:
             
             # Voeg een eerste verbinding toe zodat er nooit 0 verbindingen zijn
             connected_stations = list(random_station.connections.keys())
-            print(f"stations met connectie aan beginstation: {connected_stations}")
+            # print(f"stations met connectie aan beginstation: {connected_stations}")
             
             if traject.station_counter == 1:
                 current_station = random_station
-                print(f"current_station: {current_station.get_name()}")
+                # print(f"current_station: {current_station.get_name()}")
             
             while traject.time < self.max_tijd_per_traject:
                 best_time = float('inf')
@@ -175,8 +175,8 @@ class Algorithm:
                 current_station = next_station
 
 
-                print(traject)
-                print(traject.time)
+                # print(traject)
+                # print(traject.time)
             self.traject_list.append(traject)
         
         score = calculate_score(self.traject_list)
@@ -202,9 +202,9 @@ def run_alg_N_times(N):
         algorithm.create_station_objects()
 
         # to run random alg N times
-        score = algorithm.run_random()
+        # score = algorithm.run_random()
         # to run greedy alg N times
-        # score = algorithm.run_greedy()
+        score = algorithm.run_greedy()
 
         hist_list.append(score)
 
