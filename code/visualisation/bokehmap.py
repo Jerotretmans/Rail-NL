@@ -6,7 +6,7 @@ sys.path.append('../classes')
 
 import pandas as pd
 
-from bokeh.models import GeoJSONDataSource, ColumnDataSource, Line
+from bokeh.models import GeoJSONDataSource
 from bokeh.palettes import Category20
 from bokeh.plotting import figure, show
 from bokeh.transform import linear_cmap
@@ -16,53 +16,33 @@ from helpers import read_GeoJSON_file, read_csv_file
 from classes.dienstregeling import Regeling
 from classes.stations import Station
 
+"""
+Visualisatie van de stations en bijbehorende connecties binnen regio Holland 
+en op landelijk niveau. Gebruik makende van Bokeh als visualisatietool en 
+een eigen geschreven GeoJSON bestand voor de connecties.
+"""
 
-
-
-
-
-
-
-# Start met maken van eigen GeoJSON bestand
-
-
+# Lees de csv bestanden voor 
 my_stations = read_csv_file('../../data/StationsHolland.csv')
 my_connections = read_csv_file('../../data/ConnectiesHolland.csv')
 
-stations_dict = {}
-stations_obj = []
+class Visualise:
+
+    def __init__(self):
+        pass
+
+
 # Voeg de coördinaten toe aan een dictionary
+stations_dict = {}
 for row in my_stations:
     name = row[0]
     station = Station(name)
-    stations_obj.append(station)
     x = float(row[2])
     y = float(row[1])
-    station.add_location(x, y)
     stations_dict[name] = [x, y]
-print(stations_dict)
 
 
-# # Voeg de connecties toe aan een aparte dictionary
-# for row in my_connections:
-#     main_station = row[0]
-#     connected_station = row[1]
-#     time = row[2]
-
-#     for station in stations_obj:
-#         if station.get_name() == main_station:
-#             connections_dict[connected_station] = True
-#         elif station.get_name() == connected_station:
-#             connections_dict[main_station] = True
-    
-# for station in stations_obj:
-#     print(f"{connections_dict}")
-
-
-
-# station1 = Station('Alkmaar')
-# station2 = Station('Hoorn')
-# connections_dict[station1] = station2
+# Voeg de connecties toe aan een aparte dictionary
 connections_dict = {}
 for row in my_connections:
     station1 = Station(row[0])
@@ -70,13 +50,9 @@ for row in my_connections:
     time = row[2]
     connections_dict[station1] = station2
 
-station1naam = station1.name
-station2naam = station2.name
-print(connections_dict)
-    
-line_features = []
 
 # Itereer door de stations om lijnen te kunnen trekken
+line_features = []
 for station1, station2 in connections_dict.items():
         
     start_coords = stations_dict[station1.name]
@@ -109,17 +85,14 @@ with open(file_path, "w") as geojson_file:
 
 
 
-
-
-# Load GeoJSON file
+# Laad GeoJSON bestanden
 data = read_GeoJSON_file('../../data/provinces.geojson')
-
 connection_data = read_GeoJSON_file('../../data/connections.geojson')
 
 # Load csv files
 stations = pd.read_csv('../../data/StationsHolland.csv')
 connections = pd.read_csv('../../data/ConnectiesHolland.csv')
-dienstregeling_obj = Regeling('DR1')
+
 
 # Geef kleurtjes aan de provincies
 color_cycle = cycle(Category20[20])
@@ -138,21 +111,18 @@ connection_geo_source = GeoJSONDataSource(geojson=json.dumps(connection_data))
 
 # Creëer figuur
 p = figure(background_fill_color="lightgrey", tooltips=None)
+
+# Voeg grenzen van provincies toe
 p.patches('xs', 'ys', source=geo_source, line_color='black', color='Color', alpha=0.7)
 
 # Plot station locations as circles
 p.circle(x='x', y='y', size=5, color='black', alpha=1, source=stations.reset_index())
 
 # Color mapper voor de trajecten
+dienstregeling_obj = Regeling('DR1')
 color_mapper = linear_cmap(field_name='index', palette=Viridis256, low=0, high=len(dienstregeling_obj.trajecten_in_regeling))
 
-
-
-
-
-
-
-
+# Voeg connecties tussen stations toe
 p.multi_line('xs', 'ys', line_color='blue', line_width=2, source=connection_geo_source)
 
 show(p)

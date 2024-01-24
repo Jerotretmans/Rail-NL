@@ -24,12 +24,13 @@ n, bins, patches = plt.hist(scores_list, bins=60, density=False, facecolor='gree
 bin_width = bins[1] - bins[0]
 
 # Add a 'best fit' line using the scaled normal distribution curve
-plt.plot(bins, norm.pdf(bins, mu, sigma) * len(scores_list) * bin_width, 'r--', linewidth=2)
+# plt.plot(bins, norm.pdf(bins, mu, sigma) * len(scores_list) * bin_width, 'r--', linewidth=2)
 
 # Add labels and title
 plt.xlabel('K')
 plt.ylabel('Frequency')
-plt.title(r'$\mathrm{Histogram\ of\ scores:}\ \mu=%.3f,\ \sigma=%.3f$' % (mu, sigma))
+# plt.title(r'$\mathrm{Histogram\ of\ scores:}\ \mu=%.3f,\ \sigma=%.3f$' % (mu, sigma))
+plt.title(r'$\mathrm{Histogram\ of\ scores:}$')
 plt.grid(True)
 
 plt.show()
