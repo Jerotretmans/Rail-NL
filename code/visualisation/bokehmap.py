@@ -76,10 +76,10 @@ my_geojson = {
     "features": line_features
 }
 
-# Specify the file path where you want to save the GeoJSON file
+# Geef aan waar het GeoJSON bestand naartoe moet
 file_path = "../../data/connections.geojson"
 
-# Write the GeoJSON data to the file using json.dump
+# Schrijf het GeoJSON bestand met json.dump
 with open(file_path, "w") as geojson_file:
     json.dump(my_geojson, geojson_file, indent=2)
 
@@ -89,7 +89,7 @@ with open(file_path, "w") as geojson_file:
 data = read_GeoJSON_file('../../data/provinces.geojson')
 connection_data = read_GeoJSON_file('../../data/connections.geojson')
 
-# Load csv files
+# Laadd csv bestanden
 stations = pd.read_csv('../../data/StationsHolland.csv')
 connections = pd.read_csv('../../data/ConnectiesHolland.csv')
 
