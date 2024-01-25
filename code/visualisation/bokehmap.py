@@ -20,52 +20,55 @@ from classes.stations import Station
 Visualisatie van de stations en bijbehorende connecties binnen regio Holland 
 en op landelijk niveau. Gebruik makende van Bokeh als visualisatietool en 
 een eigen geschreven GeoJSON bestand voor de connecties.
+
+Usage: 'python3 bokehmap.py holland' or 'python3 bokehmap.py nl' 
 """
 
-# Lees de csv bestanden
+# Lees de csv bestanden d.m.v. eigen functie voor de dictionaries
 my_stations = read_csv_file('../../data/StationsHolland.csv')
 my_stations_nl = read_csv_file('../../data/StationsNationaal.csv')
 my_connections = read_csv_file('../../data/ConnectiesHolland.csv')
 my_connections_nl = read_csv_file('../../data/ConnectiesNationaal.csv')
 
-# class Visualise:
 
-#     def __init__(self):
-#         self.stations_dict = {}
-#         self.connections_dict = {}
-
-#     def create_stations_dict(self, file):
-#         for row in my_stations:
-#             name = row[0]
-#             self.station = Station(name)
-#             x = float(row[2])
-#             y = float(row[1])
-#             stations_dict[name] = [x, y]
-    
-#     def create_connections(self, file):
-#         for row in my_connections:
-#             station1 = Station(row[0])
-#             station2 = Station(row[1])
-#             time = row[2]
-#             connections_dict[station1] = station2
-
-
-# Voeg de coördinaten toe aan een dictionary
+# Initialiseer dicts voor stationslocaties en voor connecties tussen de locaties
 stations_dict = {}
-for row in my_stations:
-    name = row[0]
-    x = float(row[2])
-    y = float(row[1])
-    stations_dict[name] = [x, y]
-
-
-# Voeg de connecties toe aan een aparte dictionary
 connections_dict = {}
-for row in my_connections:
-    station1 = Station(row[0])
-    station2 = Station(row[1])
-    time = row[2]
-    connections_dict[station1] = station2
+
+# Verzeker het correcte gebruik van de code
+# assert len(sys.argv) == 2, "Usage: 'python3 bokehmap.py holland' or 'python3 bokehmap.py nl'" 
+
+
+# Voeg locaties van stations toe aan stations_dict
+def fill_stations_dict(region_file):
+    for row in region_file:
+        name = row[0]
+        x = float(row[2])
+        y = float(row[1])
+        stations_dict[name] = [x, y]
+
+
+# Voeg de connecties toe aan connections_dict
+def fill_connections_dict(region_file):
+    for row in region_file:
+        station1 = Station(row[0])
+        station2 = Station(row[1])
+        time = row[2]
+        connections_dict[station1] = station2
+
+
+# Vul de dicts voor regio Holland of op nationaal niveau
+if sys.argv[1].lower() == 'holland':
+    fill_stations_dict(my_stations)
+    fill_connections_dict(my_connections)
+    pd_stations = pd.read_csv('../../data/StationsHolland.csv')
+elif sys.argv[1].lower() == 'nl':
+    fill_stations_dict(my_stations_nl)
+    fill_connections_dict(my_connections_nl)
+    pd_stations = pd.read_csv('../../data/StationsNationaal.csv')
+else:
+    raise AssertionError ("Usage: 'python3 bokehmap.py holland' or 'python3 bokehmap.py nl'")
+
 
 
 # Itereer door de stations om lijnen te kunnen trekken
@@ -106,13 +109,6 @@ with open(file_path, "w") as geojson_file:
 data = read_GeoJSON_file('../../data/provinces.geojson')
 connection_data = read_GeoJSON_file('../../data/connections.geojson')
 
-# Laadd csv bestanden
-stations = pd.read_csv('../../data/StationsHolland.csv')
-stations_nl = pd.read_csv('../../data/StationsNationaal.csv')
-connections = pd.read_csv('../../data/ConnectiesHolland.csv')
-connections_nl = pd.read_csv('../../data/ConnectiesNationaal.csv')
-
-
 
 # Geef kleurtjes aan de provincies
 color_cycle = cycle(Category20[20])
@@ -136,7 +132,7 @@ p = figure(background_fill_color="lightgrey", tooltips=None)
 p.patches('xs', 'ys', source=geo_source, line_color='black', color='Color', alpha=0.7)
 
 # Plot station locations as circles
-p.circle(x='x', y='y', size=5, color='black', alpha=1, source=stations.reset_index())
+p.circle(x='x', y='y', size=5, color='black', alpha=1, source=pd_stations.reset_index())
 
 # Color mapper voor de trajecten
 dienstregeling_obj = Regeling('DR1')
