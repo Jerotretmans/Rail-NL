@@ -184,7 +184,7 @@ class Algorithm:
     def run_hill_climber(self):
         saved_states = []
         # geldige oplossing als input van het algoritme
-        start_state = self.run_random_greedy()
+        start_state = self.run_random()
         score_start_state = calculate_score(start_state)
         # print(score_start_state)
         print(f"start state = {start_state}")
@@ -218,50 +218,41 @@ def run_hill_climb_loop(state, max_time, station_objects, score_best_state):
             
             print(f"Traject na het cutten is: {traject}")
 
-            current_station = traject.stations_in_traject[cut - 1]
-            print(f"current station na cutten is: {current_station.get_name()}")
+            traject.current_station = traject.stations_in_traject[cut - 1]
+            print(f"current station na cutten is: {traject.current_station.get_name()}")
             
             while traject.time < max_time:
-                connected_stations = list(current_station.connections.keys())
+                connected_stations = list(traject.current_station.connections.keys())
                 print(f"Huidig traject is nu: {traject}")
                 print(f"Huidige score is nu: {calculate_score(state)}")
-                print(f"huidig station is nu: {current_station.get_name()}")
-                print(f"stations met connectie aan huidig station: {connected_stations}")
+                print(f"huidig station is nu: {traject.current_station.get_name()}")
+                
+                # print(f"stations in traject: {traject.stations_in_traject}")
+                
+                connected_stations_not_in_traject = []
+                for station in connected_stations:
+                    if station not in traject.stations_in_traject_name_only:
+                        connected_stations_not_in_traject.append(station)
 
-                if not connected_stations:
+                print(traject.stations_in_traject_name_only)
+                print(f"stations met connectie aan huidig station en niet in traject: {connected_stations_not_in_traject}")
+
+                if len(connected_stations_not_in_traject) == 0:
                     break
-                print()
-
-                # Voeg random station toe aan traject
-                next_station_name = random.choice(connected_stations)
+                        
+                # Voeg random station toe aan traject dat nog niet is gekozen
+                next_station_name = random.choice(connected_stations_not_in_traject)
                 print(f"next station name = {next_station_name}")
                 next_station = station_objects[next_station_name]
-                print(counter)
-                # print(f"huidig traject: {traject.get_names}")
-                print()
-                # print(traject.stations_in_traject.get_names())
-                while next_station_name in traject.get_names() and counter < len(connected_stations):
-                    counter += 1
-                    print("Opniew kiezen")
-                    next_station_name = random.choice(connected_stations)
-                    # print(f"next station name = {next_station_name}")
-                    next_station = station_objects[next_station_name]
 
                 # Check de tijd voordat je weer een station toevoegt 
-                additional_time = int(current_station.connections[next_station_name])
+                additional_time = int(traject.current_station.connections[next_station_name])
                 if traject.time + additional_time > max_time:
                     break
-                
-                # voeg station toe
-                # print(f"Huidig traject voor toevoegen station: {traject}")
-                
+
                 traject.add_station(next_station)
-                print(f"traject na toevoegen: {traject}")
-                current_station = next_station
                 print("succes")
-                counter = 0
-                print()
-            
+
             score_state = calculate_score(state)
             
             # print("Nieuwe trajecten:")
@@ -281,7 +272,7 @@ def run_hill_climb_loop(state, max_time, station_objects, score_best_state):
 
 
 
-N = 3
+N = 100
 def run_alg_N_times(N):
     hist_list = []
     for i in range(N):
@@ -290,16 +281,16 @@ def run_alg_N_times(N):
         algorithm.create_station_objects()
 
         # to run random alg N times
-        state = algorithm.run_random()
-        score = calculate_score(state)
+        # state = algorithm.run_random()
+        # score = calculate_score(state)
 
         # to run greedy alg N times
         # state = algorithm.run_random_greedy()
         # score = calculate_score(state)
 
         # to run hill_climber N times
-        # state = algorithm.run_hill_climber()
-        # score = calculate_score(state)
+        state = algorithm.run_hill_climber()
+        score = calculate_score(state)
 
         hist_list.append(score)
 

@@ -5,6 +5,7 @@ sys.path.append('../classes')
 from dienstregeling import Regeling
 sys.path.append('../algorithms')
 from randalg import run_randalg_N_times
+from randalg2 import run_alg_N_times
 import matplotlib
 matplotlib.use('Qt5Agg')
 import matplotlib.pyplot as plt
@@ -12,7 +13,7 @@ from scipy.stats import norm
 
 
 # Generate scores list (assuming run_randalg_N_times is defined)
-scores_list = run_randalg_N_times(10000)
+scores_list = run_alg_N_times(100)
 
 # Fit a normal distribution to the data
 (mu, sigma) = norm.fit(scores_list)

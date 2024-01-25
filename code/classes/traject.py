@@ -26,6 +26,7 @@ class Traject:
         # als er nog geen station in de trajectlijst staat:
         if self.station_counter == 0:
             self.stations_in_traject.append(new_station)
+            self.stations_in_traject_name_only.append(new_station.get_name())
             self.current_station = new_station
             self.station_counter += 1
         # als er wel een station in staat moet er worden gecheckt of er een verbinding bestaat tussen de stations
@@ -47,11 +48,13 @@ class Traject:
             #         print("geen verbinding tussen nieuw en huidig station")
                     
     def delete_station(self):
-        current_station = self.stations_in_traject[self.station_counter - 1]
+        self.current_station = self.stations_in_traject[self.station_counter - 2]
 
-        for connected_station_name, time in current_station.connections.items():
+        for connected_station_name, time in self.current_station.connections.items():
             if self.stations_in_traject[self.station_counter - 2].get_name() == connected_station_name:
                 del self.stations_in_traject[self.station_counter - 1]
+                del self.stations_in_traject_name_only[self.station_counter - 1]
+
                 time = int(time)
                 self.time -= time
                 self.station_counter -= 1
