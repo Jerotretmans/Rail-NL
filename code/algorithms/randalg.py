@@ -35,7 +35,7 @@ def run_randalg():
         time = row[2]
         station_objects[main_station_name].create_connection(connected_station_name, time)
         station_objects[connected_station_name].create_connection(main_station_name, time)
-    print(station_objects)
+    # print(station_objects)
 
     # Maak een lijst trajecten
     trajects_list = []
@@ -120,7 +120,7 @@ def run_randalg():
     # return score
         
 run_randalg()
-N = 100
+N = 10000
 
 def run_randalg_N_times(N):
     hist_list = []
