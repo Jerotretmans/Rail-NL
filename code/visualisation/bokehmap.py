@@ -31,12 +31,13 @@ my_connections = read_csv_file('../../data/ConnectiesHolland.csv')
 my_connections_nl = read_csv_file('../../data/ConnectiesNationaal.csv')
 
 
+# Verzeker het correcte gebruik van de code
+assert len(sys.argv) == 2, "Usage: 'python3 bokehmap.py holland' or 'python3 bokehmap.py nl'" 
+
+
 # Initialiseer dicts voor stationslocaties en voor connecties tussen de locaties
 stations_dict = {}
 connections_dict = {}
-
-# Verzeker het correcte gebruik van de code
-# assert len(sys.argv) == 2, "Usage: 'python3 bokehmap.py holland' or 'python3 bokehmap.py nl'" 
 
 
 # Voeg locaties van stations toe aan stations_dict
@@ -57,14 +58,16 @@ def fill_connections_dict(region_file):
         connections_dict[station1] = station2
 
 
-# Vul de dicts voor regio Holland of op nationaal niveau
+# Implementeer de visualisatie voor regio Holland of op nationaal niveau
 if sys.argv[1].lower() == 'holland':
     fill_stations_dict(my_stations)
     fill_connections_dict(my_connections)
+    data = read_GeoJSON_file('../../data/holland.geojson')
     pd_stations = pd.read_csv('../../data/StationsHolland.csv')
 elif sys.argv[1].lower() == 'nl':
     fill_stations_dict(my_stations_nl)
     fill_connections_dict(my_connections_nl)
+    data = read_GeoJSON_file('../../data/nl.geojson')
     pd_stations = pd.read_csv('../../data/StationsNationaal.csv')
 else:
     raise AssertionError ("Usage: 'python3 bokehmap.py holland' or 'python3 bokehmap.py nl'")
@@ -106,7 +109,7 @@ with open(file_path, "w") as geojson_file:
 
 
 # Laad GeoJSON bestanden
-data = read_GeoJSON_file('../../data/provinces.geojson')
+
 connection_data = read_GeoJSON_file('../../data/connections.geojson')
 
 
@@ -131,6 +134,9 @@ p = figure(background_fill_color="lightgrey", tooltips=None)
 # Voeg grenzen van provincies toe
 p.patches('xs', 'ys', source=geo_source, line_color='black', color='Color', alpha=0.7)
 
+# Voeg connecties tussen stations toe
+p.multi_line('xs', 'ys', line_color='red', line_width=2, source=connection_geo_source)
+
 # Plot station locations as circles
 p.circle(x='x', y='y', size=5, color='black', alpha=1, source=pd_stations.reset_index())
 
@@ -138,8 +144,6 @@ p.circle(x='x', y='y', size=5, color='black', alpha=1, source=pd_stations.reset_
 dienstregeling_obj = Regeling('DR1')
 color_mapper = linear_cmap(field_name='index', palette=Viridis256, low=0, high=len(dienstregeling_obj.trajecten_in_regeling))
 
-# Voeg connecties tussen stations toe
-p.multi_line('xs', 'ys', line_color='blue', line_width=2, source=connection_geo_source)
-
+# Display de plot in een browser
 show(p)
 
