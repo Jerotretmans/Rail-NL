@@ -34,6 +34,13 @@ Example: 'python3 hist.py rd'
 # Verzeker het correcte gebruik van de code
 assert len(sys.argv) == 2, description
 
+# Vraag om een hoeveelheid runs van het algoritme
+try:
+    N = int(input("How many times do you want to run the algorithm? "))
+# Accepteer alleen integers
+except ValueError:
+    print("Please enter a valid integer.")
+
 
 # Run algoritme op verzoek van de gebruiker
 if sys.argv[1].lower() == 'rd':
@@ -60,13 +67,9 @@ else:
     raise AssertionError ("Geen valide naam!")
 
 
-# Vraag om een hoeveelheid runs van het algoritme
-try:
-    N = int(input("How many times do you want to run the algorithm? "))
-# Accepteer alleen integers
-except ValueError:
-    print("Please enter a valid integer.")
-
+# Print de hoogst behaalde score
+highest_score  = max(scores_list)
+print(f"Highest score: {highest_score}")
 
 # Creëer een niet-genormaliseerde histogram (density=False)
 n, bins, patches = plt.hist(scores_list, bins=60, density=False, facecolor='green', alpha=0.75)
