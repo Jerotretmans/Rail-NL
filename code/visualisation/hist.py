@@ -24,6 +24,8 @@ Usage: 'python3 hist.py (algorithm)' where (algorithm) is one of the following a
 rd for random
 gr for greedy
 hc for hill climber
+bf for breadth first
+df for depth first
 
 Example: 'python3 hist.py rd' 
 """
@@ -40,9 +42,9 @@ Example: 'python3 hist.py rd'
 """
 
 try:
-    # Ask the user for input
+    # Vraag om een hoeveelheid runs van het algoritme
     N = int(input("How many times do you want to run the algorithm? "))
-# Only accept integers
+# Accepteer alleen integers
 except ValueError:
     print("Please enter a valid integer.")
 
@@ -51,13 +53,21 @@ if sys.argv[1].lower() == 'rd':
     algorithm = 'Random'
     algorithm_abrev = 'rd'
 elif sys.argv[1].lower() == 'gr':
-    # scores_list = run_alg_N_times(1000)
+    # scores_list = run_alg_N_times(N)
     algorithm = 'Greedy'
     algorithm_abrev = 'gr'
 elif sys.argv[1] == 'hc':
-    # scores_list = run_alg_N_times(1000)
+    # scores_list = run_alg_N_times(N)
     algorithm = 'Hill Climber'
     algorithm_abrev = 'hc'
+elif sys.argv[1].lower() == 'bf':
+    # scores_list = run_randalg_N_times(N)
+    algorithm = 'Breadth First'
+    algorithm_abrev = 'bf'
+elif sys.argv[1].lower() == 'df':
+    # scores_list = run_randalg_N_times(N)
+    algorithm = 'Depth First'
+    algorithm_abrev = 'df'
 else:
     raise AssertionError ("Geen valide naam!")
 
