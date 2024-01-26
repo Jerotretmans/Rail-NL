@@ -184,7 +184,7 @@ class Algorithm:
     def run_hill_climber(self):
         saved_states = []
         # geldige oplossing als input van het algoritme
-        start_state = self.run_random()
+        start_state = self.run_random_greedy()
         score_start_state = calculate_score(start_state)
         # print(score_start_state)
         print(f"start state = {start_state}")
