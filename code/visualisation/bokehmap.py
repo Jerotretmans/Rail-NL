@@ -88,7 +88,8 @@ for station1, station2 in connections_dict.items():
         },
         "properties": {
             "name": f"{station1.name} -> {station2.name}"
-        }
+        },
+        "tooltip": f"{station1.name} -> {station2.name}"
     }
     line_features.append(line_feature)
 
@@ -108,8 +109,7 @@ with open(file_path, "w") as geojson_file:
 
 
 
-# Laad GeoJSON bestanden
-
+# Laad het GeoJSON bestand van de connecties
 connection_data = read_GeoJSON_file('../../data/connections.geojson')
 
 
@@ -137,8 +137,8 @@ p.patches('xs', 'ys', source=geo_source, line_color='black', color='Color', alph
 # Voeg connecties tussen stations toe
 p.multi_line('xs', 'ys', line_color='red', line_width=2, source=connection_geo_source)
 
-# Plot station locations as circles
-p.circle(x='x', y='y', size=5, color='black', alpha=1, source=pd_stations.reset_index())
+# Plot station locaties als stippen
+p.circle(x='x', y='y', size=6, color='black', alpha=1, source=pd_stations.reset_index())
 
 # Color mapper voor de trajecten
 dienstregeling_obj = Regeling('DR1')

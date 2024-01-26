@@ -18,7 +18,8 @@
       },
       "properties": {
         "name": "Alkmaar -> Hoorn"
-      }
+      },
+      "tooltip": "Alkmaar -> Hoorn"
     },
     {
       "type": "Feature",
@@ -37,7 +38,8 @@
       },
       "properties": {
         "name": "Alkmaar -> Den Helder"
-      }
+      },
+      "tooltip": "Alkmaar -> Den Helder"
     },
     {
       "type": "Feature",
@@ -56,7 +58,8 @@
       },
       "properties": {
         "name": "Amsterdam Amstel -> Amsterdam Zuid"
-      }
+      },
+      "tooltip": "Amsterdam Amstel -> Amsterdam Zuid"
     },
     {
       "type": "Feature",
@@ -75,7 +78,8 @@
       },
       "properties": {
         "name": "Amsterdam Amstel -> Amsterdam Centraal"
-      }
+      },
+      "tooltip": "Amsterdam Amstel -> Amsterdam Centraal"
     },
     {
       "type": "Feature",
@@ -94,7 +98,8 @@
       },
       "properties": {
         "name": "Amsterdam Centraal -> Amsterdam Sloterdijk"
-      }
+      },
+      "tooltip": "Amsterdam Centraal -> Amsterdam Sloterdijk"
     },
     {
       "type": "Feature",
@@ -113,7 +118,8 @@
       },
       "properties": {
         "name": "Amsterdam Sloterdijk -> Haarlem"
-      }
+      },
+      "tooltip": "Amsterdam Sloterdijk -> Haarlem"
     },
     {
       "type": "Feature",
@@ -132,7 +138,8 @@
       },
       "properties": {
         "name": "Amsterdam Sloterdijk -> Zaandam"
-      }
+      },
+      "tooltip": "Amsterdam Sloterdijk -> Zaandam"
     },
     {
       "type": "Feature",
@@ -151,7 +158,8 @@
       },
       "properties": {
         "name": "Amsterdam Zuid -> Amsterdam Sloterdijk"
-      }
+      },
+      "tooltip": "Amsterdam Zuid -> Amsterdam Sloterdijk"
     },
     {
       "type": "Feature",
@@ -170,7 +178,8 @@
       },
       "properties": {
         "name": "Amsterdam Zuid -> Schiphol Airport"
-      }
+      },
+      "tooltip": "Amsterdam Zuid -> Schiphol Airport"
     },
     {
       "type": "Feature",
@@ -189,7 +198,8 @@
       },
       "properties": {
         "name": "Beverwijk -> Castricum"
-      }
+      },
+      "tooltip": "Beverwijk -> Castricum"
     },
     {
       "type": "Feature",
@@ -208,7 +218,8 @@
       },
       "properties": {
         "name": "Castricum -> Alkmaar"
-      }
+      },
+      "tooltip": "Castricum -> Alkmaar"
     },
     {
       "type": "Feature",
@@ -227,7 +238,8 @@
       },
       "properties": {
         "name": "Delft -> Den Haag Centraal"
-      }
+      },
+      "tooltip": "Delft -> Den Haag Centraal"
     },
     {
       "type": "Feature",
@@ -246,7 +258,8 @@
       },
       "properties": {
         "name": "Den Haag Centraal -> Gouda"
-      }
+      },
+      "tooltip": "Den Haag Centraal -> Gouda"
     },
     {
       "type": "Feature",
@@ -265,7 +278,8 @@
       },
       "properties": {
         "name": "Den Haag Centraal -> Leiden Centraal"
-      }
+      },
+      "tooltip": "Den Haag Centraal -> Leiden Centraal"
     },
     {
       "type": "Feature",
@@ -284,7 +298,8 @@
       },
       "properties": {
         "name": "Dordrecht -> Rotterdam Centraal"
-      }
+      },
+      "tooltip": "Dordrecht -> Rotterdam Centraal"
     },
     {
       "type": "Feature",
@@ -303,7 +318,8 @@
       },
       "properties": {
         "name": "Gouda -> Alphen a/d Rijn"
-      }
+      },
+      "tooltip": "Gouda -> Alphen a/d Rijn"
     },
     {
       "type": "Feature",
@@ -322,7 +338,8 @@
       },
       "properties": {
         "name": "Haarlem -> Beverwijk"
-      }
+      },
+      "tooltip": "Haarlem -> Beverwijk"
     },
     {
       "type": "Feature",
@@ -341,7 +358,8 @@
       },
       "properties": {
         "name": "Heemstede-Aerdenhout -> Haarlem"
-      }
+      },
+      "tooltip": "Heemstede-Aerdenhout -> Haarlem"
     },
     {
       "type": "Feature",
@@ -360,7 +378,8 @@
       },
       "properties": {
         "name": "Leiden Centraal -> Heemstede-Aerdenhout"
-      }
+      },
+      "tooltip": "Leiden Centraal -> Heemstede-Aerdenhout"
     },
     {
       "type": "Feature",
@@ -379,7 +398,8 @@
       },
       "properties": {
         "name": "Leiden Centraal -> Alphen a/d Rijn"
-      }
+      },
+      "tooltip": "Leiden Centraal -> Alphen a/d Rijn"
     },
     {
       "type": "Feature",
@@ -398,7 +418,8 @@
       },
       "properties": {
         "name": "Leiden Centraal -> Schiphol Airport"
-      }
+      },
+      "tooltip": "Leiden Centraal -> Schiphol Airport"
     },
     {
       "type": "Feature",
@@ -417,7 +438,8 @@
       },
       "properties": {
         "name": "Rotterdam Alexander -> Gouda"
-      }
+      },
+      "tooltip": "Rotterdam Alexander -> Gouda"
     },
     {
       "type": "Feature",
@@ -436,7 +458,8 @@
       },
       "properties": {
         "name": "Rotterdam Centraal -> Schiedam Centrum"
-      }
+      },
+      "tooltip": "Rotterdam Centraal -> Schiedam Centrum"
     },
     {
       "type": "Feature",
@@ -455,7 +478,8 @@
       },
       "properties": {
         "name": "Rotterdam Centraal -> Rotterdam Alexander"
-      }
+      },
+      "tooltip": "Rotterdam Centraal -> Rotterdam Alexander"
     },
     {
       "type": "Feature",
@@ -474,7 +498,8 @@
       },
       "properties": {
         "name": "Schiedam Centrum -> Delft"
-      }
+      },
+      "tooltip": "Schiedam Centrum -> Delft"
     },
     {
       "type": "Feature",
@@ -493,7 +518,8 @@
       },
       "properties": {
         "name": "Zaandam -> Castricum"
-      }
+      },
+      "tooltip": "Zaandam -> Castricum"
     },
     {
       "type": "Feature",
@@ -512,7 +538,8 @@
       },
       "properties": {
         "name": "Zaandam -> Beverwijk"
-      }
+      },
+      "tooltip": "Zaandam -> Beverwijk"
     },
     {
       "type": "Feature",
@@ -531,7 +558,8 @@
       },
       "properties": {
         "name": "Zaandam -> Hoorn"
-      }
+      },
+      "tooltip": "Zaandam -> Hoorn"
     }
   ]
 }
