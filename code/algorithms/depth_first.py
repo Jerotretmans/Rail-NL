@@ -1,39 +1,12 @@
 import sys
 sys.path.append('../')
-from helpers import read_csv_file
+from helpers import read_csv_file, calculate_score
 import random
 
 sys.path.append('../classes')
 from stations import Station
 from traject import Traject
 from dienstregeling import Regeling
-
-def calculate_score(traject_list):
-    unieke_connections = set()
-    traject_counter = 0
-    Min = 0
-
-    for traject in traject_list:
-        traject_counter += 1
-        # print(f"tijd per traject: {traject.time}")
-        Min += traject.time
-        # print(Min)
-        stations = traject.stations_in_traject
-        for i in range(len(stations) - 1):
-            connection = frozenset([stations[i].get_name(), stations[i+1].get_name()])
-            unieke_connections.add(connection)
-
-    # print("Calculate score:")
-    # print(f"unieke connecties: {len(unieke_connections)}")
-    p = len(unieke_connections) / 28
-    # print(f"p = {p}")
-    T = traject_counter
-    # print(f"T = {T}")
-    Min = sum(traject.time for traject in traject_list)
-    # print(f"Min = {Min}")
-    # # Bereken de score
-    K = round(p * 10000 - (T * 100 + Min))     
-    return K
 
 class Algorithm:
     def __init__(self):
@@ -59,7 +32,7 @@ class Algorithm:
 
     def run_depth_first(self):
     # bepaal max aantal trajecten en max tijd
-        self.aantal_trajecten = 7
+        self.aantal_trajecten = 5
         self.max_tijd_per_traject = 120
         specific_starts = {"Traject_1": "Gouda", "Traject_2": "Dordrecht"}
         self.visited_start_station = set()
@@ -119,8 +92,8 @@ class Algorithm:
                                     
                                 
                     traject.add_station(current_station)
-                    # print(traject)
-                    # print(traject.time)
+                    print(traject)
+                    print(traject.time)
             self.traject_list.append(traject)
 
         for traject in self.traject_list:
@@ -129,7 +102,7 @@ class Algorithm:
         score = calculate_score(self.traject_list)
         return score
 
-N = 10000
+N = 1
 def run_alg_N_times(N):
     hist_list = []
     for i in range(N):

@@ -38,8 +38,11 @@ def calculate_score(traject_list):
 
     # Stel variabelen in
     p = len(unique_connections) / 28
+    print(f"p = {p}")
     T = traject_counter
+    print(f"T = {T}")
     Min = minutes
+    print(f"Min = {Min}")
 
     # Bereken de score
     K = round(p * 10000 - (T * 100 + Min))     
