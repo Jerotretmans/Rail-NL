@@ -29,7 +29,7 @@ def calculate_score(traject_list):
     # print(f"p = {p}")
     T = traject_counter
     # print(f"T = {T}")
-    # Min = sum(traject.time for traject in traject_list)
+    Min = sum(traject.time for traject in traject_list)
     # print(f"Min = {Min}")
     # # Bereken de score
     K = round(p * 10000 - (T * 100 + Min))     

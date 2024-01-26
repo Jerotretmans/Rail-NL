@@ -29,7 +29,7 @@ def calculate_score(traject_list):
     # print(f"p = {p}")
     T = traject_counter
     # print(f"T = {T}")
-    # Min = sum(traject.time for traject in traject_list)
+    Min = sum(traject.time for traject in traject_list)
     # print(f"Min = {Min}")
     # # Bereken de score
     K = round(p * 10000 - (T * 100 + Min))     
@@ -59,7 +59,7 @@ class Algorithm:
 
     
     def run_breadth_first(self):
-        self.aantal_trajecten = 7
+        self.aantal_trajecten = 5
         self.max_tijd_per_traject = 120
         specific_starts = {"Traject_1": "Dordrecht", "Traject_2": "Alkmaar"}
         self.visited_start_station = set()
@@ -101,8 +101,8 @@ class Algorithm:
                                 
                             
                     traject.add_station(current_station)
-                # print(traject)
-                # print(traject.time)
+                print(traject)
+                print(traject.time)
             self.traject_list.append(traject)
         
         for traject in self.traject_list:
@@ -112,7 +112,7 @@ class Algorithm:
         return score
 
 
-N = 10000
+N = 1
 def run_alg_N_times(N):
     hist_list = []
     for i in range(N):
