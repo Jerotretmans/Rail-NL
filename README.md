@@ -14,11 +14,23 @@ python main.py alg
 
 waar ```alg``` vervangen moet worden door een van de volgende afkortingen:
 
-{
-    rd voor random
-    gr voor greedy
-    ...
-}
+
+> rd voor random
+> gr voor greedy
+> hc voor hill climber
+> df voor depth first
+> bf voor breadth first
+
+Voorbeeld:
+
+```
+python main.py rd
+```
+
+Om het random algoritme te runnen.
+
+#### 
+
 
 ### Structuur
 
