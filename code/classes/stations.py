@@ -1,6 +1,6 @@
 import sys
 sys.path.append('../')
-from helpers import read_csv_file
+from ..helpers import read_csv_file
 
 class Station:
     """

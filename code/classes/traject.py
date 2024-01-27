@@ -1,8 +1,4 @@
-from stations import Station
-import sys
-sys.path.append('../')
-from helpers import read_csv_file
-
+from .stations import Station
 
 class Traject:
     """
@@ -58,67 +54,4 @@ class Traject:
                 time = int(time)
                 self.time -= time
                 self.station_counter -= 1
-                # print("station deleted")
-
-
-    def get_name(self):
-        return f"{self.name}"
-    
-    def get_names(self):
-        station_names = []
-        for station in self.stations_in_traject:
-            station_names.append(station.get_name())
-        return(station_names)
-    
-    def get_time(self):
-        return self.time
-    
-    def __repr__(self):
-        return f"{self.name}, {self.get_names()}"
-
-
-if __name__ == "__main__":
-    """
-    Test functie voordat we in main.py bezig gaan.
-    """
-
-    # Lees verbindingen van CSV bestand
-    connections = read_csv_file('../../data/ConnectiesHolland.csv')
-    
-    test_stations = []
-    station1 = Station('Hoorn')
-    station2 = Station('Alkmaar')
-    station3 = Station('Den Helder')
-    station4 = Station('Gouda')
-    station5 = Station('Alkmaar')
-
-    test_stations.append(station1)
-    test_stations.append(station2)
-    test_stations.append(station3)
-    test_stations.append(station4)
- 
-
-    for row in connections:
-        main_station = row[0]
-        connected_station = row[1]
-        time = row[2]
-
-        for station in test_stations:
-            if station.name == main_station:
-                station.create_connection(connected_station, time)
-            elif station.name == connected_station:
-                station.create_connection(main_station, time)
-    
-    name = "Track1"
-    traject1 = Traject(name)
-    
-    for station in test_stations:
-        print(f"Name: {station.get_name()}")
-        traject1.add_station(station)
-    
-    print(traject1.get_names())
-
-
-
-
-    
+                # print("station deleted")    
