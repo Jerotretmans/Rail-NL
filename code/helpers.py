@@ -47,3 +47,4 @@ def calculate_score(traject_list):
     # Bereken de score
     K = round(p * 10000 - (T * 100 + Min))     
     return K
+
