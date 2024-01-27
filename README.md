@@ -38,7 +38,7 @@ De hierop volgende lijst beschrijft de belangrijkste mappen en files in het proj
 
 - **/code**: bevat alle code van dit project
   - **/code/algorithms**: bevat de code voor algoritmes
-  - **/code/classes**: bevat de drie benodigde classes voor deze case
+  - **/code/classes**: bevat de vier benodigde classes voor deze case
   - **/code/visualisation**: bevat de bokeh code voor de visualisatie
 - **/data**: bevat de verschillende databestanden die nodig zijn om de graaf te vullen en te visualiseren
 - **/docs**: bevat vershillende documenten die van belang zijn geweest tijdens het project
