@@ -15,11 +15,11 @@ python main.py alg
 waar ```alg``` vervangen moet worden door een van de volgende afkortingen:
 
 
-> rd voor random
-> gr voor greedy
-> hc voor hill climber
-> df voor depth first
-> bf voor breadth first
+- rd voor random
+- gr voor greedy
+- hc voor hill climber
+- df voor depth first
+- bf voor breadth first
 
 Voorbeeld:
 
