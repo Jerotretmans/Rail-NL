@@ -29,7 +29,7 @@ python main.py rd
 
 Om het random algoritme te runnen.
 
-#### 
+De terminal zal na het aanroepen van de main een aantal vragen stellen over de details van het runnen van het algoritme. Hieronder valt op welke regio het algoritme moet worden toegepast, hoeveel keer het algoritme uitgevoerd moet worden en of je een histogram van de scores wilt zien na het runnen.
 
 
 ### Structuur
