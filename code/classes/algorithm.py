@@ -12,7 +12,6 @@ from ..algorithms.depth_first import run_depth_first
 from ..helpers import read_csv_file
 
 class Algorithm:
-
     def _init_(self, name, stations_data, connections_data):
         self.name = name
         self.station_objects = {}
