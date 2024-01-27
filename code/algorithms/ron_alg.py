@@ -8,32 +8,6 @@ from stations import Station
 from traject import Traject
 from dienstregeling import Regeling
 
-def calculate_score(traject_list):
-    unieke_connections = set()
-    traject_counter = 0
-    Min = 0
-
-    for traject in traject_list:
-        traject_counter += 1
-        # print(f"tijd per traject: {traject.time}")
-        Min += traject.time
-        # print(Min)
-        stations = traject.stations_in_traject
-        for i in range(len(stations) - 1):
-            connection = frozenset([stations[i].get_name(), stations[i+1].get_name()])
-            unieke_connections.add(connection)
-
-    # print("Calculate score:")
-    # print(f"unieke connecties: {len(unieke_connections)}")
-    p = len(unieke_connections) / 28
-    # print(f"p = {p}")
-    T = traject_counter
-    # print(f"T = {T}")
-    # Min = sum(traject.time for traject in traject_list)
-    # print(f"Min = {Min}")
-    # # Bereken de score
-    K = round(p * 10000 - (T * 100 + Min))     
-    return K
 
 class Algorithm:
     def __init__(self):

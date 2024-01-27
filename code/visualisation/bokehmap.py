@@ -13,7 +13,7 @@ from bokeh.transform import linear_cmap
 from bokeh.palettes import Viridis256
 
 from helpers import read_GeoJSON_file, read_csv_file
-from classes.dienstregeling import Regeling
+# from classes.dienstregeling import Regeling
 from classes.stations import Station
 
 """
@@ -141,8 +141,8 @@ p.multi_line('xs', 'ys', line_color='red', line_width=2, source=connection_geo_s
 p.circle(x='x', y='y', size=6, color='black', alpha=1, source=pd_stations.reset_index())
 
 # Color mapper voor de trajecten
-dienstregeling_obj = Regeling('DR1')
-color_mapper = linear_cmap(field_name='index', palette=Viridis256, low=0, high=len(dienstregeling_obj.trajecten_in_regeling))
+# dienstregeling_obj = Regeling('DR1')
+# color_mapper = linear_cmap(field_name='index', palette=Viridis256, low=0, high=len(dienstregeling_obj.trajecten_in_regeling))
 
 # Display de plot in een browser
 show(p)

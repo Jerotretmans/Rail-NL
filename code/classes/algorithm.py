@@ -3,16 +3,16 @@ sys.path.append('../')
 
 from .stations import Station
 
-from ..algorithms.randalg import run_randalg
-# from ..algorithms.greedy import run_greedy
-# from ..algorithms.hill_climber import run_hill_climber
-from ..algorithms.depth_first import run_depth_first
-# from ..algorithms.breadth_first import run_breadth_first
-
+from algorithms.randalg import run_randalg
+from algorithms.greedy import run_greedy
+# from algorithms.hill_climber import run_hill_climber
+from algorithms.depth_first import run_depth_first
+from algorithms.breadth_first import run_breadth_first
 from ..helpers import read_csv_file
 
 class Algorithm:
-    def _init_(self, name, stations_data, connections_data):
+
+    def __init__(self, name, stations_data, connections_data):
         self.name = name
         self.station_objects = {}
         self.stations_data = stations_data
@@ -37,27 +37,29 @@ class Algorithm:
     def run_algorithm(self, algorithm_instance):
         self.algorithm_instance = algorithm_instance
         if self.name == 'random':
-            run_randalg(algorithm_instance)
+            return run_randalg(algorithm_instance)
+            
         elif self.name == 'greedy':
-            # run_greedy()
-            pass
+            return run_greedy(algorithm_instance)
+
         elif self.name == 'hill climber':
             # run_hill_climber()
             pass
+
         elif self.name == 'depth first':
-            # run_depth_first(df_object)
-            pass
+            return run_depth_first(algorithm_instance)
+
         elif self.name == 'breadth first':
-            # run_breadth_first()
-            pass
+            return run_breadth_first(algorithm_instance)
+        
         else:
             raise AssertionError ("Geen valide naam!")
     
 
-    def run_algorithm_N_times(self, N):
+    def run_algorithm_N_times(self, N, algorithm_instance):
         scores_list = []
+        self.algorithm_instance = algorithm_instance
         for _ in range(N):
             score = self.run_algorithm(self.algorithm_instance)
             scores_list.append(score)
-
         return scores_list
