@@ -44,7 +44,7 @@ class Regeling:
         return K
     
     def export_output(self):
-        csv_file_path = '../../output.csv'  
+        csv_file_path = '../../data/output.csv'  
         
         with open(csv_file_path, 'w', newline='') as csvfile:
             # Create a CSV writer
