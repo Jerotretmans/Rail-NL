@@ -28,10 +28,26 @@ if __name__ == "__main__":
     else:
         raise AssertionError ("Usage: 'python3 bokehmap.py holland' or 'python3 bokehmap.py nl'")
 
-    
-    randalg_object = Algorithm('random', stations_data, connections_data)
-    randalg_object.create_station_objects()
-    alg_object = randalg_object
+    # Gebruik random algoritme --> Werkt
+    # randalg_object = Algorithm('random', stations_data, connections_data)
+    # randalg_object.create_station_objects()
+    # alg_object = randalg_object
+
+    # Gebruik greedy algoritme --> Werkt
+    # greedy_object = Algorithm('greedy', stations_data, connections_data)
+    # greedy_object.create_station_objects()
+    # alg_object = greedy_object
+
+    # Gebruik depth_first algoritme --> Werkt
+    depth_first_object = Algorithm('depth first', stations_data, connections_data)
+    depth_first_object.create_station_objects()
+    alg_object = depth_first_object
+
+    # Gebruik breath_first algoritme
+    # breath_first_object = Algorithm('breath first', stations_data, connections_data)
+    # breath_first_object.create_station_objects()
+    # alg_object = breath_first_object
+
 
     # Vraag om een hoeveelheid runs van het algoritme
     try:
@@ -41,7 +57,7 @@ if __name__ == "__main__":
         print("Alleen hele getallen a.u.b.")
 
     # Run het algoritme hoe vaak de gebruiker opgeeft
-    scores = randalg_object.run_algorithm_N_times(N, alg_object)
+    scores = alg_object.run_algorithm_N_times(N, alg_object)
     print(scores)
     high_score = max(scores)
     print(f"Highest score: {high_score}")

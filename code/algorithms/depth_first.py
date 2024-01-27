@@ -18,7 +18,7 @@ Usage: 'python3 depth_first.py holland' or 'python3 depth_first.py nl'
 
 
 # Eenmalige run van het Depth First algoritme
-def run_depth_first():
+def run_depth_first(algorithm_instance):
 
     # bepaal max aantal trajecten en max tijd
     aantal_trajecten = 5
@@ -42,8 +42,8 @@ def run_depth_first():
         else:
         # Kies een random station om te beginnen
             while True:
-                random_station_name = random.choice(list(station_objects.keys()))
-                random_station = station_objects[random_station_name]
+                random_station_name = random.choice(list(algorithm_instance.station_objects.keys()))
+                random_station = algorithm_instance.station_objects[random_station_name]
                 if random_station not in visited_start_station:
                     visited_start_station.add(random_station)
                     break
@@ -70,7 +70,7 @@ def run_depth_first():
                 for next_station_name, time_to_next in current_station.connections.items():
                         # Kijk of een verbonden station al bezocht is en zo niet dan...
                     if next_station_name not in visited_stations and next_station_name:
-                        next_station = station_objects[next_station_name]
+                        next_station = algorithm_instance.station_objects[next_station_name]
                         time_to_next_int = int(time_to_next)
                             # Check of het toevoegen van die connectie niet de maximale tijd overschrijdt 
                         if current_time + time_to_next_int <= max_tijd_per_traject:
