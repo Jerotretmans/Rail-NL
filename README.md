@@ -1,14 +1,37 @@
-# Rail-NL
-Fixing the issues of the dutch railway problem.
+# RailNL
 
-description = """
-Usage: 'python main.py (algorithm)' waar (algorithm) een van de volgende afkortingen is:
+Het Nederlandse spoornetwerk is vaak een bron van frustratie voor menig reizigers. Om dit te verhelpen...
 
-rd for random
-gr for greedy
-hc for hill climber
-bf for breadth first
-df for depth first
+## Aan de slag
 
-Voorbeeld: 'python main.py rd' 
-"""
+### Gebruik
+
+Een voorbeeldje kan gerund worden door aanroepen van:
+
+```
+python main.py alg
+```
+
+waar ```alg``` vervangen moet worden door een van de volgende afkortingen:
+
+{
+    rd voor random
+    gr voor greedy
+    ...
+}
+
+### Structuur
+
+De hierop volgende lijst beschrijft de belangrijkste mappen en files in het project, en waar je ze kan vinden:
+
+- **/code**: bevat alle code van dit project
+  - **/code/algorithms**: bevat de code voor algoritmes
+  - **/code/classes**: bevat de drie benodigde classes voor deze case
+  - **/code/visualisation**: bevat de bokeh code voor de visualisatie
+- **/data**: bevat de verschillende databestanden die nodig zijn om de graaf te vullen en te visualiseren
+- **/docs**: bevat vershillende documenten die van belang zijn geweest tijdens het project
+
+## Auteurs
+- Menno Rooker
+- Ron Lakeman
+- Jero Tretmans
