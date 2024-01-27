@@ -39,14 +39,14 @@ if __name__ == "__main__":
     # alg_object = greedy_object
 
     # Gebruik depth_first algoritme --> Werkt
-    depth_first_object = Algorithm('depth first', stations_data, connections_data)
-    depth_first_object.create_station_objects()
-    alg_object = depth_first_object
+    # depth_first_object = Algorithm('depth first', stations_data, connections_data)
+    # depth_first_object.create_station_objects()
+    # alg_object = depth_first_object
 
     # Gebruik breath_first algoritme
-    # breath_first_object = Algorithm('breath first', stations_data, connections_data)
-    # breath_first_object.create_station_objects()
-    # alg_object = breath_first_object
+    breath_first_object = Algorithm('breath first', stations_data, connections_data)
+    breath_first_object.create_station_objects()
+    alg_object = breath_first_object
 
 
     # Vraag om een hoeveelheid runs van het algoritme
