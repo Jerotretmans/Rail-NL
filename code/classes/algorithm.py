@@ -8,7 +8,6 @@ from algorithms.greedy import run_greedy
 # from algorithms.hill_climber import run_hill_climber
 from algorithms.depth_first import run_depth_first
 from algorithms.breadth_first import run_breadth_first
-from ..helpers import read_csv_file
 
 class Algorithm:
 
@@ -49,7 +48,7 @@ class Algorithm:
         elif self.name == 'depth first':
             return run_depth_first(algorithm_instance)
 
-        elif self.name == 'breath first':
+        elif self.name == 'breadth first':
             return run_breadth_first(algorithm_instance)
         
         else:
