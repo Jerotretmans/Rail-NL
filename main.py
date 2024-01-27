@@ -30,10 +30,8 @@ if __name__ == "__main__":
 
     
     randalg_object = Algorithm('random', stations_data, connections_data)
-
     randalg_object.create_station_objects()
-
-    randalg_object.run_algorithm(randalg_object)
+    alg_object = randalg_object
 
     # Vraag om een hoeveelheid runs van het algoritme
     try:
@@ -43,6 +41,7 @@ if __name__ == "__main__":
         print("Alleen hele getallen a.u.b.")
 
     # Run het algoritme hoe vaak de gebruiker opgeeft
-    scores = randalg_object.run_algorithm_N_times(N)
+    scores = randalg_object.run_algorithm_N_times(N, alg_object)
+    print(scores)
     high_score = max(scores)
     print(f"Highest score: {high_score}")

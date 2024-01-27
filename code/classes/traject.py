@@ -1,4 +1,8 @@
-from .stations import Station
+import sys
+sys.path.append('../classes')
+
+from classes.stations import Station
+
 
 class Traject:
     """

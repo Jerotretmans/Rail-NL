@@ -1,5 +1,5 @@
 import csv
-from .traject import Traject
+from classes.traject import Traject
 
 
 class Regeling:

@@ -1,14 +1,13 @@
 import sys
-sys.path.append('../')
-sys.path.append('../classes')
-
-from ..helpers import read_csv_file
-
 import random
 
-from ..classes.stations import Station
-from ..classes.traject import Traject
-from ..classes.dienstregeling import Regeling
+sys.path.append('../')
+from helpers import read_csv_file
+
+sys.path.append('/classes')
+from classes.stations import Station
+from classes.traject import Traject
+from classes.dienstregeling import Regeling
 
 """
 Implementatie van het Depth First algoritme. Om dit algoritme aan te roepen
@@ -39,7 +38,7 @@ def run_depth_first():
         if f"Traject_{i+1}" in specific_starts:
         # Use the specific starting station
             random_station_name = specific_starts[f"Traject_{i+1}"]
-            random_station = station_objects[random_station_name]
+            random_station = algorithm_instance.station_objects[random_station_name]
         else:
         # Kies een random station om te beginnen
             while True:
