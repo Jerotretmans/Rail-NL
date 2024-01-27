@@ -49,7 +49,7 @@ class Algorithm:
         elif self.name == 'depth first':
             return run_depth_first(algorithm_instance)
 
-        elif self.name == 'breadth first':
+        elif self.name == 'breath first':
             return run_breadth_first(algorithm_instance)
         
         else:

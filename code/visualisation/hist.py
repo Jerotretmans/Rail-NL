@@ -23,7 +23,6 @@ Maakt een histogram van de scores van verschillende algoritmes.
 description = """
 Usage: 'python3 hist.py (algorithm)' waar (algorithm) een van de volgende afkortingen is:
 
-
 rd for random
 gr for greedy
 hc for hill climber

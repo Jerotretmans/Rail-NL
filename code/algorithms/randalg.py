@@ -2,6 +2,8 @@ import sys
 import random
 
 sys.path.append('../')
+sys.path.append('../classes')
+
 from helpers import read_csv_file
 sys.path.append('/classes')
 from classes.stations import Station
@@ -18,6 +20,9 @@ Usage: 'python3 randalg.py holland' or 'python3 randalg.py nl'
 
 # Eenmalige run van het random algoritme
 def run_randalg(algorithm_instance):
+    # Roep een toestand op waarin de dienstregeling zich verkeert
+    State = Regeling()
+
     # Roep een toestand op waarin de dienstregeling zich verkeert
     State = Regeling()
 
