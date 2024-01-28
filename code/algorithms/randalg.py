@@ -24,7 +24,7 @@ def run_randalg(algorithm_instance: Regeling) -> int:
     State: Regeling = Regeling()
 
     # Random aantal trajecten
-    aantal_trajecten: int = random.randint(1, 7)
+    aantal_trajecten: int = random.randint(1, algorithm_instance.max_trajecten)
 
     # Maximale tijd per traject
     max_tijd_per_traject: int = random.randint(1, 120)

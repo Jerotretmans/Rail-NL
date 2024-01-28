@@ -12,11 +12,13 @@ from algorithms.breadth_first import run_breadth_first
 
 class Algorithm:
 
-    def __init__(self, name: str, stations_data: List[List[str]], connections_data: List[List[str]]):
+    def __init__(self, name: str, stations_data: List[List[str]], connections_data: List[List[str]], max_trajecten: int, max_tijd_traject: int):
         self.name: str = name
         self.station_objects: Dict[str, Station] = {}
         self.stations_data: List[List[str]] = stations_data
         self.connections_data: List[List[str]] = connections_data
+        self.max_trajecten: int = max_trajecten
+        self.max_tijd_traject: int = max_tijd_traject
 
     def create_station_objects(self) -> Dict[str, Station]:
         for row in self.stations_data:

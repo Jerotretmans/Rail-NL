@@ -22,7 +22,6 @@ Usage: 'python3 depth_first.py holland' or 'python3 depth_first.py nl'
 def run_depth_first(algorithm_instance: Regeling) -> int:
 
     # bepaal max aantal trajecten en max tijd
-    aantal_trajecten: int = 5
     max_tijd_per_traject: int = 120
     specific_starts: Dict[str, str] = {"Traject_1": "Gouda", "Traject_2": "Dordrecht"}
     visited_start_station: Set[Station] = set()
@@ -33,7 +32,7 @@ def run_depth_first(algorithm_instance: Regeling) -> int:
     State: Regeling = Regeling()    
     
     # Maak elk traject
-    for i in range(aantal_trajecten):
+    for i in range(algorithm_instance.max_trajecten):
         # Maak een lege set om alle bezocte stations te onthouden
         visited_stations: Set[Station] = set()
         # Gebruik de aangegeven start stations indien die aangegeven zijn
@@ -74,7 +73,7 @@ def run_depth_first(algorithm_instance: Regeling) -> int:
                         next_station = algorithm_instance.station_objects[next_station_name]
                         time_to_next_int: int = int(time_to_next)
                             # Check of het toevoegen van die connectie niet de maximale tijd overschrijdt 
-                        if current_time + time_to_next_int <= max_tijd_per_traject:
+                        if current_time + time_to_next_int <= algorithm_instance.max_tijd_traject:
                             stack.append((next_station, current_time + time_to_next_int))
                             # als het toevoegen de tijd zou overschrijden break dan uit de loop en de while loop
                         else:
@@ -91,42 +90,3 @@ def run_depth_first(algorithm_instance: Regeling) -> int:
     K: int = State.calculate_score(State.traject_list)
 
     return K
-
-
-# Run het Depth First algoritme meerdere keren
-def run_df_N_times(N):
-    scores_list = []
-    
-    for _ in range(N):
-        score = run_depth_first()
-        scores_list.append(score)
-
-    return scores_list
-
-
-if __name__ == "__main__":
-
-    # Verzeker het correcte gebruik van de code
-    assert len(sys.argv) == 2, "Usage: 'python3 randalg.py holland' or 'python3 randalg.py nl'"
-
-    # Data lezen
-    if sys.argv[1].lower() == 'holland':
-        stations_data = read_csv_file('../../data/StationsHolland.csv')
-        connections_data = read_csv_file('../../data/ConnectiesHolland.csv')
-    elif sys.argv[1].lower() == 'nl':
-        stations_data = read_csv_file('../../data/StationsNationaal.csv')
-        connections_data = read_csv_file('../../data/ConnectiesNationaal.csv')
-    else:
-        raise AssertionError ("Usage: 'python3 bokehmap.py holland' or 'python3 bokehmap.py nl'")
-
-    # Vraag om een hoeveelheid runs van het algoritme
-    try:
-        N = int(input("Hoe vaak moet het algoritme worden uitgevoerd "))
-    # Accepteer alleen integers
-    except ValueError:
-        print("Alleen hele getallen a.u.b.")
-
-    # Run het algoritme hoe vaak de gebruiker opgeeft
-    scores = run_df_N_times(N)
-    high_score = max(scores)
-    print(f"Highest score: {high_score}")

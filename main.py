@@ -42,19 +42,29 @@ if __name__ == "__main__":
         if regio not in ['h', 'nl']:
             print("Ongeldige invoer. Type 'h' voor Holland of 'nl' voor Nationaal.")
 
+    # maximaal antaal trajecten en tijd per traject gebasseerd op regio
+    max_trajecten_holland = 7
+    max_trajecten_nationaal = 20
+    max_tijd_traject_holland = 120
+    max_tijd_traject_nationaal = 180
+
     # Lees de data voor de desbetreffende regio
     if regio == 'h':
         stations_data: List[List[str]] = read_csv_file('data/StationsHolland.csv')
         connections_data: List[List[str]] = read_csv_file('data/ConnectiesHolland.csv')
+        max_trajecten = max_trajecten_holland
+        max_tijd_traject = max_tijd_traject_holland
     elif regio == 'nl':
         stations_data: List[List[str]] = read_csv_file('data/StationsNationaal.csv')
         connections_data: List[List[str]] = read_csv_file('data/ConnectiesNationaal.csv')
+        max_trajecten = max_trajecten_nationaal
+        max_tijd_traject = max_tijd_traject_nationaal
 
     # Run algoritme op verzoek van de gebruiker
     if sys.argv[1].lower() in alg_dict:
         alg_name: str = alg_dict[sys.argv[1].lower()]
 
-        alg_object: Algorithm = Algorithm(alg_name, stations_data, connections_data)
+        alg_object: Algorithm = Algorithm(alg_name, stations_data, connections_data, max_trajecten, max_tijd_traject)
         alg_object.create_station_objects()
     else:
         print("Geen valide naam!")
