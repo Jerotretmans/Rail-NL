@@ -35,8 +35,8 @@ def run_depth_first(algorithm_instance):
     for i in range(aantal_trajecten):
         # Maak een lege set om alle bezocte stations te onthouden
         visited_stations = set()
+        # Gebruik de aangegeven start stations indien die aangegeven zijn
         if f"Traject_{i+1}" in specific_starts:
-        # Use the specific starting station
             random_station_name = specific_starts[f"Traject_{i+1}"]
             random_station = algorithm_instance.station_objects[random_station_name]
         else:
