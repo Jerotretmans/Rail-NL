@@ -1,4 +1,5 @@
 import csv
+from typing import List, Set
 from classes.traject import Traject
 
 
@@ -10,7 +11,7 @@ class Regeling:
     Constraint: max 7 trajecten in regio Holland, max 20 op nationaal niveau
     """
     def __init__(self) -> None:
-        self.traject_list = []
+        self.traject_list: List[Traject] = []
         self.traject = Traject('Name')
 
     # Voeg een traject toe aan de lijst
@@ -19,10 +20,10 @@ class Regeling:
         self.traject_list.append(new_traject)
 
     # Berekent de kwaliteitsscore van de gehele dienstregeling
-    def calculate_score(self, traject_list):
-        unique_connections = set()
-        traject_counter = 0
-        minutes = 0
+    def calculate_score(self, traject_list) -> int:
+        unique_connections: Set[frozenset] = set()
+        traject_counter: int = 0
+        minutes: int = 0
 
         # Houd de variabelen bij
         for traject in self.traject_list:
@@ -43,7 +44,7 @@ class Regeling:
         K = round(p * 10000 - (T * 100 + Min))     
         return K
     
-    def export_output(self):
+    def export_output(self) -> None:
         csv_file_path = '../../data/output.csv'  
         
         with open(csv_file_path, 'w', newline='') as csvfile:

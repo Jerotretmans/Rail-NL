@@ -1,5 +1,6 @@
 import sys
 import random
+from typing import Dict, List
 
 sys.path.append('../')
 from helpers import read_csv_file
@@ -17,23 +18,23 @@ Usage: 'python3 randalg.py holland' or 'python3 randalg.py nl'
 """
 
 # Eenmalige run van het random algoritme
-def run_greedy(algorithm_instance):
+def run_greedy(algorithm_instance: Regeling) -> int:
     # Roep een toestand op waarin de dienstregeling zich verkeert
     State = Regeling()
 
     # Random aantal trajecten
-    aantal_trajecten = random.randint(4, 5)
+    aantal_trajecten: int = random.randint(4, 5)
 
     for i in range(aantal_trajecten):
         # Maximale tijd per traject
-        max_tijd_per_traject = random.randint(40, 120)
+        max_tijd_per_traject: int = random.randint(40, 120)
 
         # random start station
-        random_station_name = random.choice(list(algorithm_instance.station_objects.keys()))
-        random_station = algorithm_instance.station_objects[random_station_name]
+        random_station_name: str = random.choice(list(algorithm_instance.station_objects.keys()))
+        random_station: Station = algorithm_instance.station_objects[random_station_name]
         
         # begin een traject
-        traject = Traject(f"Traject_{i+1}")
+        traject: Traject = Traject(f"Traject_{i+1}")
         
         # begin met het maken van een traject
         traject.add_station(random_station)
@@ -42,14 +43,14 @@ def run_greedy(algorithm_instance):
         connected_stations = list(random_station.connections.keys())
 
         if traject.station_counter == 1:
-            current_station = random_station
+            current_station: Station = random_station
 
         while traject.time < max_tijd_per_traject:
-            best_time = float('inf')
-            best_station = None
+            best_time: float = float('inf')
+            best_station: str = None
 
             for connected_station_name, time in current_station.connections.items():
-                time = float(time)
+                time: float = float(time)
                 if connected_station_name not in traject.stations_in_traject_name_only and time < best_time:
                     best_time = time
                     best_station = connected_station_name
@@ -58,7 +59,7 @@ def run_greedy(algorithm_instance):
             if traject.time + best_time > max_tijd_per_traject:
                 break
 
-            next_station_name = best_station
+            next_station_name: str = best_station
             next_station = algorithm_instance.station_objects[next_station_name]
             traject.add_station(next_station)
             current_station = next_station
@@ -68,5 +69,5 @@ def run_greedy(algorithm_instance):
     
 
     # Bereken de score van de gehele dienstregeling
-    K = State.calculate_score(State.traject_list)
+    K: int = State.calculate_score(State.traject_list)
     return K
