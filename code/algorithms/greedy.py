@@ -68,5 +68,5 @@ def run_greedy(algorithm_instance):
     
 
     # Bereken de score van de gehele dienstregeling
-    K = State.calculate_score(State.traject_list)
+    K = State.calculate_score()
     return K

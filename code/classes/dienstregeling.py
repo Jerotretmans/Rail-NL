@@ -19,7 +19,7 @@ class Regeling:
         self.traject_list.append(new_traject)
 
     # Berekent de kwaliteitsscore van de gehele dienstregeling
-    def calculate_score(self, traject_list):
+    def calculate_score(self):
         unique_connections = set()
         traject_counter = 0
         minutes = 0

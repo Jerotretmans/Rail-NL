@@ -55,6 +55,6 @@ def run_breadth_first(algorithm_instance):
         State.add_traject(traject)
     
     # Bereken de score van de gehele dienstregeling
-    K = State.calculate_score(State.traject_list)
+    K = State.calculate_score()
 
     return K

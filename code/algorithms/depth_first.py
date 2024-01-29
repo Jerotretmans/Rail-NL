@@ -1,10 +1,8 @@
 import sys
+sys.path.append('/classes')
+
 import random
 
-sys.path.append('../')
-from helpers import read_csv_file
-
-sys.path.append('/classes')
 from classes.stations import Station
 from classes.traject import Traject
 from classes.dienstregeling import Regeling
@@ -87,45 +85,6 @@ def run_depth_first(algorithm_instance):
         State.add_traject(traject)
                 
     # Bereken de score van de gehele dienstregeling
-    K = State.calculate_score(State.traject_list)
+    K = State.calculate_score()
 
     return K
-
-
-# Run het Depth First algoritme meerdere keren
-def run_df_N_times(N):
-    scores_list = []
-    
-    for _ in range(N):
-        score = run_depth_first()
-        scores_list.append(score)
-
-    return scores_list
-
-
-if __name__ == "__main__":
-
-    # Verzeker het correcte gebruik van de code
-    assert len(sys.argv) == 2, "Usage: 'python3 randalg.py holland' or 'python3 randalg.py nl'"
-
-    # Data lezen
-    if sys.argv[1].lower() == 'holland':
-        stations_data = read_csv_file('../../data/StationsHolland.csv')
-        connections_data = read_csv_file('../../data/ConnectiesHolland.csv')
-    elif sys.argv[1].lower() == 'nl':
-        stations_data = read_csv_file('../../data/StationsNationaal.csv')
-        connections_data = read_csv_file('../../data/ConnectiesNationaal.csv')
-    else:
-        raise AssertionError ("Usage: 'python3 bokehmap.py holland' or 'python3 bokehmap.py nl'")
-
-    # Vraag om een hoeveelheid runs van het algoritme
-    try:
-        N = int(input("Hoe vaak moet het algoritme worden uitgevoerd "))
-    # Accepteer alleen integers
-    except ValueError:
-        print("Alleen hele getallen a.u.b.")
-
-    # Run het algoritme hoe vaak de gebruiker opgeeft
-    scores = run_df_N_times(N)
-    high_score = max(scores)
-    print(f"Highest score: {high_score}")
