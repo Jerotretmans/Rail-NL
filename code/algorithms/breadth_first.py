@@ -57,4 +57,4 @@ def run_breadth_first(algorithm_instance):
     # Bereken de score van de gehele dienstregeling
     K = State.calculate_score()
 
-    return K
+    return State, K

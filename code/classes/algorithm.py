@@ -5,7 +5,7 @@ from .stations import Station
 
 from algorithms.randalg import run_randalg
 from algorithms.greedy import run_greedy
-# from algorithms.hill_climber import run_hill_climber
+from algorithms.hill_climber import run_hill_climber
 from algorithms.depth_first import run_depth_first
 from algorithms.breadth_first import run_breadth_first
 
@@ -17,6 +17,7 @@ class Algorithm:
         self.stations_data = stations_data
         self.connections_data = connections_data
 
+    # Voeg station objecten toe aan een lijst
     def create_station_objects(self):
         for row in self.stations_data:
             station_name = row[0]
@@ -32,9 +33,10 @@ class Algorithm:
 
         return self.station_objects
     
-    
+    # run_algorithm roept vershillende agoritmes in hun eigen script aan op verzoek van de gebruiker
     def run_algorithm(self, algorithm_instance):
         self.algorithm_instance = algorithm_instance
+        
         if self.name == 'random':
             return run_randalg(algorithm_instance)
             
@@ -42,8 +44,7 @@ class Algorithm:
             return run_greedy(algorithm_instance)
 
         elif self.name == 'hill climber':
-            # run_hill_climber()
-            pass
+            return run_hill_climber(algorithm_instance)
 
         elif self.name == 'depth first':
             return run_depth_first(algorithm_instance)

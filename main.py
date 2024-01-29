@@ -1,11 +1,14 @@
 import sys
 sys.path.append('code')
 sys.path.append('code/algorithms')
+sys.path.append('code/visualisation')
 sys.path.append('data')
 
 from code.helpers import read_csv_file, load_algorithms_dict
 
 from code.classes.algorithm import Algorithm
+
+from code.visualisation.hist import make_histogram
 
 
 """
@@ -28,7 +31,7 @@ Gebruik de README.md als gebruiksaanwijzing!
 if __name__ == "__main__":
 
     # Verzeker het correcte gebruik van de code
-    assert len(sys.argv) == 2, "Error: Gebruik de README.md als gebruiksaanwijzing!"
+    assert len(sys.argv) == 2 or len(sys.argv) == 3, "Error: Gebruik de README.md als gebruiksaanwijzing!"
 
     # Laad de namen van de algoritmes vanuit helpers
     alg_dict = load_algorithms_dict()
@@ -66,6 +69,7 @@ if __name__ == "__main__":
     except ValueError:
         print("Alleen hele getallen a.u.b.")
 
+    # Vraag of de gebruiker een histogram wilt zien van de scores
     histogram = None
     while histogram not in ['y', 'n']:
         histogram = str(input("Wil je een histogram van de data? (y/n): ")).lower()
@@ -74,18 +78,23 @@ if __name__ == "__main__":
             print("Ongeldige invoer. Type 'y' voor wel een histogram of 'n' voor geen histogram.")
     
 
-    # Plot een histogram als de gebruiker dat opgeeft
-    if histogram == 'y':
-        """
-        Hier histogram maken...
-        """
-        pass
-    elif histogram == 'n':
-        pass
-    
-
     # Run het algoritme hoe vaak de gebruiker opgeeft
-    scores = alg_object.run_algorithm_N_times(N, alg_object)
+    results = alg_object.run_algorithm_N_times(N, alg_object)
+    state = [result[0] for result in results]
+    scores = [result[1] for result in results]
     print(scores)
     high_score = max(scores)
     print(f"Highest score: {high_score}")
+
+    
+    # Plot een histogram als de gebruiker dat opgeeft
+    if histogram == 'y':
+        make_histogram(scores, N, sys.argv[1].lower())
+    elif histogram == 'n':
+        pass
+
+    if len(sys.argv) == 3:
+        if sys.argv == '-f':
+            state.export_output()
+        else:
+            pass
