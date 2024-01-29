@@ -1,4 +1,5 @@
 import sys
+from typing import List, Dict, Optional
 sys.path.append('code')
 sys.path.append('code/algorithms')
 sys.path.append('data')
@@ -31,29 +32,43 @@ if __name__ == "__main__":
     assert len(sys.argv) == 2, "Error: Gebruik de README.md als gebruiksaanwijzing!"
 
     # Laad de namen van de algoritmes vanuit helpers
-    alg_dict = load_algorithms_dict()
+    alg_dict: Dict[str, str] = load_algorithms_dict()
 
     # Vraag aan de gebruiker voor welke regio het algoritme moet worden uitgevoerd
-    regio = None
+    regio: Optional[str] = None
     while regio not in ['h', 'nl']:
         regio = str(input("Voor regio Holland of Nationaal? (h/nl): ")).lower()
 
         if regio not in ['h', 'nl']:
             print("Ongeldige invoer. Type 'h' voor Holland of 'nl' voor Nationaal.")
 
+    # maximaal antaal trajecten en tijd per traject gebasseerd op regio
+    max_trajecten_holland = 7
+    max_trajecten_nationaal = 2
+    max_tijd_traject_holland = 120
+    max_tijd_traject_nationaal = 180
+    alle_connecties_holland = 28
+    alle_connecties_nederland = 89 
+
     # Lees de data voor de desbetreffende regio
     if regio == 'h':
-        stations_data = read_csv_file('data/StationsHolland.csv')
-        connections_data = read_csv_file('data/ConnectiesHolland.csv')
+        stations_data: List[List[str]] = read_csv_file('data/StationsHolland.csv')
+        connections_data: List[List[str]] = read_csv_file('data/ConnectiesHolland.csv')
+        max_trajecten = max_trajecten_holland
+        max_tijd_traject = max_tijd_traject_holland
+        alle_connecties = alle_connecties_holland
     elif regio == 'nl':
-        stations_data = read_csv_file('data/StationsNationaal.csv')
-        connections_data = read_csv_file('data/ConnectiesNationaal.csv')
+        stations_data: List[List[str]] = read_csv_file('data/StationsNationaal.csv')
+        connections_data: List[List[str]] = read_csv_file('data/ConnectiesNationaal.csv')
+        max_trajecten = max_trajecten_nationaal
+        max_tijd_traject = max_tijd_traject_nationaal
+        alle_connecties = alle_connecties_nederland
 
     # Run algoritme op verzoek van de gebruiker
     if sys.argv[1].lower() in alg_dict:
-        alg_name = alg_dict[sys.argv[1].lower()]
+        alg_name: str = alg_dict[sys.argv[1].lower()]
 
-        alg_object = Algorithm(alg_name, stations_data, connections_data)
+        alg_object: Algorithm = Algorithm(alg_name, stations_data, connections_data, max_trajecten, max_tijd_traject, alle_connecties)
         alg_object.create_station_objects()
     else:
         print("Geen valide naam!")
@@ -85,7 +100,7 @@ if __name__ == "__main__":
     
 
     # Run het algoritme hoe vaak de gebruiker opgeeft
-    scores = alg_object.run_algorithm_N_times(N, alg_object)
+    scores: List[int] = alg_object.run_algorithm_N_times(N, alg_object)
     print(scores)
-    high_score = max(scores)
+    high_score: int = max(scores)
     print(f"Highest score: {high_score}")

@@ -1,4 +1,5 @@
 import sys
+from typing import List, Optional
 sys.path.append('../classes')
 
 from classes.stations import Station
@@ -12,17 +13,17 @@ class Traject:
     Constraint: max 120 min per traject
     """
     
-    def __init__(self, name) -> None:
+    def __init__(self, name: str) -> None:
         # Initializeer het traject object, met een naam, een lijst stations en de totale tijd
-        self.name = name
-        self.stations_in_traject = []
-        self.stations_in_traject_name_only = []
-        self.station_counter = 0
-        self.time = 0
-        self.current_station = None
+        self.name: str = name
+        self.stations_in_traject: List[Station] = []
+        self.stations_in_traject_name_only: List[str] = []
+        self.station_counter: int = 0
+        self.time: int = 0
+        self.current_station: Optional[Station] = None
         
     
-    def add_station(self, new_station) -> None:
+    def add_station(self, new_station: Station) -> None:
         # als er nog geen station in de trajectlijst staat:
         if self.station_counter == 0:
             self.stations_in_traject.append(new_station)
@@ -40,14 +41,14 @@ class Traject:
                     self.stations_in_traject_name_only.append(new_station.get_name())
                     # nieuw station wordt huidig station
                     self.current_station = new_station
-                    time = int(time)
+                    time: int = int(time)
                     # totale trajecttijd wordt bij elkaar opgeteld
                     self.time += time
                     self.station_counter += 1
             #     else:
             #         print("geen verbinding tussen nieuw en huidig station")
                     
-    def delete_station(self):
+    def delete_station(self) -> None:
         self.current_station = self.stations_in_traject[self.station_counter - 2]
 
         for connected_station_name, time in self.current_station.connections.items():
@@ -55,7 +56,12 @@ class Traject:
                 del self.stations_in_traject[self.station_counter - 1]
                 del self.stations_in_traject_name_only[self.station_counter - 1]
 
-                time = int(time)
+                time: int = int(time)
                 self.time -= time
                 self.station_counter -= 1
-                # print("station deleted")    
+                # print("station deleted")
+
+    def __repr__(self):
+        return f"(name={self.name}, stations_in_traject_name_only={self.stations_in_traject_name_only})"
+
+  
