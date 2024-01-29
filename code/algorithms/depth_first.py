@@ -87,6 +87,6 @@ def run_depth_first(algorithm_instance: Regeling) -> int:
         State.add_traject(traject)
                 
     # Bereken de score van de gehele dienstregeling
-    K: int = State.calculate_score(State.traject_list)
+    K: int = State.calculate_score()
 
     return K

@@ -10,7 +10,7 @@ class Regeling:
 
     Constraint: max 7 trajecten in regio Holland, max 20 op nationaal niveau
     """
-    def __init__(self, alle_connecties: int) -> None:
+    def __init__(self, alle_connecties: int, regio) -> None:
         self.traject_list: List[Traject] = []
         self.traject = Traject('Name')
         self.alle_connecties = alle_connecties
@@ -21,7 +21,7 @@ class Regeling:
         self.traject_list.append(new_traject)
 
     # Berekent de kwaliteitsscore van de gehele dienstregeling
-    def calculate_score(self, traject_list) -> int:
+    def calculate_score(self) -> int:
         unique_connections: Set[frozenset] = set()
         traject_counter: int = 0
         minutes: int = 0

@@ -72,5 +72,5 @@ def run_randalg(algorithm_instance: Regeling) -> int:
     
 
     # Bereken de score van de gehele dienstregeling
-    K: int = State.calculate_score(State.traject_list)
+    K: int = State.calculate_score()
     return K
