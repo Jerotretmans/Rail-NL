@@ -36,7 +36,7 @@ class Algorithm:
     # run_algorithm roept vershillende agoritmes in hun eigen script aan op verzoek van de gebruiker
     def run_algorithm(self, algorithm_instance):
         self.algorithm_instance = algorithm_instance
-        
+
         if self.name == 'random':
             return run_randalg(algorithm_instance)
             
@@ -59,7 +59,16 @@ class Algorithm:
     def run_algorithm_N_times(self, N, algorithm_instance):
         scores_list = []
         self.algorithm_instance = algorithm_instance
+        high_score = 0
+
         for _ in range(N):
-            score = self.run_algorithm(self.algorithm_instance)
+            results = self.run_algorithm(self.algorithm_instance)
+            State: object = results[0]
+            score: int = results[1]
             scores_list.append(score)
-        return scores_list
+
+            for result in results:
+                if score > high_score:
+                    best_state = State
+
+        return best_state, scores_list

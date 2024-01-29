@@ -1,10 +1,8 @@
 import sys
 sys.path.append('code')
-sys.path.append('code/algorithms')
 sys.path.append('code/visualisation')
-sys.path.append('data')
 
-from code.helpers import read_csv_file, load_algorithms_dict
+from code.helpers import read_csv_file, load_algorithms_dict, export_output
 
 from code.classes.algorithm import Algorithm
 
@@ -76,25 +74,25 @@ if __name__ == "__main__":
 
         if histogram not in ['y', 'n']:
             print("Ongeldige invoer. Type 'y' voor wel een histogram of 'n' voor geen histogram.")
-    
+
 
     # Run het algoritme hoe vaak de gebruiker opgeeft
     results = alg_object.run_algorithm_N_times(N, alg_object)
-    state = [result[0] for result in results]
-    scores = [result[1] for result in results]
-    print(scores)
-    high_score = max(scores)
+    best_state: object = results[0]
+    scores_list = results[1]
+    print(scores_list)
+    high_score = max(scores_list)
     print(f"Highest score: {high_score}")
 
     
     # Plot een histogram als de gebruiker dat opgeeft
     if histogram == 'y':
-        make_histogram(scores, N, sys.argv[1].lower())
+        make_histogram(scores_list, N, sys.argv[1].lower())
     elif histogram == 'n':
         pass
 
     if len(sys.argv) == 3:
-        if sys.argv == '-f':
-            state.export_output()
+        if sys.argv[2] == 'f':
+            export_output()
         else:
             pass

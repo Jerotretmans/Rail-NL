@@ -70,5 +70,5 @@ def run_randalg(algorithm_instance):
 
     # Bereken de score van de gehele dienstregeling
     K = State.calculate_score()
-    
+
     return State, K
