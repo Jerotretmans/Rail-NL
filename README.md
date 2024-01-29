@@ -33,7 +33,6 @@ De terminal zal na het aanroepen van de main een aantal vragen stellen over de d
 
 
 ### Structuur
-
 De hierop volgende lijst beschrijft de belangrijkste mappen en files in het project, en waar je ze kan vinden:
 
 - **/code**: bevat alle code van dit project
