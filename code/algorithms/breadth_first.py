@@ -88,4 +88,4 @@ def run_breadth_first(algorithm_instance: Regeling) -> int:
     # Bereken de score van de gehele dienstregeling
     K: int = State.calculate_score()
 
-    return K
+    return State, K

@@ -10,7 +10,7 @@ class Regeling:
 
     Constraint: max 7 trajecten in regio Holland, max 20 op nationaal niveau
     """
-    def __init__(self, alle_connecties: int, regio) -> None:
+    def __init__(self, alle_connecties: int) -> None:
         self.traject_list: List[Traject] = []
         self.traject = Traject('Name')
         self.alle_connecties = alle_connecties

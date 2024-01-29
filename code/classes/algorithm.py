@@ -60,7 +60,7 @@ class Algorithm:
             
     
 
-    def run_algorithm_N_times(self, N: int, algorithm_instance: Any) -> List[int]:
+    def run_algorithm_N_times(self, N, algorithm_instance):
         scores_list: List[int] = []
         self.algorithm_instance = algorithm_instance
         for _ in range(N):

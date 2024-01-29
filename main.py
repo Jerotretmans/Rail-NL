@@ -102,7 +102,8 @@ if __name__ == "__main__":
     
 
     # Run het algoritme hoe vaak de gebruiker opgeeft
-    scores: List[int] = alg_object.run_algorithm_N_times(N, alg_object)
+    results = alg_object.run_algorithm_N_times(N, alg_object)
+    scores = scores = [result[1] for result in results]
     print(scores)
     high_score: int = max(scores)
     print(f"Highest score: {high_score}")

@@ -11,8 +11,8 @@ from classes.traject import Traject
 from classes.dienstregeling import Regeling
 
 
-def run_hill_climber(algorithm_instance: Regeling) -> int:
-    State = Regeling(algorithm_instance.alle_connecties)
+def run_hill_climber(algorithm_instance: Regeling, regio) -> int:
+    State = Regeling(algorithm_instance.alle_connecties1)
 
     start_state, K_start = run_greedy(algorithm_instance)
 
