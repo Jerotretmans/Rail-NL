@@ -6,9 +6,9 @@ from .stations import Station
 
 from algorithms.randalg import run_randalg
 from algorithms.greedy import run_greedy
-# from algorithms.hill_climber import run_hill_climber
 from algorithms.depth_first import run_depth_first
 from algorithms.breadth_first import run_breadth_first
+from algorithms.hill_climber import run_hill_climber
 
 class Algorithm:
 
@@ -47,8 +47,7 @@ class Algorithm:
             return run_greedy(algorithm_instance)
 
         elif self.name == 'hill climber':
-            # run_hill_climber()
-            pass
+            return run_hill_climber(algorithm_instance)
 
         elif self.name == 'depth first':
             return run_depth_first(algorithm_instance)
@@ -58,6 +57,7 @@ class Algorithm:
         
         else:
             raise AssertionError ("Geen valide naam!")
+            
     
 
     def run_algorithm_N_times(self, N: int, algorithm_instance: Any) -> List[int]:
