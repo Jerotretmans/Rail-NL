@@ -1,4 +1,3 @@
-import csv
 from classes.traject import Traject
 
 
@@ -42,18 +41,3 @@ class Regeling:
         # Bereken de score
         K = round(p * 10000 - (T * 100 + Min))     
         return K
-
-
-    # Schrijft een csv bestand van een state
-    def export_output():
-        csv_file_path = 'data/output.csv'  
-
-        with open(csv_file_path, 'w', newline='') as csvfile:
-            csv_writer = csv.writer(csvfile)
-
-            # Header
-            csv_writer.writerow(["train", "stations"])
-            csv_writer.writerow(["trajecten in regeling"])
-            csv_writer.writerow(["score"])
-
-        print(f"Output has been exported to {csv_file_path}")

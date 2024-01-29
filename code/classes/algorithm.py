@@ -8,6 +8,7 @@ from algorithms.greedy import run_greedy
 from algorithms.hill_climber import run_hill_climber
 from algorithms.depth_first import run_depth_first
 from algorithms.breadth_first import run_breadth_first
+from algorithms.simulated_annealing import run_simulated_annealing
 
 class Algorithm:
 
@@ -51,6 +52,9 @@ class Algorithm:
 
         elif self.name == 'breadth first':
             return run_breadth_first(algorithm_instance)
+        
+        elif self.name == 'simmulated annealing':
+            return run_simulated_annealing(algorithm_instance)
         
         else:
             raise AssertionError ("Geen valide naam!")
