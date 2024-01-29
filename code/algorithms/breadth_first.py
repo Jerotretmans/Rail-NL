@@ -20,14 +20,13 @@ Usage: 'python3 breadth_first.py holland' or 'python3 breadth_first.py nl'
 
 # Eenmalig runnen van het breadth_first algoritme
 def run_breadth_first(algorithm_instance: Regeling) -> int:
-
     # Bepaal max aantal trajecten en max tijd per traject
-    max_tijd_per_traject: int = 120
+    # max_tijd_per_traject: int = 120
     specific_starts: Dict[str, str] = {"Traject_1": "Dordrecht", "Traject_2": "Alkmaar"}
     visited_start_station: Set[Station] = set()
 
     # Roep een toestand op waarin de dienstregeling zich verkeert
-    State = Regeling()
+    State: Regeling = Regeling(algorithm_instance.alle_connecties)
     
     # Maak elk traject
     for i in range(algorithm_instance.max_trajecten):
@@ -81,7 +80,12 @@ def run_breadth_first(algorithm_instance: Regeling) -> int:
 
         # Update de toestand van de dienstregeling
         State.add_traject(traject)
+        
+
+        # print(traject)
     
+        
+
     # Bereken de score van de gehele dienstregeling
     K: int = State.calculate_score(State.traject_list)
 

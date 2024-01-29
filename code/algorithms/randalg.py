@@ -21,7 +21,7 @@ Usage: 'python3 randalg.py holland' or 'python3 randalg.py nl'
 def run_randalg(algorithm_instance: Regeling) -> int:
 
     # Roep een toestand op waarin de dienstregeling zich verkeert
-    State: Regeling = Regeling()
+    State: Regeling = Regeling(algorithm_instance.alle_connecties)
 
     # Random aantal trajecten
     aantal_trajecten: int = random.randint(1, algorithm_instance.max_trajecten)

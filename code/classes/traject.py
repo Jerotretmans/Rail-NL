@@ -59,4 +59,9 @@ class Traject:
                 time: int = int(time)
                 self.time -= time
                 self.station_counter -= 1
-                # print("station deleted")    
+                # print("station deleted")
+
+    def __repr__(self):
+        return f"(name={self.name}, stations_in_traject_name_only={self.stations_in_traject_name_only})"
+
+  

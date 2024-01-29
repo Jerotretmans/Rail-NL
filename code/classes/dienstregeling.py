@@ -10,9 +10,10 @@ class Regeling:
 
     Constraint: max 7 trajecten in regio Holland, max 20 op nationaal niveau
     """
-    def __init__(self) -> None:
+    def __init__(self, alle_connecties: int) -> None:
         self.traject_list: List[Traject] = []
         self.traject = Traject('Name')
+        self.alle_connecties = alle_connecties
 
     # Voeg een traject toe aan de lijst
     def add_traject(self, new_traject) -> None:
@@ -36,7 +37,7 @@ class Regeling:
                 unique_connections.add(connection)
 
         # Stel variabelen in
-        p = len(unique_connections) / 28
+        p = len(unique_connections) / self.alle_connecties
         T = traject_counter
         Min = minutes
 

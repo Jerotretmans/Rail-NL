@@ -20,14 +20,14 @@ Usage: 'python3 randalg.py holland' or 'python3 randalg.py nl'
 # Eenmalige run van het random algoritme
 def run_greedy(algorithm_instance: Regeling) -> int:
     # Roep een toestand op waarin de dienstregeling zich verkeert
-    State = Regeling()
+    State = Regeling(algorithm_instance.alle_connecties)
 
     # Random aantal trajecten
     # aantal_trajecten: int = random.randint(4, 5)
 
     for i in range(algorithm_instance.max_trajecten):
         # Maximale tijd per traject
-        max_tijd_per_traject: int = random.randint(40, 120)
+        max_tijd_per_traject: int = random.randint(40, algorithm_instance.max_tijd_traject)
 
         # random start station
         random_station_name: str = random.choice(list(algorithm_instance.station_objects.keys()))

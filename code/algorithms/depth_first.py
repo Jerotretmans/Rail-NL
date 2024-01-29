@@ -22,14 +22,14 @@ Usage: 'python3 depth_first.py holland' or 'python3 depth_first.py nl'
 def run_depth_first(algorithm_instance: Regeling) -> int:
 
     # bepaal max aantal trajecten en max tijd
-    max_tijd_per_traject: int = 120
+    # max_tijd_per_traject: int = 120
     specific_starts: Dict[str, str] = {"Traject_1": "Gouda", "Traject_2": "Dordrecht"}
     visited_start_station: Set[Station] = set()
     all_visited_stations: Set[Station] = set()
 
 
     # Roep een toestand op waarin de dienstregeling zich verkeert
-    State: Regeling = Regeling()    
+    State: Regeling = Regeling(algorithm_instance.alle_connecties)    
     
     # Maak elk traject
     for i in range(algorithm_instance.max_trajecten):
