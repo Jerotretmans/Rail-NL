@@ -11,10 +11,10 @@ class Regeling:
     def __init__(self) -> None:
         self.traject_list = []
         self.traject = Traject('Name')
+        self.max_trajecten: int
 
     # Voeg een traject toe aan de lijst
     def add_traject(self, new_traject) -> None:
-        assert len(self.traject_list) < 8, "Maximaal aantal trajecten berekit!"
         self.traject_list.append(new_traject)
 
     # Berekent de kwaliteitsscore van de gehele dienstregeling

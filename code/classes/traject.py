@@ -20,6 +20,7 @@ class Traject:
         self.station_counter = 0
         self.time = 0
         self.current_station = None
+        self.max_tijd: int
         
     
     def add_station(self, new_station) -> None:

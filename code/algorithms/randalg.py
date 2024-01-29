@@ -15,7 +15,7 @@ Usage: 'python3 randalg.py holland' or 'python3 randalg.py nl'
 """
 
 # Eenmalige run van het random algoritme
-def run_randalg(algorithm_instance):
+def run_randalg(algorithm_instance, regio):
 
     # Roep een toestand op waarin de dienstregeling zich verkeert
     State = Regeling()

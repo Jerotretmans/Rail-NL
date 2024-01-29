@@ -15,7 +15,7 @@ Usage: 'python3 depth_first.py holland' or 'python3 depth_first.py nl'
 
 
 # Eenmalige run van het Depth First algoritme
-def run_depth_first(algorithm_instance):
+def run_depth_first(algorithm_instance, regio):
 
     # bepaal max aantal trajecten en max tijd
     aantal_trajecten = 5

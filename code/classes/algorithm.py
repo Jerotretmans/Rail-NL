@@ -35,26 +35,27 @@ class Algorithm:
         return self.station_objects
     
     # run_algorithm roept vershillende agoritmes in hun eigen script aan op verzoek van de gebruiker
-    def run_algorithm(self, algorithm_instance):
+    def run_algorithm(self, algorithm_instance, regio):
         self.algorithm_instance = algorithm_instance
+        self.regio = regio
 
         if self.name == 'random':
-            return run_randalg(algorithm_instance)
+            return run_randalg(algorithm_instance, regio)
             
         elif self.name == 'greedy':
-            return run_greedy(algorithm_instance)
+            return run_greedy(algorithm_instance, regio)
 
         elif self.name == 'hill climber':
-            return run_hill_climber(algorithm_instance)
+            return run_hill_climber(algorithm_instance, regio)
 
         elif self.name == 'depth first':
-            return run_depth_first(algorithm_instance)
+            return run_depth_first(algorithm_instance, regio)
 
         elif self.name == 'breadth first':
-            return run_breadth_first(algorithm_instance)
+            return run_breadth_first(algorithm_instance, regio)
         
         elif self.name == 'simmulated annealing':
-            return run_simulated_annealing(algorithm_instance)
+            return run_simulated_annealing(algorithm_instance, regio)
         
         else:
             raise AssertionError ("Geen valide naam!")
