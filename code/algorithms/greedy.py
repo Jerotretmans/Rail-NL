@@ -1,10 +1,8 @@
 import sys
+sys.path.append('/classes')
+
 import random
 
-sys.path.append('../')
-from helpers import read_csv_file
-sys.path.append('/classes')
-from classes.stations import Station
 from classes.traject import Traject
 from classes.dienstregeling import Regeling
 

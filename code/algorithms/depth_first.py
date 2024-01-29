@@ -3,7 +3,6 @@ sys.path.append('/classes')
 
 import random
 
-from classes.stations import Station
 from classes.traject import Traject
 from classes.dienstregeling import Regeling
 
