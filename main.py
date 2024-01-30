@@ -77,7 +77,7 @@ if __name__ == "__main__":
 
 
     # Run het algoritme hoe vaak de gebruiker opgeeft
-    results = alg_object.run_algorithm_N_times(N, alg_object)
+    results = alg_object.run_algorithm_N_times(N, alg_object, regio)
     best_state: object = results[0]
     scores_list = results[1]
     high_score = max(scores_list)

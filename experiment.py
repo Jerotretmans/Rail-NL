@@ -62,16 +62,23 @@ if __name__ == "__main__":
     # Vraag of de gebruiker een histogram wilt zien van de scores
     histogram = 'y'
 
-    # Run het algoritme hoe vaak de gebruiker opgeeft
-    results = alg_object.run_algorithm_N_times(N, alg_object)
-    best_state: object = results[0]
-    scores_list = results[1]
-    high_score = max(scores_list)
+
+    results1 = alg_object.run_algorithm_N_times(N, alg_object1)
+    best_state1: object = results1[0]
+    scores_list1 = results1[1]
+    high_score = max(scores_list1)
+    print(f"Highest score: {high_score}")
+
+    results2 = alg_object.run_algorithm_N_times(N, alg_object2)
+    best_state2: object = results2[0]
+    scores_list2 = results2[1]
+    high_score = max(scores_list2)
     print(f"Highest score: {high_score}")
 
     
     # Plot een histogram als de gebruiker dat opgeeft
     if histogram == 'y':
-        make_histogram(scores_list, N, sys.argv[1].lower())
+        make_histogram(scores_list1, N, sys.argv[1].lower())
+        make_histogram(scores_list1, N, sys.argv[1].lower())
     elif histogram == 'n':
         pass

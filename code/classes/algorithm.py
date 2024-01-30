@@ -67,13 +67,13 @@ class Algorithm:
             raise AssertionError ("Geen valide naam!")
     
 
-    def run_algorithm_N_times(self, N, algorithm_instance):
+    def run_algorithm_N_times(self, N, algorithm_instance, regio):
         scores_list = []
         self.algorithm_instance = algorithm_instance
         high_score = 0
 
         for _ in range(N):
-            results = self.run_algorithm(self.algorithm_instance)
+            results = self.run_algorithm(self.algorithm_instance, regio)
             state: object = results[0]
             score: int = results[1]
             scores_list.append(score)
