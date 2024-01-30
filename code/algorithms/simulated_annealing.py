@@ -23,9 +23,9 @@ def run_simulated_annealing(algorithm_instance: Regeling):
 class SimulatedAnnealing:
     def __init__(self, algorithm_instance):
         self.algorithm_instance = algorithm_instance
-        self.T0 = 10
-        self.T = 100
-        self.iterations = 100
+        self.T0 = 80
+        self.T = 120
+        self.iterations = 170
 
     def update_temperature(self):
         self.T = float(self.T - (self.T0 / self.iterations))

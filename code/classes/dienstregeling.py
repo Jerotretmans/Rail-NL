@@ -41,7 +41,7 @@ class Regeling:
                 unique_connections.add(connection)
 
         # Stel variabelen in
-        print(self)
+        # print(self)
         p = len(unique_connections) / self.alle_connecties
         # print(f"{len(unique_connections)} / {self.alle_connecties}")
         # print(p)
@@ -55,15 +55,14 @@ class Regeling:
         return K
     
     def export_output(self) -> None:
-        csv_file_path = '../../data/output.csv'  
+        csv_file_path = '../data/output.csv'  
         
         with open(csv_file_path, 'w', newline='') as csvfile:
             # Create a CSV writer
             csv_writer = csv.writer(csvfile)
 
             # Write the header
-            csv_writer.writerow(["train", "stations"])
-            csv_writer.writerow(self.trajecten_in_regeling)
+            csv_writer.writerow(["beschrijving"])
             csv_writer.writerow(["score",  self.calculate_score()])
         
         print(f"Output has been exported to {csv_file_path}")

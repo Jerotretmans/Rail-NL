@@ -1,6 +1,8 @@
 import sys
+import csv
 import time
 import subprocess
+import copy
 from typing import Dict, List, Any
 
 sys.path.append('../')
@@ -14,7 +16,6 @@ from algorithms.hill_climber import run_hill_climber
 from algorithms.simulated_annealing import run_simulated_annealing
 
 class Algorithm:
-
     def __init__(self, name: str, stations_data: List[List[str]], connections_data: List[List[str]],
                 max_trajecten: int, max_tijd_traject: int, alle_connecties: int):
         self.name: str = name
@@ -69,7 +70,7 @@ class Algorithm:
         n_runs = 0
         scores_list: List[int] = []
         self.algorithm_instance = algorithm_instance
-        while time.time() - start < 60:
+        while time.time() - start < 5:
             print(f"run: {n_runs}")
             score = self.run_algorithm(self.algorithm_instance)
             n_runs += 1
@@ -83,3 +84,14 @@ class Algorithm:
             score = self.run_algorithm(self.algorithm_instance)
             scores_list.append(score)
         return scores_list
+    
+    # def export_output(self, scores_list):
+    #     print("hallo")
+    #     csv_file_path = 'data/output.csv'
+
+    #     with open(csv_file_path, 'w', newline='') as csvfile:
+    #         # Create a CSV writer
+    #         csv_writer = csv.writer(csvfile)
+            
+
+        print(f"Output has been exported to {csv_file_path}")
