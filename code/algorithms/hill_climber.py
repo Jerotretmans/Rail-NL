@@ -17,7 +17,7 @@ def run_hill_climber(algorithm_instance: Regeling) -> int:
     start_state, K_start = run_greedy(algorithm_instance)
 
     best_state, K_best = start_state, K_start
-    iterations = 10
+    iterations = 100
     for i in range(iterations):
         state = run_hill_climb_loop(best_state, algorithm_instance.max_tijd_traject, algorithm_instance.station_objects)
         K = state.calculate_score()
@@ -29,27 +29,24 @@ def run_hill_climber(algorithm_instance: Regeling) -> int:
     return best_state, K
 
 def run_hill_climb_loop(state, max_time, station_objects):
-    
     for traject in state.traject_list:
         # print("Oude trajecten:")
         # print(traject)
         # print(f"Aantal stations in traject: {traject.station_counter}")
         # print(traject.time)
         # print()
-
+        # print(f"traject voor de cut: {traject}")
+        traject_voor_deletions = copy.deepcopy(traject)
         cut = random.randint(1, traject.station_counter)
+        index_current_station = cut - 1
         number_of_deletions = traject.station_counter - cut
         # print(f"number of deletetions: {number_of_deletions}")
-        
-        # del traject.stations_in_traject[cut:traject.station_counter]
-        for i in range(0, number_of_deletions):
+        for i in range(number_of_deletions):
             traject.delete_station()
-        
         # print(f"Traject na het cutten is: {traject}")
-
-        traject.current_station = traject.stations_in_traject[cut - 1]
         # print(f"current station na cutten is: {traject.current_station.get_name()}")
-        
+        # print()
+
         while traject.time < max_time:
             connected_stations = list(traject.current_station.connections.keys())
             # print(f"Huidig traject is nu: {traject}")
@@ -57,7 +54,7 @@ def run_hill_climb_loop(state, max_time, station_objects):
             for station in connected_stations:
                 if station not in traject.stations_in_traject_name_only:
                     connected_stations_not_in_traject.append(station)
-
+            
             # print(traject.stations_in_traject_name_only)
             # print(f"stations met connectie aan huidig station en niet in traject: {connected_stations_not_in_traject}")
 
@@ -74,6 +71,8 @@ def run_hill_climb_loop(state, max_time, station_objects):
             if traject.time + additional_time > max_time:
                 break
             traject.add_station(next_station)
+            # print(f"Huidig traject is: {traject}")
+            # print(f"Traject_time: {traject.time}")
 
     # for traject in copy_state.traject_list:
     #     print(traject)

@@ -99,7 +99,7 @@ if __name__ == "__main__":
     # elif histogram == 'n':
     #     pass
         
-    N = 1
+    N = 10
     
 
     # Run het algoritme hoe vaak de gebruiker opgeeft

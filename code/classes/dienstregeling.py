@@ -41,14 +41,14 @@ class Regeling:
                 unique_connections.add(connection)
 
         # Stel variabelen in
-        print(self)
+        # print(self)
         p = len(unique_connections) / self.alle_connecties
-        print(f"{len(unique_connections)} / {self.alle_connecties}")
-        print(p)
+        # print(f"{len(unique_connections)} / {self.alle_connecties}")
+        # print(p)
         T = traject_counter
-        print(T)
+        # print(T)
         Min = minutes
-        print(Min)
+        # print(Min)
 
         # Bereken de score
         K = round(p * 10000 - (T * 100 + Min))     
