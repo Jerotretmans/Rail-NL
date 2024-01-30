@@ -20,7 +20,7 @@ Usage: 'python3 depth_first.py holland' or 'python3 depth_first.py nl'
 # Functie voor kiezen van start stations voor trajecten
 def choose_start_station(algorithm_instance: Regeling, visited_start_station: Set[Station], index: int) -> Station:
     # Mogelijke specifieke start stations
-    specific_starts: Dict[str, str] = {"Traject_1": "Dordrecht", "Traject_2": "Den Helder"}
+    specific_starts: Dict[str, str] = {"Traject_1": "Dordrecht", "Traject_2": "Den Helder", "Traject_3": "Gouda"}
     # gebruik start stations indien aanwezig
     if f"Traject_{index + 1}" in specific_starts:
         return algorithm_instance.station_objects[specific_starts[f"Traject_{index + 1}"]]
@@ -31,14 +31,21 @@ def choose_start_station(algorithm_instance: Regeling, visited_start_station: Se
             if random_station not in visited_start_station:
                 return random_station
             
-def can_lead_to_unvisited(station: Station, visited_stations, algorithm_instance: Regeling) -> bool:
-    pass
+def can_lead_to_unvisited(station: Station, visited_stations) -> bool:
+    for neighbor_name in station.connections:
+        if neighbor_name not in visited_stations:
+            return True
+    return False
 
 
 # Functie voor het maken van trajecten
 def compute_trajectory(algorithm_instance: Regeling, start_station: Station, all_visited_stations: Set[Station]) -> Traject:
+
+    # Een set om bij te houden welke stations bezocht zijn
     visited_stations: Set[Station] = set()
+    # Een stack aanmaken
     stack: List[Tuple[Station, int]] = [(start_station, 0)]
+    # Een traject aanmaken 
     trajectory: Traject = Traject(f"Traject_{len(algorithm_instance.traject_list) + 1}")
     time_remaining = True
 
@@ -58,11 +65,11 @@ def compute_trajectory(algorithm_instance: Regeling, start_station: Station, all
                     next_station = algorithm_instance.station_objects[next_station_name]
                     time_to_next_int: int = int(time_to_next)
                     if current_time + time_to_next_int <= algorithm_instance.max_tijd_traject:
-                        stack.append((next_station, current_time + time_to_next_int))
+                        if next_station_name not in visited_stations or can_lead_to_unvisited(next_station, visited_stations, algorithm_instance):
+                            stack.append((next_station, current_time + time_to_next_int))
                     else:
                         time_remaining = False
                         break
-
     return trajectory
 
 def run_depth_first(algorithm_instance: Regeling) -> Tuple[Regeling, int]:
@@ -96,30 +103,3 @@ def run_depth_first(algorithm_instance: Regeling) -> Tuple[Regeling, int]:
     # Calculate the total score
     score: int = state.calculate_score()
     return state, score
-
-
-# Eenmalige run van het Depth First algoritme
-# def run_depth_first(algorithm_instance: Regeling) -> Tuple[Regeling, int]:
-#     visited_start_station: Set[Station] = set()
-#     used_connections: Set[Tuple[Station, Station]] = set() 
-#     all_visited_stations: Set[Station] = set()
-#     max_possible_connections = len(algorithm_instance.station_objects)
-#     # Initieer de states
-#     state: Regeling = Regeling(algorithm_instance.alle_connecties)
-
-#     # Loop over elk traject 
-#     while len(used_connections) < max_possible_connections:
-#         # Kies een start station
-#         start_station = choose_start_station(algorithm_instance, visited_start_station, len(state.traject_list))
-#         visited_start_station.add(start_station)
-
-#         # Maak een traject
-#         trajectory = compute_trajectory(algorithm_instance, start_station, all_visited_stations)
-#         # Voeg traject toe aand dienstregeling
-#         state.add_traject(trajectory)
-#         if len(state.traject_list) >= algorithm_instance.max_trajecten:
-#             break
-
-#     # Bereken de volledige score
-#     score: int = state.calculate_score()
-#     return state, score

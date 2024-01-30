@@ -37,11 +37,11 @@ if __name__ == "__main__":
 
     # Vraag aan de gebruiker voor welke regio het algoritme moet worden uitgevoerd
     regio: Optional[str] = 'h'
-    # while regio not in ['h', 'nl']:
-    #     regio = str(input("Voor regio Holland of Nationaal? (h/nl): ")).lower()
+    while regio not in ['h', 'nl']:
+        regio = str(input("Voor regio Holland of Nationaal? (h/nl): ")).lower()
 
-    #     if regio not in ['h', 'nl']:
-    #         print("Ongeldige invoer. Type 'h' voor Holland of 'nl' voor Nationaal.")
+        if regio not in ['h', 'nl']:
+            print("Ongeldige invoer. Type 'h' voor Holland of 'nl' voor Nationaal.")
 
     # maximaal antaal trajecten en tijd per traject gebasseerd op regio
     max_trajecten_holland = 7
@@ -76,30 +76,30 @@ if __name__ == "__main__":
 
 
     # Vraag om een hoeveelheid runs van het algoritme
-    # try:
-    #     N = int(input("Hoe vaak moet het algoritme worden uitgevoerd "))
-    # # Accepteer alleen integers
-    # except ValueError:
-    #     print("Alleen hele getallen a.u.b.")
+    try:
+        N = int(input("Hoe vaak moet het algoritme worden uitgevoerd "))
+    # Accepteer alleen integers
+    except ValueError:
+        print("Alleen hele getallen a.u.b.")
 
-    # histogram = None
-    # while histogram not in ['y', 'n']:
-    #     histogram = str(input("Wil je een histogram van de data? (y/n): ")).lower()
+    histogram = None
+    while histogram not in ['y', 'n']:
+        histogram = str(input("Wil je een histogram van de data? (y/n): ")).lower()
 
-    #     if histogram not in ['y', 'n']:
-    #         print("Ongeldige invoer. Type 'y' voor wel een histogram of 'n' voor geen histogram.")
+        if histogram not in ['y', 'n']:
+            print("Ongeldige invoer. Type 'y' voor wel een histogram of 'n' voor geen histogram.")
     
 
     # Plot een histogram als de gebruiker dat opgeeft
-    # if histogram == 'y':
-    #     """
-    #     Hier histogram maken...
-    #     """
-    #     pass
-    # elif histogram == 'n':
-    #     pass
+    if histogram == 'y':
+        """
+        Hier histogram maken...
+        """
+        pass
+    elif histogram == 'n':
+        pass
         
-    N = 1
+    N = 1000
     
 
   # Run het algoritme hoe vaak de gebruiker opgeeft

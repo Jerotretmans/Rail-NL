@@ -3,7 +3,7 @@ sys.path.append('../')
 sys.path.append('/classes')
 
 import random
-from typing import Dict, List
+from typing import Dict, List, Set
 
 from classes.traject import Traject
 from classes.dienstregeling import Regeling
@@ -88,13 +88,15 @@ def run_randalg(algorithm_instance: Regeling) -> int:
     K: int = State.calculate_score()
     return State, K
 
-def run_randalg_bizzey_exp(algorithm_instance: Regeling):
+def run_randalg_bizzey_exp(algorithm_instance: Regeling, visited_start_station):
     
     # Roep een toestand op waarin de dienstregeling zich verkeert
     State: Regeling = Regeling(algorithm_instance.alle_connecties)
 
     # Random aantal trajecten
     aantal_trajecten: int = random.randint(2, algorithm_instance.max_trajecten)
+
+    
     
     # Maximale tijd per traject
     max_tijd_per_traject: int = random.randint(1, 120)
@@ -102,9 +104,7 @@ def run_randalg_bizzey_exp(algorithm_instance: Regeling):
     for i in range(aantal_trajecten):
 
         # start station
-        random_station = choose_start_station()
-
-        pass
+        random_station = choose_start_station(algorithm_instance, visited_start_station, i)
 
         traject: Traject = Traject(f"Traject_{i+1}")
 
@@ -150,6 +150,8 @@ def run_randalg_rustaaahg_exp(algorithm_instance: Regeling):
     # Random aantal trajecten
     aantal_trajecten: int = random.randint(2, algorithm_instance.max_trajecten)
 
+    specu
+
     # Maximale tijd per traject
     max_tijd_per_traject: int = random.randint(1, 120)
 
@@ -157,8 +159,6 @@ def run_randalg_rustaaahg_exp(algorithm_instance: Regeling):
 
         # start station
         random_station = choose_start_station()
-
-        pass
         
         traject: Traject = Traject(f"Traject_{i+1}")
 
