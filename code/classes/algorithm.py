@@ -1,6 +1,8 @@
 import sys
 sys.path.append('../')
 
+import time
+
 from .stations import Station
 
 from algorithms.randalg import run_randalg, run_randalg_bizzey, run_randalg_rustaaahg
@@ -12,11 +14,14 @@ from algorithms.simulated_annealing import run_simulated_annealing
 
 class Algorithm:
 
-    def __init__(self, name, stations_data, connections_data):
+    def __init__(self, name, stations_data, connections_data, max_trajecten, max_tijd_traject, alle_connecties):
         self.name = name
         self.station_objects = {}
         self.stations_data = stations_data
         self.connections_data = connections_data
+        self.max_trajecten: int = max_trajecten
+        self.max_tijd_traject: int = max_tijd_traject
+        self.alle_connecties = alle_connecties
 
     # Voeg station objecten toe aan een lijst
     def create_station_objects(self):
@@ -66,6 +71,18 @@ class Algorithm:
         else:
             raise AssertionError ("Geen valide naam!")
     
+
+    def run_algorithm_for_60_sec(self, algorithm_instance):
+        start = time.time()
+        n_runs = 0
+        scores_list = []
+        self.algorithm_instance = algorithm_instance
+        while time.time() - start < 60:
+            print(f"run: {n_runs}")
+            score = self.run_algorithm(self.algorithm_instance)
+            n_runs += 1
+            scores_list.append(score)
+        return scores_list
 
     def run_algorithm_N_times(self, N, algorithm_instance, regio):
         scores_list = []

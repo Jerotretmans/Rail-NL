@@ -23,10 +23,10 @@ def run_greedy(algorithm_instance, regio):
     # Stel maxima in op basis van de regio
     if regio == 'h':
         state.max_trajecten = 7
-        traject.max_tijd = 120
+        # traject.max_tijd = 120
     elif regio == 'nl':
         state.max_trajecten = 20
-        traject.max_tijd = 180
+        # traject.max_tijd = 180
     else:
         raise AssertionError ("Geen valide naam!")
     

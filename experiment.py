@@ -10,6 +10,7 @@ from code.helpers import read_csv_file, load_algorithms_dict
 from code.classes.algorithm import Algorithm
 
 from code.visualisation.hist import make_histogram
+from code.visualisation.plot import plot_scores
 
 
 """
@@ -90,6 +91,8 @@ if __name__ == "__main__":
             make_histogram(scores_list, N, 'sa')
         else:
             pass
+
+        plot_scores(scores_list, N)
 
     else:
         print("Geen experiment met die naam gevonden!")
