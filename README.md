@@ -60,7 +60,7 @@ python experiment.py exp1
 
 Met deze opdracht worden twee situaties met elkaar vergeleken. In de eerste situatie begint het algoritme twee van zijn trajecten op de twee drukste stations (Leiden Centraal en Amsterdam Sloterdijk), en in de tweede situatie begint het op de rustigste stations (Den Helder en Dordrecht).
 
-Het eerste experiment werkt met een random algoritme. De bedoeling is om te kijken of rustige beginstations of drukke beginstations betere resultaten verwerven wanneer al het andere willekeurig is. Het runnen van experiment 1 zet twee loops in werking van ieder 60 seconden. Aan het einde van de loops krijgt de gebruiker achter elkaar twee histogrammen te zien met de verdeling van scores van de twee situaties. Op basis van de histogrammen mag de gebruiker zijn/haar eigen conclusies trekken. :)
+Het eerste experiment werkt met een random algoritme. De bedoeling is om te kijken of rustige beginstations of drukke beginstations betere resultaten verwerven wanneer al het andere willekeurig is. Het runnen van experiment 1 zet twee loops in werking van ieder 60 seconden. Aan het einde van de loops krijgt de gebruiker achter elkaar twee histogrammen te zien met de verdeling van scores van de twee situaties. Op basis van de histogrammen mag de gebruiker zijn/haar conclusies trekken.
 
 ### Experiment 2
 
@@ -69,6 +69,8 @@ Het tweede experiment betreft de temperatuur van het Simulated Annealing algorit
 ```
 python experiment.py exp2
 ```
+
+
 
 ### Experiment 3
 
