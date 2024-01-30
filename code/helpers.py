@@ -25,7 +25,8 @@ def load_algorithms_dict() -> dict:
             'df': 'depth first',\
             'bf': 'breadth first',\
             'sa': 'simmulated annealing',\
-            'exp1': 'experiment1'}
+            'br': 'bizzey',\
+            'qr': 'rustaaahg'}
 
 # Schrijft een csv bestand van een state
 def export_output():

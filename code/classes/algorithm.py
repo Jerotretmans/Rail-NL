@@ -71,12 +71,14 @@ class Algorithm:
         scores_list = []
         self.algorithm_instance = algorithm_instance
         high_score = 0
+        best_state = None
 
         for _ in range(N):
             results = self.run_algorithm(self.algorithm_instance, regio)
             state: object = results[0]
             score: int = results[1]
             scores_list.append(score)
+            high_score = max(scores_list)
 
             for _ in results:
                 if state.calculate_score() > high_score:

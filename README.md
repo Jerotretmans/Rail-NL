@@ -20,6 +20,7 @@ waar ```alg``` vervangen moet worden door een van de volgende afkortingen:
 - hc voor hill climber
 - df voor depth first
 - bf voor breadth first
+- sa voor simulated annealing
 
 Voorbeeld:
 
