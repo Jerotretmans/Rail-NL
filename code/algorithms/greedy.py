@@ -18,7 +18,7 @@ Usage: 'python3 randalg.py holland' or 'python3 randalg.py nl'
 def run_greedy(algorithm_instance, regio):
     
     # Initialiseer een toestand van de dienstregeling
-    state = Regeling()
+    state = Regeling(algorithm_instance.alle_connecties)
 
     # Stel maxima in op basis van de regio
     if regio == 'h':

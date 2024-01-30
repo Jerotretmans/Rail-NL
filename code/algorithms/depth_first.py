@@ -17,14 +17,14 @@ Usage: 'python3 depth_first.py holland' or 'python3 depth_first.py nl'
 # Eenmalige run van het Depth First algoritme
 def run_depth_first(algorithm_instance, regio):
 
-    state = Regeling()
+    state = Regeling(algorithm_instance.alle_connecties)
 
     if regio == 'h':
         state.max_trajecten = 7
-        traject.max_tijd = 120
+        # traject.max_tijd = 120
     elif regio == 'nl':
         state.max_trajecten = 20
-        traject.max_tijd = 180
+        # traject.max_tijd = 180
     else:
         raise AssertionError ("Geen valide naam!")
 

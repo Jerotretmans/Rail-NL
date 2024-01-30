@@ -59,7 +59,7 @@ class Algorithm:
         elif self.name == 'breadth first':
             return run_breadth_first(algorithm_instance, regio)
         
-        elif self.name == 'simmulated annealing':
+        elif self.name == 'simulated annealing':
             return run_simulated_annealing(algorithm_instance, regio)
         
         elif self.name == 'bizzey':
@@ -79,7 +79,7 @@ class Algorithm:
         self.algorithm_instance = algorithm_instance
         while time.time() - start < 60:
             print(f"run: {n_runs}")
-            score = self.run_algorithm(self.algorithm_instance)
+            score = self.run_algorithm(self.algorithm_instance, 'h')
             n_runs += 1
             scores_list.append(score)
         return scores_list
