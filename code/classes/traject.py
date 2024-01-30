@@ -1,8 +1,10 @@
 import sys
-from typing import List, Optional
+import random
+from typing import List, Optional, Dict
 sys.path.append('../classes')
 
 from classes.stations import Station
+# from classes.dienstregeling import Regeling
 
 
 class Traject:
@@ -63,5 +65,15 @@ class Traject:
 
     def __repr__(self):
         return f"(name={self.name}, stations_in_traject_name_only={self.stations_in_traject_name_only})"
+    
+    # def choose_start_station(algorithm_instance: Regeling, visited_start_station: Set[Station], index: int) -> Station:
+    #     specific_starts: Dict[str, str] = {"Traject_1": "Gouda", "Traject_2": "Dordrecht"}
+    #     if f"Traject_{index + 1}" in specific_starts:
+    #         return algorithm_instance.station_objects[specific_starts[f"Traject_{index + 1}"]]
+    #     else:
+    #         while True:
+    #             random_station = random.choice(list(algorithm_instance.station_objects.values()))
+    #             if random_station not in visited_start_station:
+    #                 return random_station
 
   

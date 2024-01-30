@@ -21,6 +21,7 @@ class Algorithm:
         self.max_trajecten: int = max_trajecten
         self.max_tijd_traject: int = max_tijd_traject
         self.alle_connecties = alle_connecties
+        self.traject_list = []
 
     def create_station_objects(self) -> Dict[str, Station]:
         for row in self.stations_data:

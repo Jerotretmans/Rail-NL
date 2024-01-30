@@ -38,8 +38,12 @@ class Regeling:
 
         # Stel variabelen in
         p = len(unique_connections) / self.alle_connecties
+        print(unique_connections)
+        print(p)
         T = traject_counter
+        print(T)
         Min = minutes
+        print(Min)
 
         # Bereken de score
         K = round(p * 10000 - (T * 100 + Min))     
