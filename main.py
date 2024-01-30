@@ -1,4 +1,5 @@
 import sys
+
 from typing import List, Dict, Optional
 import statistics
 sys.path.append('code')
@@ -101,17 +102,17 @@ if __name__ == "__main__":
         
     N = 10
     
-
     # Run het algoritme hoe vaak de gebruiker opgeeft
     # results = alg_object.run_algorithm_N_times(N, alg_object)
     results = alg_object.run_algorithm_for_60_sec(alg_object)
     states = [result[0] for result in results]
     scores = [result[1] for result in results]
-    
+    print(scores)
     index_highest_score = scores.index(max(scores))
     print(index_highest_score)
     best_state = states[index_highest_score]
     print(best_state)
+    # als je experiment wilt runnen
     high_score: int = max(scores)
     average_score = statistics.mean(scores)
     print(f"Highest score: {high_score}")

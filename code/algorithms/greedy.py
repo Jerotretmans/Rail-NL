@@ -23,7 +23,7 @@ def run_greedy(algorithm_instance: Regeling) -> int:
     State = Regeling(algorithm_instance.alle_connecties)
 
     # Random aantal trajecten
-    aantal_trajecten: int = random.randint(4, 6)
+    aantal_trajecten: int = algorithm_instance.max_trajecten
     
     for i in range(aantal_trajecten):
         # Maximale tijd per traject
