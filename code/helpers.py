@@ -7,7 +7,7 @@ def read_csv_file(filename) -> None:
     rows = []
     with open(filename) as file:
         stations = csv.reader(file)
-        _ = next(stations) # Negeer de boevneste regel van het csv bestand
+        _ = next(stations) # Negeer de bovenste regel van het csv bestand
         for row in stations:
             rows.append(row)
     return rows

@@ -1,60 +1,65 @@
 import sys
+sys.path.append('../')
 sys.path.append('/classes')
 
 import random
+from typing import Dict, List
 
 from classes.traject import Traject
 from classes.dienstregeling import Regeling
+from classes.stations import Station
 
 
 """
-Implementatie van het random algoritme.
+Implementatie van het random algoritme. Om dit algoritme aan te roepen
+kan je dit script runnen.
+
+Usage: 'python3 randalg.py holland' or 'python3 randalg.py nl' 
 """
 
-def set_begin_stations_bizzey():
-    pass
+def start_stations_bizzey():
+    """
+    Returns the starting station for the 'bizzey' traject.
+    """
+    station_names_bizzey = ["Amsterdam Sloterdijk", "Leiden Centraal"]
+    return station_names_bizzey
 
-def set_begin_stations_rustaaahg():
-    pass
+
+def start_stations_rustaaahg():
+    """
+    Returns the starting station for the 'rustaaahg' traject.
+    """
+    station_names_bizzey = ["Den Helder", "Dordrecht"]
+    return station_names_bizzey
 
 # Eenmalige run van het random algoritme
-def run_randalg(algorithm_instance, regio):
+def run_randalg(algorithm_instance: Regeling, regio) -> int:
 
-    # Initialiseer een toestand van de dienstregeling
-    state = Regeling()
-
-    # Stel maxima in op basis van de regio
-    if regio == 'h':
-        state.max_trajecten = 7
-        # traject.max_tijd = 120
-    elif regio == 'nl':
-        state.max_trajecten = 20
-        # traject.max_tijd = 180
-    else:
-        raise AssertionError ("Geen valide naam!")
+    # Roep een toestand op waarin de dienstregeling zich verkeert
+    State: Regeling = Regeling(algorithm_instance.alle_connecties)
 
     # Random aantal trajecten
-    aantal_trajecten = random.randint(1, 7)
+    aantal_trajecten: int = random.randint(1, algorithm_instance.max_trajecten)
 
     # Maximale tijd per traject
-    max_tijd_per_traject = random.randint(1, 120)
+    max_tijd_per_traject: int = random.randint(1, 120)
 
     for i in range(aantal_trajecten):
         # random start station
-        random_station_name = random.choice(list(algorithm_instance.station_objects.keys()))
-        random_station = algorithm_instance.station_objects[random_station_name]
+        random_station_name: str = random.choice(list(algorithm_instance.station_objects.keys()))
+        random_station: Station = algorithm_instance.station_objects[random_station_name]
         
         # begin een traject
-        traject = Traject(f"Traject_{i+1}")
+        traject: Traject = Traject(f"Traject_{i+1}")
         
         # begin met het maken van een traject
         traject.add_station(random_station)
         
         # Voeg een eerste verbinding toe zodat er nooit 0 verbindingen zijn
-        connected_stations = list(random_station.connections.keys())
+        connected_stations: List[str] = list(random_station.connections.keys())
         if connected_stations:  # Ensure there is at least one connected station
-            next_station_name = random.choice(connected_stations)
-            next_station = algorithm_instance.station_objects[next_station_name]
+            next_station_name: str = random.choice(connected_stations)
+            next_station: Station = algorithm_instance.station_objects[next_station_name]
             traject.add_station(next_station)
             random_station = next_station
         
@@ -65,11 +70,11 @@ def run_randalg(algorithm_instance, regio):
                 break
             
             # Voeg random station aan traject
-            next_station_name = random.choice(connected_stations)
+            next_station_name: str = random.choice(connected_stations)
             next_station = algorithm_instance.station_objects[next_station_name]
             
             # Check de tijd voordat je weer een station toevoegt 
-            additional_time = int(random_station.connections[next_station_name])
+            additional_time: int = int(random_station.connections[next_station_name])
             if traject.time + additional_time > max_tijd_per_traject:
                 break
             
@@ -78,27 +83,122 @@ def run_randalg(algorithm_instance, regio):
             random_station = next_station
         
         # Update de toestand van de dienstregeling
-        state.add_traject(traject)
+        State.add_traject(traject)
     
 
     # Bereken de score van de gehele dienstregeling
-    K = state.calculate_score()
+    K: int = State.calculate_score()
+    return State, K
 
-    return state, K
+def run_randalg_bizzey(algorithm_instance: Regeling, regio) -> int:
+    
+    bizzey_start_stations = start_stations_bizzey()
 
+    State: Regeling = Regeling(algorithm_instance.alle_connecties)
 
-def run_randalg_bizzey(algorithm_instance: Regeling):
+    aantal_trajecten: int = random.randint(2, algorithm_instance.max_trajecten)
 
-    set_begin_stations_bizzey()
+    max_tijd_per_traject: int = random.randint(1, 120)
 
-    run_randalg()
+    for i in range(aantal_trajecten):
+        # Use the bizzey start stations for the first two trajectories
+        if i < len(bizzey_start_stations):
+            station_name = bizzey_start_stations[i]
+            random_station = algorithm_instance.station_objects.get(station_name)
+        else:
+        # Random start station for subsequent trajectories
+            random_station_name = random.choice(list(algorithm_instance.station_objects.keys()))
+            random_station = algorithm_instance.station_objects[random_station_name]
 
-    pass
+        traject: Traject = Traject(f"Bizzey_Traject_{i+1}")
 
-def run_randalg_rustaaahg(algorithm_instance: Regeling):
+        traject.add_station(random_station)
 
-    set_begin_stations_rustaaahg()
+        connected_stations: List[str] = list(random_station.connections.keys())
+        if connected_stations:  # Ensure there is at least one connected station
+            next_station_name: str = random.choice(connected_stations)
+            next_station: Station = algorithm_instance.station_objects[next_station_name]
+            traject.add_station(next_station)
+            random_station = next_station
+        
+        # blijf stations toevoegen totdat de maximale tijd is bereikt
+        while traject.time < max_tijd_per_traject:
+            connected_stations = list(random_station.connections.keys())
+            if not connected_stations:
+                break
+            
+            # Voeg random station aan traject
+            next_station_name: str = random.choice(connected_stations)
+            next_station = algorithm_instance.station_objects[next_station_name]
+            
+            # Check de tijd voordat je weer een station toevoegt 
+            additional_time: int = int(random_station.connections[next_station_name])
+            if traject.time + additional_time > max_tijd_per_traject:
+                break
+            
+            # voeg station toe
+            traject.add_station(next_station)
+            random_station = next_station
+        
+        # Update de toestand van de dienstregeling
+        State.add_traject(traject)
+    
 
-    run_randalg()
+    # Bereken de score van de gehele dienstregeling
+    K: int = State.calculate_score()
+    return State, K
 
-    pass
+def run_randalg_rustaaahg(algorithm_instance: Regeling, regio) -> int:
+    rustaaahg_start_stations = start_stations_rustaaahg()
+
+    State: Regeling = Regeling(algorithm_instance.alle_connecties)
+
+    aantal_trajecten: int = random.randint(2, algorithm_instance.max_trajecten)
+
+    max_tijd_per_traject: int = random.randint(1, 120)
+
+    for i in range(aantal_trajecten):
+        if i < len(rustaaahg_start_stations):
+            station_name = rustaaahg_start_stations[i]
+            random_station = algorithm_instance.station_objects.get(station_name)
+        else:
+            random_station_name = random.choice(list(algorithm_instance.station_objects.keys()))
+            random_station = algorithm_instance.station_objects[random_station_name]
+
+        traject: Traject = Traject(f"Rustaaahg_Traject_{i+1}")
+
+        traject.add_station(random_station)
+
+        connected_stations: List[str] = list(random_station.connections.keys())
+        if connected_stations:  # Ensure there is at least one connected station
+            next_station_name: str = random.choice(connected_stations)
+            next_station: Station = algorithm_instance.station_objects[next_station_name]
+            traject.add_station(next_station)
+            random_station = next_station
+        
+        # blijf stations toevoegen totdat de maximale tijd is bereikt
+        while traject.time < max_tijd_per_traject:
+            connected_stations = list(random_station.connections.keys())
+            if not connected_stations:
+                break
+            
+            # Voeg random station aan traject
+            next_station_name: str = random.choice(connected_stations)
+            next_station = algorithm_instance.station_objects[next_station_name]
+            
+            # Check de tijd voordat je weer een station toevoegt 
+            additional_time: int = int(random_station.connections[next_station_name])
+            if traject.time + additional_time > max_tijd_per_traject:
+                break
+            
+            # voeg station toe
+            traject.add_station(next_station)
+            random_station = next_station
+        
+        # Update de toestand van de dienstregeling
+        State.add_traject(traject)
+    
+
+    # Bereken de score van de gehele dienstregeling
+    K: int = State.calculate_score()
+    return State, K

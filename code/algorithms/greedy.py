@@ -8,10 +8,7 @@ from classes.dienstregeling import Regeling
 
 
 """
-Implementatie van het random algoritme. Om dit algoritme aan te roepen
-kan je dit script runnen.
-
-Usage: 'python3 randalg.py holland' or 'python3 randalg.py nl' 
+Implementatie van het greedy algoritme.
 """
 
 # Eenmalige run van het random algoritme

@@ -63,10 +63,10 @@ class Algorithm:
             return run_simulated_annealing(algorithm_instance, regio)
         
         elif self.name == 'bizzey':
-            return run_randalg_bizzey(algorithm_instance)
+            return run_randalg_bizzey(algorithm_instance, regio)
             
         elif self.name == 'rustaaahg':
-            return run_randalg_rustaaahg(algorithm_instance)
+            return run_randalg_rustaaahg(algorithm_instance, regio)
         
         else:
             raise AssertionError ("Geen valide naam!")
@@ -79,7 +79,8 @@ class Algorithm:
         self.algorithm_instance = algorithm_instance
         while time.time() - start < 60:
             print(f"run: {n_runs}")
-            score = self.run_algorithm(self.algorithm_instance, 'h')
+            results = self.run_algorithm(self.algorithm_instance, 'h')
+            score = results[1]
             n_runs += 1
             scores_list.append(score)
         return scores_list
