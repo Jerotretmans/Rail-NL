@@ -10,6 +10,15 @@ from .hill_climber import run_hill_climb_loop
 
 from code.visualisation.plot import plot_scores
 
+T0_options = []
+T_options = []
+iterations_options = []
+
+for i in range(20, 220, 20):
+    T0_options.append(i)
+    T_options.append(i)
+    iterations_options.append(i)
+
 
 def run_simulated_annealing(algorithm_instance, regio):
     sim_ann = SimulatedAnnealing(algorithm_instance)
@@ -21,9 +30,15 @@ def run_simulated_annealing(algorithm_instance, regio):
 class SimulatedAnnealing:
     def __init__(self, algorithm_instance):
         self.algorithm_instance = algorithm_instance
-        self.T0 = 110
-        self.T = 120
-        self.iterations = 110
+        # for T0 in T0_options:
+        #     self.T0 = T0
+        # for T in T_options:
+        #     self.T = T
+        # for iterations in iterations_options:
+        #     self.iterations = iterations
+        self.T0 = 120
+        self.T = 110
+        self.iterations = 130
         self.sim_list = []
 
     def update_temperature(self):
