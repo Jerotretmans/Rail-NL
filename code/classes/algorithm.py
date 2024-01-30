@@ -63,8 +63,11 @@ class Algorithm:
 
     def run_algorithm_N_times(self, N, algorithm_instance):
         scores_list: List[int] = []
+        n_runs = 0
         self.algorithm_instance = algorithm_instance
         for _ in range(N):
+            print(f"run: {n_runs}")
             score = self.run_algorithm(self.algorithm_instance)
             scores_list.append(score)
+            n_runs += 1
         return scores_list

@@ -150,7 +150,6 @@ def run_randalg_rustaaahg_exp(algorithm_instance: Regeling):
     # Random aantal trajecten
     aantal_trajecten: int = random.randint(2, algorithm_instance.max_trajecten)
 
-    specu
 
     # Maximale tijd per traject
     max_tijd_per_traject: int = random.randint(1, 120)

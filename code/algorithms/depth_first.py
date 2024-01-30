@@ -20,7 +20,8 @@ Usage: 'python3 depth_first.py holland' or 'python3 depth_first.py nl'
 # Functie voor kiezen van start stations voor trajecten
 def choose_start_station(algorithm_instance: Regeling, visited_start_station: Set[Station], index: int) -> Station:
     # Mogelijke specifieke start stations
-    specific_starts: Dict[str, str] = {"Traject_1": "Dordrecht", "Traject_2": "Den Helder", "Traject_3": "Gouda"}
+    specific_starts: Dict[str, str] = {"Traject_1": "Utrecht Centraal", "Traject_2": "Groningen", "Traject_3": "Den Helder", "Traject_4": "Maastricht",
+                                       "Traject_5": "Vlissingen", "Traject_6": "Enschede"}
     # gebruik start stations indien aanwezig
     if f"Traject_{index + 1}" in specific_starts:
         return algorithm_instance.station_objects[specific_starts[f"Traject_{index + 1}"]]
@@ -60,7 +61,12 @@ def compute_trajectory(algorithm_instance: Regeling, start_station: Station, all
             # Voeg toe aan traject
             trajectory.add_station(current_station)
 
-            for next_station_name, time_to_next in current_station.connections.items():
+            # Sort connections based on the number of unvisited connections
+            sorted_connections = sorted(current_station.connections.items(), 
+                                        key=lambda item: sum(neighbor not in visited_stations for neighbor in algorithm_instance.station_objects[item[0]].connections),
+                                        reverse=True)
+
+            for next_station_name, time_to_next in sorted_connections:
                 if next_station_name not in visited_stations:
                     next_station = algorithm_instance.station_objects[next_station_name]
                     time_to_next_int: int = int(time_to_next)
