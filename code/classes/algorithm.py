@@ -1,4 +1,6 @@
 import sys
+import time
+import subprocess
 from typing import Dict, List, Any
 
 sys.path.append('../')
@@ -62,7 +64,17 @@ class Algorithm:
         else:
             raise AssertionError ("Geen valide naam!")
             
-    
+    def run_algorithm_for_60_sec(self, algorithm_instance):
+        start = time.time()
+        n_runs = 0
+        scores_list: List[int] = []
+        self.algorithm_instance = algorithm_instance
+        while time.time() - start < 60:
+            print(f"run: {n_runs}")
+            score = self.run_algorithm(self.algorithm_instance)
+            n_runs += 1
+            scores_list.append(score)
+        return scores_list
 
     def run_algorithm_N_times(self, N, algorithm_instance):
         scores_list: List[int] = []

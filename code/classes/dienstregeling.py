@@ -41,7 +41,7 @@ class Regeling:
                 unique_connections.add(connection)
 
         # Stel variabelen in
-        # print(self)
+        print(self)
         p = len(unique_connections) / self.alle_connecties
         # print(f"{len(unique_connections)} / {self.alle_connecties}")
         # print(p)

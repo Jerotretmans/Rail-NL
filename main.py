@@ -99,11 +99,12 @@ if __name__ == "__main__":
     # elif histogram == 'n':
     #     pass
         
-    N = 10
+    N = 100
     
 
     # Run het algoritme hoe vaak de gebruiker opgeeft
-    results = alg_object.run_algorithm_N_times(N, alg_object)
+    # results = alg_object.run_algorithm_N_times(N, alg_object)
+    results = alg_object.run_algorithm_for_60_sec(alg_object)
     scores = scores = [result[1] for result in results]
     print(scores)
     high_score: int = max(scores)

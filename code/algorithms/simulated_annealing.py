@@ -23,9 +23,9 @@ def run_simulated_annealing(algorithm_instance: Regeling):
 class SimulatedAnnealing:
     def __init__(self, algorithm_instance):
         self.algorithm_instance = algorithm_instance
-        self.T0 = 100
+        self.T0 = 10
         self.T = 100
-        self.iterations = 10
+        self.iterations = 100
 
     def update_temperature(self):
         self.T = float(self.T - (self.T0 / self.iterations))
@@ -42,7 +42,7 @@ class SimulatedAnnealing:
     def accept(self, score_old, score_new):
         # print(f"score_old - score_new: {score_old - score_new}")
         chance = 2 ** ((score_old - score_new) / self.T)
-        print(f"chance: {chance}")
+        # print(f"chance: {chance}")
         r = round(random.uniform(0, 1), 2)
         # print(f"r: {r}")
         self.update_temperature()

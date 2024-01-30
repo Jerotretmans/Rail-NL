@@ -68,6 +68,7 @@ class Traject:
         time: int = int(time)
         self.time -= time
         
+        
         # print("station deleted")
 
     def __repr__(self):
