@@ -38,7 +38,7 @@ class Regeling:
 
         # Stel variabelen in
         p = len(unique_connections) / self.alle_connecties
-        print(unique_connections)
+        # print(unique_connections)
         print(p)
         T = traject_counter
         print(T)

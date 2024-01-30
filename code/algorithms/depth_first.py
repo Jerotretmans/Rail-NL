@@ -20,7 +20,7 @@ Usage: 'python3 depth_first.py holland' or 'python3 depth_first.py nl'
 # Functie voor kiezen van start stations voor trajecten
 def choose_start_station(algorithm_instance: Regeling, visited_start_station: Set[Station], index: int) -> Station:
     # Mogelijke specifieke start stations
-    specific_starts: Dict[str, str] = {}
+    specific_starts: Dict[str, str] = {"Traject_1": "Dordrecht", "Traject_2": "Den Helder"}
     # gebruik start stations indien aanwezig
     if f"Traject_{index + 1}" in specific_starts:
         return algorithm_instance.station_objects[specific_starts[f"Traject_{index + 1}"]]
@@ -30,6 +30,10 @@ def choose_start_station(algorithm_instance: Regeling, visited_start_station: Se
             random_station = random.choice(list(algorithm_instance.station_objects.values()))
             if random_station not in visited_start_station:
                 return random_station
+            
+def can_lead_to_unvisited(station: Station, visited_stations, algorithm_instance: Regeling) -> bool:
+    pass
+
 
 # Functie voor het maken van trajecten
 def compute_trajectory(algorithm_instance: Regeling, start_station: Station, all_visited_stations: Set[Station]) -> Traject:
@@ -85,6 +89,7 @@ def run_depth_first(algorithm_instance: Regeling) -> Tuple[Regeling, int]:
         trajectory = compute_trajectory(algorithm_instance, start_station, used_connections)
         # Add the trajectory to the timetable
         state.add_traject(trajectory)
+        print(trajectory)
         if len(state.traject_list) >= algorithm_instance.max_trajecten:
             break
 
