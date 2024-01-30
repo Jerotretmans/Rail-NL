@@ -11,6 +11,11 @@ from classes.dienstregeling import Regeling
 Implementatie van het random algoritme.
 """
 
+def set_begin_stations_bizzey():
+    pass
+
+def set_begin_stations_rustaaahg():
+    pass
 
 # Eenmalige run van het random algoritme
 def run_randalg(algorithm_instance, regio):
@@ -83,7 +88,17 @@ def run_randalg(algorithm_instance, regio):
 
 
 def run_randalg_bizzey(algorithm_instance: Regeling):
+
+    set_begin_stations_bizzey()
+
+    run_randalg()
+
     pass
 
 def run_randalg_rustaaahg(algorithm_instance: Regeling):
+
+    set_begin_stations_rustaaahg()
+
+    run_randalg()
+
     pass

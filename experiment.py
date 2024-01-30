@@ -10,7 +10,6 @@ from code.helpers import read_csv_file, load_algorithms_dict
 from code.classes.algorithm import Algorithm
 
 from code.visualisation.hist import make_histogram
-from code.visualisation.plot import plot_scores
 
 
 """
@@ -19,6 +18,10 @@ Experiment script.
 Gebruik de README.md als gebruiksaanwijzing!
 """
 
+
+max_trajecten_holland = 7
+max_tijd_traject_holland = 120
+alle_connecties_holland = 28
 
 
 if __name__ == "__main__":
@@ -51,9 +54,9 @@ if __name__ == "__main__":
 
     # Run het experiment dat de gebruiker aangeeft
     if sys.argv[1].lower() == 'exp1':
-        alg_object1 = Algorithm('bizzey', stations_data, connections_data)
+        alg_object1 = Algorithm('bizzey', stations_data, connections_data, max_trajecten_holland, max_tijd_traject_holland, alle_connecties_holland)
         alg_object1.create_station_objects()
-        alg_object2 = Algorithm('rustaaahg', stations_data, connections_data)
+        alg_object2 = Algorithm('rustaaahg', stations_data, connections_data, max_trajecten_holland, max_tijd_traject_holland, alle_connecties_holland)
         alg_object2.create_station_objects()
 
         # Definieer de scores voor de twee cases van experiment 1
@@ -91,8 +94,6 @@ if __name__ == "__main__":
             make_histogram(scores_list, N, 'sa')
         else:
             pass
-
-        plot_scores(scores_list, N)
 
     else:
         print("Geen experiment met die naam gevonden!")

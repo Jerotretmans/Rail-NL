@@ -7,7 +7,6 @@ from code.helpers import read_csv_file, load_algorithms_dict, export_output
 from code.classes.algorithm import Algorithm
 
 from code.visualisation.hist import make_histogram
-from code.visualisation.plot import plot_scores
 
 
 """
@@ -31,7 +30,7 @@ max_trajecten_nationaal = 20
 max_tijd_traject_holland = 120
 max_tijd_traject_nationaal = 180
 alle_connecties_holland = 28
-alle_connecties_nationaal = 89 
+alle_connecties_nationaal = 89
 
 if __name__ == "__main__":
 

@@ -8,19 +8,23 @@ import copy
 from .greedy import run_greedy
 from .hill_climber import run_hill_climb_loop
 
+from code.visualisation.plot import plot_scores
+
 
 def run_simulated_annealing(algorithm_instance, regio):
     sim_ann = SimulatedAnnealing(algorithm_instance)
-    State, K = sim_ann.run_sim_ann()
+    State, K, sim_list = sim_ann.run_sim_ann()
+    plot_scores(sim_list, sim_ann.iterations)
     return State, K
 
 
 class SimulatedAnnealing:
     def __init__(self, algorithm_instance):
         self.algorithm_instance = algorithm_instance
-        self.T0 = 10
-        self.T = 100
-        self.iterations = 100
+        self.T0 = 110
+        self.T = 120
+        self.iterations = 110
+        self.sim_list = []
 
     def update_temperature(self):
         self.T = float(self.T - (self.T0 / self.iterations))
@@ -57,9 +61,12 @@ class SimulatedAnnealing:
         
         for _ in range(self.iterations):
             new_state = run_hill_climb_loop(copy.deepcopy(best_state), self.algorithm_instance.max_tijd_traject, self.algorithm_instance.station_objects)
+            score = new_state.calculate_score()
             # print(f"score for current best_state: {best_state.calculate_score()}")
             # print(f"score for new state: {new_state.calculate_score()}")
             # breakpoint()
             best_state = self.state_compare(new_state, best_state)
+            self.sim_list.append(score)
+
         K = best_state.calculate_score()
-        return best_state, K
+        return best_state, K, self.sim_list
