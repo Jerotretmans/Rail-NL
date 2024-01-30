@@ -62,6 +62,6 @@ class Traject:
                 # print("station deleted")
 
     def __repr__(self):
-        return f"(name={self.name}, stations_in_traject_name_only={self.stations_in_traject_name_only})"
+        return f"{self.name}, {self.stations_in_traject_name_only}\n"
 
   

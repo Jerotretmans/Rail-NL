@@ -1,5 +1,6 @@
 import sys
 from typing import List, Dict, Optional
+import statistics
 sys.path.append('code')
 sys.path.append('code/algorithms')
 sys.path.append('data')
@@ -98,7 +99,7 @@ if __name__ == "__main__":
     # elif histogram == 'n':
     #     pass
         
-    N = 10
+    N = 1
     
 
     # Run het algoritme hoe vaak de gebruiker opgeeft
@@ -106,4 +107,6 @@ if __name__ == "__main__":
     scores = scores = [result[1] for result in results]
     print(scores)
     high_score: int = max(scores)
+    average_score = statistics.mean(scores)
     print(f"Highest score: {high_score}")
+    print(f"average score: {average_score}")

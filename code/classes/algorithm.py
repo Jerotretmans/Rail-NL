@@ -9,6 +9,7 @@ from algorithms.greedy import run_greedy
 from algorithms.depth_first import run_depth_first
 from algorithms.breadth_first import run_breadth_first
 from algorithms.hill_climber import run_hill_climber
+from algorithms.simulated_annealing import run_simulated_annealing
 
 class Algorithm:
 
@@ -48,6 +49,9 @@ class Algorithm:
 
         elif self.name == 'hill climber':
             return run_hill_climber(algorithm_instance)
+        
+        elif self.name == 'simulated annealing':
+            return run_simulated_annealing(algorithm_instance)
 
         elif self.name == 'depth first':
             return run_depth_first(algorithm_instance)
