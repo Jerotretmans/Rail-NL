@@ -80,7 +80,6 @@ if __name__ == "__main__":
     results = alg_object.run_algorithm_N_times(N, alg_object)
     best_state: object = results[0]
     scores_list = results[1]
-    print(scores_list)
     high_score = max(scores_list)
     print(f"Highest score: {high_score}")
 

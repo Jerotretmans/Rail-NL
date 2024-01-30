@@ -16,8 +16,20 @@ Usage: 'python3 randalg.py holland' or 'python3 randalg.py nl'
 
 # Eenmalige run van het random algoritme
 def run_greedy(algorithm_instance, regio):
-    # Roep een toestand op waarin de dienstregeling zich verkeert
-    State = Regeling()
+    
+    # Initialiseer een toestand van de dienstregeling
+    state = Regeling()
+
+    # Stel maxima in op basis van de regio
+    if regio == 'h':
+        state.max_trajecten = 7
+        traject.max_tijd = 120
+    elif regio == 'nl':
+        state.max_trajecten = 20
+        traject.max_tijd = 180
+    else:
+        raise AssertionError ("Geen valide naam!")
+    
 
     # Random aantal trajecten
     aantal_trajecten = random.randint(4, 5)
@@ -62,10 +74,10 @@ def run_greedy(algorithm_instance, regio):
             current_station = next_station
         
         # Update de toestand van de dienstregeling
-        State.add_traject(traject)
+        state.add_traject(traject)
     
 
     # Bereken de score van de gehele dienstregeling
-    K = State.calculate_score()
+    K = state.calculate_score()
 
-    return State, K
+    return state, K

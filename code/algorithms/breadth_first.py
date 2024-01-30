@@ -10,7 +10,6 @@ from classes.dienstregeling import Regeling
 def run_breadth_first(algorithm_instance, regio):
 
     state = Regeling()
-    traject = Traject()
 
     if regio == 'h':
         state.max_trajecten = 7
@@ -21,7 +20,7 @@ def run_breadth_first(algorithm_instance, regio):
     else:
         raise AssertionError ("Geen valide naam!")
     
-
+    traject = Traject()
 
     aantal_trajecten = 3
     max_tijd_per_traject = 120

@@ -17,16 +17,24 @@ Usage: 'python3 depth_first.py holland' or 'python3 depth_first.py nl'
 # Eenmalige run van het Depth First algoritme
 def run_depth_first(algorithm_instance, regio):
 
+    state = Regeling()
+
+    if regio == 'h':
+        state.max_trajecten = 7
+        traject.max_tijd = 120
+    elif regio == 'nl':
+        state.max_trajecten = 20
+        traject.max_tijd = 180
+    else:
+        raise AssertionError ("Geen valide naam!")
+
     # bepaal max aantal trajecten en max tijd
     aantal_trajecten = 5
     max_tijd_per_traject = 120
     specific_starts = {"Traject_1": "Gouda", "Traject_2": "Dordrecht"}
     visited_start_station = set()
     all_visited_stations = set()
-
-
-    # Roep een toestand op waarin de dienstregeling zich verkeert
-    State = Regeling()    
+ 
     
     # Maak elk traject
     for i in range(aantal_trajecten):
@@ -81,9 +89,9 @@ def run_depth_first(algorithm_instance, regio):
                 traject.add_station(current_station)
         
         # Update de toestand van de dienstregeling
-        State.add_traject(traject)
+        state.add_traject(traject)
                 
     # Bereken de score van de gehele dienstregeling
-    K = State.calculate_score()
+    K = state.calculate_score()
 
-    return State, K
+    return state, K
