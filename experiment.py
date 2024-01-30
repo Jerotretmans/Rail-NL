@@ -56,19 +56,19 @@ if __name__ == "__main__":
         alg_object2.create_station_objects()
 
         # Definieer de scores voor de twee cases van experiment 1
-        results1 = alg_object1.run_algorithm_N_times(N, alg_object1)
+        results1 = alg_object1.run_algorithm_N_times(N, alg_object1, regio)
         best_state1: object = results1[0]
         scores_list1 = results1[1]
         high_score = max(scores_list1)
         print(f"Highest score: {high_score}")
 
-        results2 = alg_object2.run_algorithm_N_times(N, alg_object2)
+        results2 = alg_object2.run_algorithm_N_times(N, alg_object2, regio)
         best_state2: object = results2[0]
         scores_list2 = results2[1]
         high_score = max(scores_list2)
         print(f"Highest score: {high_score}")
 
-        # Plot een histogram als de gebruiker dat opgeeft
+        # Plot een histogram
         if histogram == 'y':
             make_histogram(scores_list1, N, 'br')
             make_histogram(scores_list2, N, 'qr')
@@ -79,12 +79,13 @@ if __name__ == "__main__":
         alg_object = Algorithm('Simulated Annealing', stations_data, connections_data)
 
         # Definieer de scores van experiment 2
-        results = alg_object.run_algorithm_N_times(N, alg_object)
+        results = alg_object.run_algorithm_N_times(N, alg_object, regio)
         best_state1: object = results[0]
         scores_list = results[1]
         high_score = max(scores_list)
         print(f"Highest score: {high_score}")
 
+        # Plot een histogram
         if histogram == 'y':
             make_histogram(scores_list, N, 'sa')
         else:

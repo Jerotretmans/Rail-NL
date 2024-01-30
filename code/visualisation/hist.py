@@ -28,5 +28,6 @@ def make_histogram(scores_list, N, alg_abrev):
     plt.text(0.65, 0.95, f"Highest score: {highest_score}", transform=plt.gca().transAxes, fontsize=11, verticalalignment='top', bbox=bbox_props)
 
     # Laat de plot zien en sla het op
-    plt.show()
     plt.savefig(f"docs/{alg_abrev}_hist.png")
+    plt.show()
+    

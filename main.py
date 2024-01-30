@@ -81,6 +81,7 @@ if __name__ == "__main__":
     best_state: object = results[0]
     scores_list = results[1]
     high_score = max(scores_list)
+    # print(best_state.traject_list)
     print(f"Highest score: {high_score}")
 
     
