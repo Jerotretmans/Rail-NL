@@ -5,7 +5,7 @@ sys.path.append('code/visualisation')
 import subprocess
 import time
 
-from code.helpers import read_csv_file, load_algorithms_dict, export_output
+from code.helpers import read_csv_file, load_algorithms_dict
 
 from code.classes.algorithm import Algorithm
 
@@ -38,11 +38,11 @@ if __name__ == "__main__":
 
 
     # Run het experiment dat de gebruiker aangeeft
-    if sys.argv[1].lower() in alg_dict:
-        alg_name = alg_dict[sys.argv[1].lower()]
-
-        alg_object = Algorithm(alg_name, stations_data, connections_data)
-        alg_object.create_station_objects()   
+    if sys.argv[1].lower() == 'exp1':
+        alg_object1 = Algorithm('bizzey', stations_data, connections_data)
+        alg_object1.create_station_objects()
+        alg_object2 = Algorithm('rustaaahg', stations_data, connections_data)
+        alg_object2.create_station_objects()
 
     elif sys.argv[1].lower() == 'exp2':
         alg_object = Algorithm('Simulated Annealing', stations_data, connections_data)
@@ -50,15 +50,6 @@ if __name__ == "__main__":
     else:
         print("Geen experiment met die naam gevonden!")
     
-
-    # Run algoritme op verzoek van de gebruiker
-    if sys.argv[2].lower() in alg_dict:
-        alg_name = alg_dict[sys.argv[2].lower()]
-
-        alg_object = Algorithm(alg_name, stations_data, connections_data)
-        alg_object.create_station_objects()
-    else:
-        print("Geen valide naam!")
 
     start = time.time()
     N = 0
@@ -75,7 +66,6 @@ if __name__ == "__main__":
     results = alg_object.run_algorithm_N_times(N, alg_object)
     best_state: object = results[0]
     scores_list = results[1]
-    print(scores_list)
     high_score = max(scores_list)
     print(f"Highest score: {high_score}")
 

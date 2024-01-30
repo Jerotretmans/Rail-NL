@@ -82,3 +82,9 @@ def run_randalg(algorithm_instance, regio):
     K = state.calculate_score()
 
     return state, K
+
+def run_randalg_bizzey(algorithm_instance):
+    pass
+
+def run_randalg_rustaaahg(algorithm_instance):
+    pass

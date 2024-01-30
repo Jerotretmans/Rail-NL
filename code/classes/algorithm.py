@@ -3,7 +3,7 @@ sys.path.append('../')
 
 from .stations import Station
 
-from algorithms.randalg import run_randalg
+from algorithms.randalg import run_randalg, run_randalg_bizzey, run_randalg_rustaaahg
 from algorithms.greedy import run_greedy
 from algorithms.hill_climber import run_hill_climber
 from algorithms.depth_first import run_depth_first
@@ -57,8 +57,11 @@ class Algorithm:
         elif self.name == 'simmulated annealing':
             return run_simulated_annealing(algorithm_instance, regio)
         
-        elif self.name == 'experiment1':
-            return run_randalg_bizzey(algorithm_instance), run_randalg_rustaaahg(algorithm_instance)
+        elif self.name == 'bizzey':
+            return run_randalg_bizzey(algorithm_instance)
+            
+        elif self.name == 'rustaaahg':
+            return run_randalg_rustaaahg(algorithm_instance)
         
         else:
             raise AssertionError ("Geen valide naam!")
@@ -76,7 +79,7 @@ class Algorithm:
             scores_list.append(score)
 
             for _ in results:
-                if score > high_score:
+                if state.calculate_score() > high_score:
                     best_state = state
 
         return best_state, scores_list
