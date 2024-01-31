@@ -13,12 +13,9 @@ Implementatie van het greedy algoritme.
 """
 
 # Eenmalige run van het random algoritme
-def run_greedy(algorithm_instance, regio) -> int:
+def run_greedy(algorithm_instance, regio, aantal_trajecten) -> int:
     # Roep een toestand op waarin de dienstregeling zich verkeert
     State = Regeling(algorithm_instance.alle_connecties)
-
-    # Random aantal trajecten
-    aantal_trajecten: int = algorithm_instance.max_trajecten
     
     for i in range(aantal_trajecten):
         # Maximale tijd per traject
