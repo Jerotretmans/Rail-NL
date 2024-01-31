@@ -29,7 +29,7 @@ Gebruik de README.md als gebruiksaanwijzing!
 
 # maximaal antaal trajecten en tijd per traject gebasseerd op regio
 max_trajecten_holland = 7
-max_trajecten_nationaal = 20
+max_trajecten_nationaal = 10
 max_tijd_traject_holland = 120
 max_tijd_traject_nationaal = 180
 alle_connecties_holland = 28

@@ -8,8 +8,7 @@ import copy
 from .greedy import run_greedy
 from .hill_climber import run_hill_climb_loop
 
-from code.visualisation.plot import plot_scores
-
+# Run het simulated annealing algoritme
 def run_simulated_annealing(algorithm_instance, regio):
     sim_ann = SimulatedAnnealing(algorithm_instance)
     State, K = sim_ann.run_sim_ann()
@@ -17,37 +16,45 @@ def run_simulated_annealing(algorithm_instance, regio):
 
 
 class SimulatedAnnealing:
+    """
+    Simulated Annealing heeft zijn eigen class om het runnen van de functie
+    wat overzichtelijker te maken.
+    """
+
+    # Initialiseer het algoritme, tempratuur, start tempratuur en iteraties
     def __init__(self, algorithm_instance):
         self.algorithm_instance = algorithm_instance
         self.T0 = 80
         self.T = 120
         self.iterations = 170
 
+    # Update de temperatuur
     def update_temperature(self):
         self.T = float(self.T - (self.T0 / self.iterations))
-        
+    
+    # Checkt of de nieuwe state is geaccepteerd door de accept functie en return de geaccepteerde state
     def state_compare(self, new_state, state):
         score_old = state.calculate_score()
         score_new = new_state.calculate_score()
+
         if self.accept(score_old, score_new):
             state = new_state
             return state
         else:
             return state
-
+        
+    # Bepaalt of een state wordt geaccepteerd
     def accept(self, score_old, score_new):
-        # print(f"score_old - score_new: {score_old - score_new}")
         chance = 2 ** ((score_old - score_new) / self.T)
-        # print(f"chance: {chance}")
+        # Genereer een random float tussen 0 en 1
         r = round(random.uniform(0, 1), 2)
-        # print(f"r: {r}")
+        # Update de tempraturr middels de functie
         self.update_temperature()
 
+        # Wanneer de berekende chance kleiner is dat
         if chance < r:
-            # print("accept")
             return True
         else:
-            # print("not accept")
             return False
  
     def run_sim_ann(self):

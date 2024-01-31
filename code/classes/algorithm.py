@@ -81,14 +81,11 @@ class Algorithm:
         n_runs = 0
         results = []
         self.algorithm_instance = algorithm_instance
-
         while time.time() - start < 60:
-            print(f"run: {n_runs}")
             score = self.run_algorithm(self.algorithm_instance, 'h')
             n_runs += 1
             results.append(score)
-
-        # Return tuple (state, score)
+        print(f"Totaal aantal gemaakte runs: {n_runs}")
         return results
 
     # Runt het algoritme een N aantal keren (def N in main.py)
@@ -99,6 +96,4 @@ class Algorithm:
         for _ in range(N):
             score = self.run_algorithm(self.algorithm_instance, regio)
             results.append(score)
-
-        # Return tuple (state, score)
         return results
