@@ -12,7 +12,7 @@ class Regeling:
 
     def __init__(self, regio) -> None:
         self.traject_list = []
-        self.traject = Traject('Name')
+        self.traject = Traject('Name', regio)
 
         if regio == 'h':
             self.max_trajecten = 7
