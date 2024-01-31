@@ -20,7 +20,7 @@ def run_hill_climber(algorithm_instance: Regeling, regio) -> int:
     iterations = 100
     for i in range(iterations):
         # Run de loop om een nieuwe state te verkrijgen
-        state = run_hill_climb_loop(copy.deepcopy(best_state), algorithm_instance.max_tijd_traject, algorithm_instance.station_objects)
+        state = run_hill_climb_loop(copy.deepcopy(best_state), algorithm_instance.station_objects)
         # Check of nieuwe state een verbetering is
         best_state = state_compare(state, best_state)
 
@@ -31,7 +31,7 @@ def run_hill_climber(algorithm_instance: Regeling, regio) -> int:
 """
 Runt hill climber iteratie met oude staat als input, en nieuwe staat als output.
 """
-def run_hill_climb_loop(state, max_time, station_objects):
+def run_hill_climb_loop(state, station_objects):
     state = copy.deepcopy(state)
     # Loop over elk traject van de dienstregeling
     for traject in state.traject_list:
@@ -43,7 +43,7 @@ def run_hill_climb_loop(state, max_time, station_objects):
             traject.delete_station()
 
         # Voeg random stations toe zo lang ze niet boven maximale trajecttijd vallen
-        while traject.time < max_time:
+        while traject.time < traject.max_tijd:
             # Vind connecties aan het huidige station
             connected_stations = list(traject.current_station.connections.keys())
             connected_stations_not_in_traject = []
@@ -63,7 +63,7 @@ def run_hill_climb_loop(state, max_time, station_objects):
 
             # Check of totale trajecttijd niet wordt overschreden
             additional_time = int(traject.current_station.connections[next_station_name])
-            if traject.time + additional_time > max_time:
+            if traject.time + additional_time > traject.max_tijd:
                 break
             # Wanneer aan alle eisen is voldaan, kan station worden toegevoegd
             traject.add_station(next_station)

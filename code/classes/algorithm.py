@@ -49,7 +49,7 @@ class Algorithm:
             return run_randalg(algorithm_instance, regio)
             
         elif self.name == 'greedy':
-            return run_greedy(algorithm_instance, regio)
+            return run_greedy(algorithm_instance, regio, aantal_trajecten)
 
         elif self.name == 'hill climber':
             return run_hill_climber(algorithm_instance, regio)
