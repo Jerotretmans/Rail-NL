@@ -1,6 +1,3 @@
-import sys
-sys.path.append('/classes')
-
 import random
 from typing import Dict, List
 
@@ -13,20 +10,24 @@ Implementatie van het greedy algoritme.
 """
 
 # Eenmalige run van het random algoritme
-def run_greedy(algorithm_instance, regio, aantal_trajecten) -> int:
+def run_greedy(algorithm_instance, regio) -> int:
+
     # Roep een toestand op waarin de dienstregeling zich verkeert
-    State = Regeling(algorithm_instance.alle_connecties)
+    State = Regeling(regio)
+
+    # Random aantal trajecten
+    aantal_trajecten: int = algorithm_instance.max_trajecten
     
     for i in range(aantal_trajecten):
         # Maximale tijd per traject
-        max_tijd_per_traject: int = random.randint(40, algorithm_instance.max_tijd_traject)
+        max_tijd_per_traject: int = random.randint(40, traject.max_tijd)
 
         # random start station
         random_station_name: str = random.choice(list(algorithm_instance.station_objects.keys()))
         random_station = algorithm_instance.station_objects[random_station_name]
         
         # begin een traject
-        traject: Traject = Traject(f"Traject_{i+1}")
+        traject = Traject(f"Traject_{i+1}", regio)
         
         # begin met het maken van een traject
         traject.add_station(random_station)
@@ -37,7 +38,7 @@ def run_greedy(algorithm_instance, regio, aantal_trajecten) -> int:
         if traject.station_counter == 1:
             current_station = random_station
 
-        while traject.time < algorithm_instance.max_tijd_traject:
+        while traject.time < traject.max_tijd:
             best_time: float = float('inf')
             best_station: str = None
 

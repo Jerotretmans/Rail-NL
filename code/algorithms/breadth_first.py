@@ -28,7 +28,7 @@ def compute_trajectory(algorithm_instance, start_station, all_visited_stations, 
                     next_station = algorithm_instance.station_objects[next_station_name]
                     time_to_next_int: int = int(time_to_next)
 
-                    if current_time + time_to_next_int <= algorithm_instance.max_tijd_traject:
+                    if current_time + time_to_next_int <= trajectory.max_tijd:
                         stack.append((next_station, current_time + time_to_next_int))
                     else:
                         time_remaining = False
@@ -58,7 +58,7 @@ def run_breadth_first(algorithm_instance, regio):
         state.add_traject(trajectory)
         
         # Zorg dat je niet te veel trajecten maakt
-        if len(state.traject_list) == algorithm_instance.max_trajecten:
+        if len(state.traject_list) == state.max_trajecten:
             break
 
     # Calculate the total score
