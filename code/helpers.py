@@ -30,8 +30,7 @@ def load_algorithms_dict() -> dict:
             'qr': 'rustaaahg'}
 
 # Schrijft een csv bestand van een state
-def export_output():
-    csv_file_path = 'data/output.csv'  
+def export_output(csv_file_path):
 
     with open(csv_file_path, 'w', newline='') as csvfile:
         csv_writer = csv.writer(csvfile)

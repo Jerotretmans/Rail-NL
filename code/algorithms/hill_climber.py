@@ -10,9 +10,9 @@ from .greedy import run_greedy
 from classes.dienstregeling import Regeling
 
 
-def run_hill_climber(algorithm_instance: Regeling) -> int:
+def run_hill_climber(algorithm_instance: Regeling, regio) -> int:
     # Creeër een begin state middels het greedy algoritme
-    start_state, K_start = run_greedy(algorithm_instance)
+    start_state, K_start = run_greedy(algorithm_instance, regio)
     # Begin state toewijzen als beste state
     best_state = start_state
 

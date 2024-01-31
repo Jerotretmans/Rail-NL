@@ -83,11 +83,11 @@ class Algorithm:
         n_runs = 0
         results = []
         self.algorithm_instance = algorithm_instance
-        while time.time() - start < 10:
-            print(f"run: {n_runs}")
+        while time.time() - start < 60:
             score = self.run_algorithm(self.algorithm_instance, 'h')
             n_runs += 1
             results.append(score)
+        print(f"Totaal aantal gemaakte runs: {n_runs}")
         return results
 
     def run_algorithm_N_times(self, N, algorithm_instance, regio):

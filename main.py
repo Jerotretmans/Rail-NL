@@ -29,7 +29,7 @@ Gebruik de README.md als gebruiksaanwijzing!
 
 # maximaal antaal trajecten en tijd per traject gebasseerd op regio
 max_trajecten_holland = 7
-max_trajecten_nationaal = 20
+max_trajecten_nationaal = 10
 max_tijd_traject_holland = 120
 max_tijd_traject_nationaal = 180
 alle_connecties_holland = 28
@@ -94,6 +94,7 @@ if __name__ == "__main__":
 
     # Run het algoritme hoe vaak de gebruiker opgeeft
     results = alg_object.run_algorithm_N_times(N, alg_object, regio)
+    # results = alg_object.run_algorithm_for_60_sec(alg_object)
     states = [result[0] for result in results]
     scores = [result[1] for result in results]
     high_score = max(scores)

@@ -5,9 +5,7 @@ sys.path.append('code/visualisation')
 import statistics
 
 from code.helpers import read_csv_file, load_algorithms_dict
-
 from code.classes.algorithm import Algorithm
-
 from code.visualisation.hist import make_histogram
 
 
@@ -66,37 +64,39 @@ if __name__ == "__main__":
             pass
 
     elif sys.argv[1].lower() == 'exp2':
-        alg_object = Algorithm('simulated annealing', stations_data, connections_data, max_trajecten_holland, max_tijd_traject_holland, alle_connecties_holland)
-        alg_object.run_algorithm(alg_object, regio)
-    
-    elif sys.argv[1].lower() == 'exp3':
-        # random niet mogelijk want random
+        
+        # Vraagt de gebruiker welk algoritme hij/zij wil gebruiken voor het experiment
         alg_name = None
         while alg_name == None:
             alg_afk = str(input("Voor welk algoritme wil je het experiment uitvoeren? <gr, hc, sa, df, bf>: ")).lower()
-        # Run algoritme op verzoek van de gebruiker
+
+        # Runt desbetreffende algoritme 
             if alg_afk.lower() in alg_dict:
                 alg_name: str = alg_dict[alg_afk.lower()]
             else:
                 print("Geen valide algoritme!")
+
         aantal_trajecten = 0
         while aantal_trajecten < 1 or aantal_trajecten > 7:
             aantal_trajecten = int(input("Hoeveel trajecten wil je instellen? (1 - 7): "))
 
-        alg_object: Algorithm = Algorithm(alg_name, stations_data, connections_data, aantal_trajecten, max_tijd_traject_holland, alle_connecties_holland)
+        # Creeërt algoritme object voor aangegeven hoeveelheid trajecten
+        alg_object = Algorithm(alg_name, stations_data, connections_data, aantal_trajecten, max_tijd_traject_holland, alle_connecties_holland)
         alg_object.create_station_objects()
-
+        
+        # Runt algoritme voor 60 sec en creërt een lijst met alle gecreërde states met scores
         results = alg_object.run_algorithm_for_60_sec(alg_object)
         states = [result[0] for result in results]
         scores = [result[1] for result in results]
-        print(scores)
+
+        # Verkrijgt de index voor de hooste score in de score lijst
         index_highest_score = scores.index(max(scores))
-        # print(index_highest_score)
+        # Slaat de beste state op
         best_state = states[index_highest_score]
-        # print(best_state)
-        # als je experiment wilt runnen
+    
         high_score: int = max(scores)
         average_score = statistics.mean(scores)
+        print(best_state)
         print(f"Highest score: {high_score}")
         print(f"average score: {average_score}")
 

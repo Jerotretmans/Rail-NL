@@ -8,39 +8,43 @@ import copy
 from .greedy import run_greedy
 from .hill_climber import run_hill_climb_loop
 
-from code.visualisation.plot import plot_scores
-
+# Run het simulated annealing algoritme
 def run_simulated_annealing(algorithm_instance, regio):
     sim_ann = SimulatedAnnealing(algorithm_instance)
-    # Run het simulated annealing algoritme
     State, K = sim_ann.run_sim_ann()
     return State, K
 
 
 class SimulatedAnnealing:
+    """
+    Simulated Annealing heeft zijn eigen class om het runnen van de functie
+    wat overzichtelijker te maken.
+    """
+
+    # Initialiseer het algoritme, tempratuur, start tempratuur en iteraties
     def __init__(self, algorithm_instance):
-        # initialiseer het algoritme, tempratuur, start tempratuur en iteraties
         self.algorithm_instance = algorithm_instance
         self.T0 = 80
         self.T = 120
         self.iterations = 170
 
+    # Update de temperatuur
     def update_temperature(self):
-        # Update de tempratuur
         self.T = float(self.T - (self.T0 / self.iterations))
-        
+    
+    # Checkt of de nieuwe state is geaccepteerd door de accept functie en return de geaccepteerde state
     def state_compare(self, new_state, state):
-        # Checkt of de nieuwe state is geaccepteerd door de accept functie en return de geaccepteerde state
         score_old = state.calculate_score()
         score_new = new_state.calculate_score()
+
         if self.accept(score_old, score_new):
             state = new_state
             return state
         else:
             return state
-
+        
+    # Bepaalt of een state wordt geaccepteerd
     def accept(self, score_old, score_new):
-        # Bereken de kans dat een state niet wordt geaccepteerd
         chance = 2 ** ((score_old - score_new) / self.T)
         # Genereer een random float tussen 0 en 1
         r = round(random.uniform(0, 1), 2)
