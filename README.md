@@ -1,19 +1,25 @@
 # RailNL
 
-Het Nederlandse spoornetwerk is vaak een bron van frustratie voor menig reizigers. Om dit te verhelpen...
+Het Nederlandse spoornetwerk is vaak een bron van frustratie voor menig reizigers. Om dit te verhelpen wordt er met de hulp van verschillende algoritmes geprobeerd een zo optimaal mogelijke dienstregeling te creeëren. Dit wil zeggen; er wordt geprobeerd een dienstregeling te creeëren die over zo veel mogelijk verbindingen rijd, met zo min mogelijk treinen, in een zo kort mogelijke tijd. Om het probleem wat te versimpelen bestaat daarnaast de mogelijkheid om een dienstregeling te creeëren voor de provincies Noord en Zuid Holland. 
 
 ## Aan de slag
 
-### Gebruik
-
-Een voorbeeldje kan gerund worden door aanroepen van:
+## Vereisten
+Deze codebase is volledig geschreven in Python 3.10.12. In requirements.txt staan alle benodigde packages om de code succesvol te draaien. Deze zijn gemakkelijk te installeren via pip dmv. de volgende instructie:
 
 ```
-python main.py alg
+pip install -r requirements.txt
+```
+
+## Gebruik
+
+Een voorbeeld kan gerund worden door aanroepen van:
+
+```
+python main.py <alg>
 ```
 
 waar ```alg``` vervangen moet worden door een van de volgende afkortingen:
-
 
 - rd voor random
 - gr voor greedy
@@ -28,12 +34,23 @@ Voorbeeld:
 python main.py rd
 ```
 
-Om het random algoritme te runnen.
+Met het bovenstaande commando wordt het random algoritme aangeroepen.
 
-De terminal zal na het aanroepen van de main een aantal vragen stellen over de details van het runnen van het algoritme. Hieronder valt op welke regio het algoritme moet worden toegepast, hoeveel keer het algoritme uitgevoerd moet worden en of je een histogram van de scores wilt zien na het runnen.
+Na het aanroepen van het commando wordt er in de terminal een aantal vragen gesteld over hoe het algoritme moet worden gerunt:
+- Voor regio Holland of Nationaal? (h/nl):
+  - Wilt u een dienstregeling creeëren voor regio Holland: vul 'h' in.
+  - Wilt u een dienstregeling creeëren voor Nederland: vul 'nl' in.
+- Hoeveel trajecten moeten er worden gecreeërd?
+  - Wanneer u voor regio Holland heeft gekozen, kies voor 1 - 7 trajecten.
+  - Wanneer u voor regio Nederland heeft gekozen, kies voor 1 - 20 trajecten.
+- Hoe vaak moet het algoritme worden uitgevoerd?
+  - Vul een geheel getal in boven de 0
+- Wil je een histogram van de data? (y/n):
+  - Vul 'y' in voor ja.
+  - Vul 'n' in voor nee.
 
 
-### Structuur
+## Structuur
 De hierop volgende lijst beschrijft de belangrijkste mappen en files in het project, en waar je ze kan vinden:
 
 - **/code**: bevat alle code van dit project
@@ -42,6 +59,7 @@ De hierop volgende lijst beschrijft de belangrijkste mappen en files in het proj
   - **/code/visualisation**: bevat de bokeh code voor de visualisatie
 - **/data**: bevat de verschillende databestanden die nodig zijn om de graaf te vullen en te visualiseren
 - **/docs**: bevat vershillende documenten die van belang zijn geweest tijdens het project
+
 
 ## Experimenten
 

@@ -83,7 +83,7 @@ class Algorithm:
             score = self.run_algorithm(self.algorithm_instance, 'h', aantal_trajecten)
             n_runs += 1
             results.append(score)
-            print(f"Run: {n_runs}")
+            print(f"Run: {n_runs} - Score: {score[1]}")
         print(f"Totaal aantal gemaakte runs: {n_runs}")
 
         return results
@@ -92,9 +92,10 @@ class Algorithm:
     def run_algorithm_N_times(self, N, algorithm_instance, regio, aantal_trajecten):
         results = []
         self.algorithm_instance = algorithm_instance
-
+        n_runs = 0
         for _ in range(N):
             score = self.run_algorithm(self.algorithm_instance, regio, aantal_trajecten)
             results.append(score)
-
+            n_runs += 1
+            print(f"Run: {n_runs} / {N} - Score: {score[1]}")
         return results

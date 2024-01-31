@@ -16,7 +16,7 @@ def run_greedy(algorithm_instance, regio, aantal_trajecten) -> int:
     State = Regeling(regio)
 
     # Random aantal trajecten
-    assert aantal_trajecten < State.max_trajecten
+    assert 0 < aantal_trajecten < State.max_trajecten, "Onjuist aantal trajecten opgegeven!"
     
     for i in range(aantal_trajecten):
         # random start station

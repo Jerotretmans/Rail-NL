@@ -66,13 +66,16 @@ if __name__ == "__main__":
     else:
         print("Geen valide naam!")
 
-
-    # Vraag om een hoeveelheid runs van het algoritme
-    try:
-        N = int(input("Hoe vaak moet het algoritme worden uitgevoerd? "))
-    # Accepteer alleen integers
-    except ValueError:
-        print("Alleen hele getallen a.u.b.")
+    while True:
+        # Vraag om een hoeveelheid runs van het algoritme
+        try:
+            N = int(input("Hoe vaak moet het algoritme worden uitgevoerd? "))
+            if N <= 0:
+                print("Alleen gehele getallen boven 0 zijn toegestaan.")
+            else:
+                break
+        except ValueError:
+            print("Alleen gehele getallen a.u.b.")
 
     # Vraag of de gebruiker een histogram wilt zien van de scores
     histogram = None
