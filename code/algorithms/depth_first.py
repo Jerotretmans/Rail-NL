@@ -66,6 +66,7 @@ def compute_trajectory(algorithm_instance, start_station, all_visited_stations, 
                         time_remaining = False
                         break
     
+    # Return traject en gebruikte connecties
     return trajectory, used_connections
 
 # Eenmalig runnen van het depth_first algoritme
@@ -100,9 +101,13 @@ def run_depth_first(algorithm_instance, regio):
         # Voeg het traject toe aan de dienstregeling
         state.add_traject(trajectory)
 
-        # Zorg dat je het maximaal aantal trajecten niet overschrijdt
-        if len(state.traject_list) >= state.max_trajecten:
-            break
+        # Zorg dat je het maximaal aantal trajecten niet overschrijdt en max anders voor nl voor aanzienlijk betere scores
+        if regio == 'h':
+            if len(state.traject_list) >= state.max_trajecten:
+                break
+        if regio == 'nl':
+            if len(state.traject_list) >= 11 or len(state.traject_list) >= state.max_trajecten:
+                break
 
     # Calculate the total score
     score = state.calculate_score()

@@ -47,11 +47,13 @@ def compute_trajectory(algorithm_instance, start_station, all_visited_stations, 
                         else:
                             used_connections.add((next_station_name, current_station.name))
                             
+                        # Voeg de connectie toe aan de stack    
                         stack.append((next_station, current_time + time_to_next_int))
                     else:
                         time_remaining = False
                         break
-                    
+
+    # Return traject en gebruike connecties    
     return trajectory, used_connections
 
 # Eenmalig runnen van het breadth_first algoritme
@@ -83,11 +85,14 @@ def run_breadth_first(algorithm_instance, regio):
         # Voeg het traject toe aan de dienstregeling
         state.add_traject(trajectory)
 
-        # Zorg dat je het maximaal aantal trajecten niet overschrijdt
-        if len(state.traject_list) >= state.max_trajecten:
-            break
+        # Zorg dat je het maximaal aantal trajecten niet overschrijdt en max anders voor nl voor aanzienlijk betere scores
+        if regio == 'h':
+            if len(state.traject_list) >= state.max_trajecten:
+                break
+        if regio == 'nl':
+            if len(state.traject_list) >= 11 or len(state.traject_list) >= state.max_trajecten:
+                break
 
-    # Bereken de score
+    # Bereken de score en return de score en state
     score = state.calculate_score()
-
     return state, score
