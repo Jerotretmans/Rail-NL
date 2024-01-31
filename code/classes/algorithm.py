@@ -68,30 +68,20 @@ class Algorithm:
     def run_algorithm_for_60_sec(self, algorithm_instance):
         start = time.time()
         n_runs = 0
-        scores_list: List[int] = []
+        results: List[int] = []
         self.algorithm_instance = algorithm_instance
-        while time.time() - start < 2000:
+        while time.time() - start < 10:
             print(f"run: {n_runs}")
             score = self.run_algorithm(self.algorithm_instance)
             n_runs += 1
-            scores_list.append(score)
-        return scores_list
+            results.append(score)
+        return results
 
     def run_algorithm_N_times(self, N, algorithm_instance):
-        scores_list: List[int] = []
+        results: List[int] = []
         self.algorithm_instance = algorithm_instance
         for _ in range(N):
             score = self.run_algorithm(self.algorithm_instance)
-            scores_list.append(score)
-        return scores_list
-    
-    # def export_output(self, scores_list):
-    #     print("hallo")
-    #     csv_file_path = 'data/output.csv'
+            results.append(score)
+        return results
 
-    #     with open(csv_file_path, 'w', newline='') as csvfile:
-    #         # Create a CSV writer
-    #         csv_writer = csv.writer(csvfile)
-            
-
-        print(f"Output has been exported to {csv_file_path}")
