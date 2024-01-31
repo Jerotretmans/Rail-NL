@@ -64,10 +64,10 @@ class Algorithm:
             return run_simulated_annealing(algorithm_instance, regio, aantal_trajecten)
         
         elif self.name == 'bizzey':
-            return run_randalg_bizzey(algorithm_instance, regio, aantal_trajecten=None)
+            return run_randalg_bizzey(algorithm_instance, regio, aantal_trajecten)
             
         elif self.name == 'rustaaahg':
-            return run_randalg_rustaaahg(algorithm_instance, regio, aantal_trajecten=None)
+            return run_randalg_rustaaahg(algorithm_instance, regio, aantal_trajecten)
         
         else:
             raise AssertionError ("Geen valide naam!")
