@@ -1,4 +1,7 @@
 import sys
+
+from typing import List, Dict, Optional
+import statistics
 sys.path.append('code')
 sys.path.append('code/visualisation')
 
@@ -91,16 +94,16 @@ if __name__ == "__main__":
 
     # Run het algoritme hoe vaak de gebruiker opgeeft
     results = alg_object.run_algorithm_N_times(N, alg_object, regio)
-    best_state: object = results[0]
-    scores_list = results[1]
-    high_score = max(scores_list)
+    states = [result[0] for result in results]
+    scores = [result[1] for result in results]
+    high_score = max(scores)
     # print(best_state.traject_list)
     print(f"Highest score: {high_score}")
 
     
     # Plot een histogram als de gebruiker dat opgeeft
     if histogram == 'y':
-        make_histogram(scores_list, N, sys.argv[1].lower())
+        make_histogram(scores, N, sys.argv[1].lower())
     elif histogram == 'n':
         pass
 

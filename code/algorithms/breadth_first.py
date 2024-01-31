@@ -1,74 +1,91 @@
 import sys
-sys.path.append('../')
-sys.path.append('/classes')
-
 import random
+from typing import Set, Tuple, List, Dict
 
+sys.path.append('../')
+from helpers import read_csv_file
+
+sys.path.append('/classes')
+from classes.stations import Station
 from classes.traject import Traject
 from classes.dienstregeling import Regeling
+# from classes.algorithm import Algorithm 
+
+"""
+Implementatie van het Breadth First algoritme. Om dit algoritme aan te roepen
+kan je dit script runnen.
+
+Usage: 'python3 breadth_first.py holland' or 'python3 breadth_first.py nl' 
+"""
+
+# Eenmalig runnen van het breadth_first algoritme
+def run_breadth_first(algorithm_instance: Regeling) -> int:
+    # Bepaal max aantal trajecten en max tijd per traject
+    specific_starts: Dict[str, str] = {"Traject_1": "Dordrecht", "Traject_2": "Alkmaar"}
+    visited_start_station: Set[Station] = set()
+
+    # Roep een toestand op waarin de dienstregeling zich verkeert
+    State: Regeling = Regeling(algorithm_instance.alle_connecties)
     
-def run_breadth_first(algorithm_instance, regio):
-
-    state = Regeling(algorithm_instance.alle_connecties)
-
-    if regio == 'h':
-        state.max_trajecten = 7
-        # traject.max_tijd = 120
-    elif regio == 'nl':
-        state.max_trajecten = 20
-        # traject.max_tijd = 180
-    else:
-        raise AssertionError ("Geen valide naam!")
-    
-    traject = Traject()
-
-    aantal_trajecten = 3
-    max_tijd_per_traject = 120
-    specific_starts = {"Traject_1": "Dordrecht", "Traject_2": "Alkmaar"}
-    visited_start_station = set()
-
-    
-    
-    for i in range(aantal_trajecten):
-        visited_stations = set()
-
+    # Maak elk traject
+    for i in range(algorithm_instance.max_trajecten):
+        # Maak een lege set om alle bezochte stations te onthouden
+        visited_stations: Set[Station] = set()
+        # Gebruik de aangegeven start stations indien die aangegeven zijn
         if f"Traject_{i+1}" in specific_starts:
-        # Use the specific starting station
-            random_station_name = specific_starts[f"Traject_{i+1}"]
+            random_station_name: str = specific_starts[f"Traject_{i+1}"]
             random_station = algorithm_instance.station_objects[random_station_name]
         else:
+            # Kies een random station om te beginnen
             while True:
-                random_station_name = random.choice(list(algorithm_instance.station_objects.keys()))
+                random_station_name: str = random.choice(list(algorithm_instance.station_objects.keys()))
                 # print(f"Begin station: {random_station_name}")
                 random_station = algorithm_instance.station_objects[random_station_name]
+                if random_station not in visited_start_station:
+                    visited_start_station.add(random_station)
                 break
-
-        stack = [(random_station, 0)]
-        traject = Traject(f"Traject_{i+1}")
-        time_remaining = True
-
+            # Start de stack met het eerste station en de tijd op 0
+        stack: List[Tuple[Station, int]] = [(random_station, 0)]
+            # Maak een traject aan om het nieuwe traject op te slaan
+        traject: Traject = Traject(f"Traject_{i+1}")
+            # Boolean om bij te houden of de maximale tijd niet wordt overschreden
+        time_remaining: bool = True
+            # Loop totdat de stack op is of de maximale tijd is bereikt
         while stack and time_remaining:
+                # Pop een station van de stack
             current_station, current_time = stack.pop(0)
+                # check of een station al bezocht is
             if current_station not in visited_stations:
+                 # Voeg hem toe aan bezochte stations in traject
                 visited_stations.add(current_station)
-                
+                #     # Voeg toe aan al de bezochte stations
+
+                    # Ga over de verbonden stations
                 for next_station_name, time_to_next in current_station.connections.items():
+                        # Kijk of een verbonden station al bezocht is en zo niet dan...
                     if next_station_name not in visited_stations:
                         next_station = algorithm_instance.station_objects[next_station_name]
-                        time_to_next_int = int(time_to_next)
+                        time_to_next_int: int = int(time_to_next)
                         # stack.append((next_station, current_time + time_to_next_int))
 
-                        if current_time + time_to_next_int <= max_tijd_per_traject:
+                            # Check of het toevoegen van die connectie niet de maximale tijd overschrijdt 
+                        if current_time + time_to_next_int <= algorithm_instance.max_tijd_traject:
                             stack.append((next_station, current_time + time_to_next_int))
+                            # als het toevoegen de tijd zou overschrijden break dan uit de loop en de while loop
                         else:
                             time_remaining = False
                             break
                 traject.add_station(current_station)
 
         # Update de toestand van de dienstregeling
-        state.add_traject(traject)
-    
-    # Bereken de score van de gehele dienstregeling
-    K = state.calculate_score()
+        State.add_traject(traject)
+        
 
-    return state, K
+        # print(traject)
+    
+        
+
+    # Bereken de score van de gehele dienstregeling
+    K: int = State.calculate_score()
+
+    return State, K

@@ -1,5 +1,6 @@
 import sys
-sys.path.append('/classes')
+import random
+from typing import Dict, Set, List, Tuple
 
 import random
 
@@ -15,39 +16,30 @@ Usage: 'python3 depth_first.py holland' or 'python3 depth_first.py nl'
 
 
 # Eenmalige run van het Depth First algoritme
-def run_depth_first(algorithm_instance, regio):
-
-    state = Regeling(algorithm_instance.alle_connecties)
-
-    if regio == 'h':
-        state.max_trajecten = 7
-        # traject.max_tijd = 120
-    elif regio == 'nl':
-        state.max_trajecten = 20
-        # traject.max_tijd = 180
-    else:
-        raise AssertionError ("Geen valide naam!")
+def run_depth_first(algorithm_instance: Regeling) -> int:
 
     # bepaal max aantal trajecten en max tijd
-    aantal_trajecten = 5
-    max_tijd_per_traject = 120
-    specific_starts = {"Traject_1": "Gouda", "Traject_2": "Dordrecht"}
+    # max_tijd_per_traject: int = 120
+    specific_starts: Dict[str, str] = {"Traject_1": "Gouda", "Traject_2": "Dordrecht"}
     visited_start_station = set()
     all_visited_stations = set()
- 
+
+
+    # Roep een toestand op waarin de dienstregeling zich verkeert
+    State: Regeling = Regeling(algorithm_instance.alle_connecties)    
     
     # Maak elk traject
-    for i in range(aantal_trajecten):
+    for i in range(algorithm_instance.max_trajecten):
         # Maak een lege set om alle bezocte stations te onthouden
         visited_stations = set()
+        # Gebruik de aangegeven start stations indien die aangegeven zijn
         if f"Traject_{i+1}" in specific_starts:
-        # Use the specific starting station
-            random_station_name = specific_starts[f"Traject_{i+1}"]
+            random_station_name: str = specific_starts[f"Traject_{i+1}"]
             random_station = algorithm_instance.station_objects[random_station_name]
         else:
         # Kies een random station om te beginnen
             while True:
-                random_station_name = random.choice(list(algorithm_instance.station_objects.keys()))
+                random_station_name: str = random.choice(list(algorithm_instance.station_objects.keys()))
                 random_station = algorithm_instance.station_objects[random_station_name]
                 if random_station not in visited_start_station:
                     visited_start_station.add(random_station)
@@ -55,9 +47,9 @@ def run_depth_first(algorithm_instance, regio):
             # Start de stack met het eerste station en de tijd op 0
         stack = [(random_station, 0)]
             # Maak een traject aan om het nieuwe traject op te slaan
-        traject = Traject(f"Traject_{i+1}")
+        traject: Traject = Traject(f"Traject_{i+1}")
             # Boolean om bij te houden of de maximale tijd niet wordt overschreden
-        time_remaining = True
+        time_remaining: bool = True
             # Loop totdat de stack op is of de maximale tijd is bereikt
         while stack and time_remaining:
                 # Pop een station van de stack
@@ -76,9 +68,9 @@ def run_depth_first(algorithm_instance, regio):
                         # Kijk of een verbonden station al bezocht is en zo niet dan...
                     if next_station_name not in visited_stations and next_station_name:
                         next_station = algorithm_instance.station_objects[next_station_name]
-                        time_to_next_int = int(time_to_next)
+                        time_to_next_int: int = int(time_to_next)
                             # Check of het toevoegen van die connectie niet de maximale tijd overschrijdt 
-                        if current_time + time_to_next_int <= max_tijd_per_traject:
+                        if current_time + time_to_next_int <= algorithm_instance.max_tijd_traject:
                             stack.append((next_station, current_time + time_to_next_int))
                             # als het toevoegen de tijd zou overschrijden break dan uit de loop en de while loop
                         else:
@@ -89,9 +81,9 @@ def run_depth_first(algorithm_instance, regio):
                 traject.add_station(current_station)
         
         # Update de toestand van de dienstregeling
-        state.add_traject(traject)
+        State.add_traject(traject)
                 
     # Bereken de score van de gehele dienstregeling
-    K = state.calculate_score()
+    K: int = State.calculate_score()
 
-    return state, K
+    return State, K

@@ -22,6 +22,7 @@ def load_algorithms_dict() -> dict:
     return {'rd': 'random',\
             'gr': 'greedy',\
             'hc': 'hill climber',\
+            'sa': 'simulated annealing',\
             'df': 'depth first',\
             'bf': 'breadth first',\
             'sa': 'simulated annealing',\

@@ -1,0 +1,14 @@
+Experiment
+
+Parameters:
+T waardes
+Max aantal trajecten
+Begin trajecten
+
+
+
+
+
+
+
+

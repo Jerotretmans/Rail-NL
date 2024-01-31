@@ -75,31 +75,19 @@ class Algorithm:
     def run_algorithm_for_60_sec(self, algorithm_instance):
         start = time.time()
         n_runs = 0
-        scores_list = []
+        results = []
         self.algorithm_instance = algorithm_instance
-        while time.time() - start < 60:
+        while time.time() - start < 10:
             print(f"run: {n_runs}")
-            results = self.run_algorithm(self.algorithm_instance, 'h')
-            score = results[1]
+            score = self.run_algorithm(self.algorithm_instance, 'h')
             n_runs += 1
-            scores_list.append(score)
-        return scores_list
+            results.append(score)
+        return results
 
     def run_algorithm_N_times(self, N, algorithm_instance, regio):
-        scores_list = []
+        results = []
         self.algorithm_instance = algorithm_instance
-        high_score = 0
-        best_state = None
-
         for _ in range(N):
-            results = self.run_algorithm(self.algorithm_instance, regio)
-            state: object = results[0]
-            score: int = results[1]
-            scores_list.append(score)
-            high_score = max(scores_list)
-
-            for _ in results:
-                if state.calculate_score() > high_score:
-                    best_state = state
-
-        return best_state, scores_list
+            score = self.run_algorithm(self.algorithm_instance, regio)
+            results.append(score)
+        return results
