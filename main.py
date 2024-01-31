@@ -3,12 +3,13 @@ import sys
 from typing import List, Dict, Optional
 import statistics
 sys.path.append('code')
-sys.path.append('code/algorithms')
-sys.path.append('data')
+sys.path.append('code/visualisation')
 
-from code.helpers import read_csv_file, load_algorithms_dict
+from code.helpers import read_csv_file, load_algorithms_dict, export_output
 
 from code.classes.algorithm import Algorithm
+
+from code.visualisation.hist import make_histogram
 
 
 """
@@ -26,94 +27,89 @@ Januari 2024
 Gebruik de README.md als gebruiksaanwijzing!
 """
 
-
+# maximaal antaal trajecten en tijd per traject gebasseerd op regio
+max_trajecten_holland = 7
+max_trajecten_nationaal = 20
+max_tijd_traject_holland = 120
+max_tijd_traject_nationaal = 180
+alle_connecties_holland = 28
+alle_connecties_nationaal = 89
 
 if __name__ == "__main__":
 
     # Verzeker het correcte gebruik van de code
-    assert len(sys.argv) == 2, "Error: Gebruik de README.md als gebruiksaanwijzing!"
+    assert len(sys.argv) == 2 or len(sys.argv) == 3, "Error: Gebruik de README.md als gebruiksaanwijzing!"
 
     # Laad de namen van de algoritmes vanuit helpers
-    alg_dict: Dict[str, str] = load_algorithms_dict()
+    alg_dict = load_algorithms_dict()
 
     # Vraag aan de gebruiker voor welke regio het algoritme moet worden uitgevoerd
-    regio: Optional[str] = 'nl'
-    # while regio not in ['h', 'nl']:
-    #     regio = str(input("Voor regio Holland of Nationaal? (h/nl): ")).lower()
+    regio = None
+    while regio not in ['h', 'nl']:
+        regio = str(input("Voor regio Holland of Nationaal? (h/nl): ")).lower()
 
-    #     if regio not in ['h', 'nl']:
-    #         print("Ongeldige invoer. Type 'h' voor Holland of 'nl' voor Nationaal.")
-
-    # maximaal antaal trajecten en tijd per traject gebasseerd op regio
-    max_trajecten_holland = 7
-    max_trajecten_nationaal = 11
-    max_tijd_traject_holland = 120
-    max_tijd_traject_nationaal = 180
-    alle_connecties_holland = 28
-    alle_connecties_nederland = 89 
+        if regio not in ['h', 'nl']:
+            print("Ongeldige invoer. Type 'h' voor Holland of 'nl' voor Nationaal.")
 
     # Lees de data voor de desbetreffende regio
     if regio == 'h':
-        stations_data: List[List[str]] = read_csv_file('data/StationsHolland.csv')
-        connections_data: List[List[str]] = read_csv_file('data/ConnectiesHolland.csv')
+        stations_data = read_csv_file('data/StationsHolland.csv')
+        connections_data = read_csv_file('data/ConnectiesHolland.csv')
         max_trajecten = max_trajecten_holland
         max_tijd_traject = max_tijd_traject_holland
         alle_connecties = alle_connecties_holland
+
     elif regio == 'nl':
-        stations_data: List[List[str]] = read_csv_file('data/StationsNationaal.csv')
-        connections_data: List[List[str]] = read_csv_file('data/ConnectiesNationaal.csv')
+        stations_data = read_csv_file('data/StationsNationaal.csv')
+        connections_data = read_csv_file('data/ConnectiesNationaal.csv')
         max_trajecten = max_trajecten_nationaal
         max_tijd_traject = max_tijd_traject_nationaal
-        alle_connecties = alle_connecties_nederland
+        alle_connecties = alle_connecties_nationaal
 
     # Run algoritme op verzoek van de gebruiker
     if sys.argv[1].lower() in alg_dict:
-        alg_name: str = alg_dict[sys.argv[1].lower()]
+        alg_name = alg_dict[sys.argv[1].lower()]
 
-        alg_object: Algorithm = Algorithm(alg_name, stations_data, connections_data, max_trajecten, max_tijd_traject, alle_connecties)
+        alg_object = Algorithm(alg_name, stations_data, connections_data, max_trajecten, max_tijd_traject, alle_connecties)
         alg_object.create_station_objects()
     else:
         print("Geen valide naam!")
 
 
     # Vraag om een hoeveelheid runs van het algoritme
-    # try:
-    #     N = int(input("Hoe vaak moet het algoritme worden uitgevoerd "))
-    # # Accepteer alleen integers
-    # except ValueError:
-    #     print("Alleen hele getallen a.u.b.")
+    try:
+        N = int(input("Hoe vaak moet het algoritme worden uitgevoerd "))
+    # Accepteer alleen integers
+    except ValueError:
+        print("Alleen hele getallen a.u.b.")
 
-    # histogram = None
-    # while histogram not in ['y', 'n']:
-    #     histogram = str(input("Wil je een histogram van de data? (y/n): ")).lower()
+    # Vraag of de gebruiker een histogram wilt zien van de scores
+    histogram = None
+    while histogram not in ['y', 'n']:
+        histogram = str(input("Wil je een histogram van de data? (y/n): ")).lower()
 
-    #     if histogram not in ['y', 'n']:
-    #         print("Ongeldige invoer. Type 'y' voor wel een histogram of 'n' voor geen histogram.")
-    
+        if histogram not in ['y', 'n']:
+            print("Ongeldige invoer. Type 'y' voor wel een histogram of 'n' voor geen histogram.")
 
-    # Plot een histogram als de gebruiker dat opgeeft
-    # if histogram == 'y':
-    #     """
-    #     Hier histogram maken...
-    #     """
-    #     pass
-    # elif histogram == 'n':
-    #     pass
-        
-    N = 10
-    
+
     # Run het algoritme hoe vaak de gebruiker opgeeft
-    # results = alg_object.run_algorithm_N_times(N, alg_object)
-    results = alg_object.run_algorithm_for_60_sec(alg_object)
+    results = alg_object.run_algorithm_N_times(N, alg_object, regio)
     states = [result[0] for result in results]
     scores = [result[1] for result in results]
-    print(scores)
-    index_highest_score = scores.index(max(scores))
-    print(index_highest_score)
-    best_state = states[index_highest_score]
-    print(best_state)
-    # als je experiment wilt runnen
-    high_score: int = max(scores)
-    average_score = statistics.mean(scores)
+    high_score = max(scores)
+    # print(best_state.traject_list)
     print(f"Highest score: {high_score}")
-    print(f"average score: {average_score}")
+
+    
+    # Plot een histogram als de gebruiker dat opgeeft
+    if histogram == 'y':
+        make_histogram(scores, N, sys.argv[1].lower())
+    elif histogram == 'n':
+        pass
+
+    if len(sys.argv) == 3:
+        if sys.argv[2] == 'f':
+            export_output()
+        else:
+            pass
+

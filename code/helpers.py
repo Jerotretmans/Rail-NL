@@ -7,7 +7,7 @@ def read_csv_file(filename) -> None:
     rows = []
     with open(filename) as file:
         stations = csv.reader(file)
-        _ = next(stations) # Negeer de boevneste regel van het csv bestand
+        _ = next(stations) # Negeer de bovenste regel van het csv bestand
         for row in stations:
             rows.append(row)
     return rows
@@ -24,4 +24,21 @@ def load_algorithms_dict() -> dict:
             'hc': 'hill climber',\
             'sa': 'simulated annealing',\
             'df': 'depth first',\
-            'bf': 'breadth first'}
+            'bf': 'breadth first',\
+            'sa': 'simulated annealing',\
+            'br': 'bizzey',\
+            'qr': 'rustaaahg'}
+
+# Schrijft een csv bestand van een state
+def export_output():
+    csv_file_path = 'data/output.csv'  
+
+    with open(csv_file_path, 'w', newline='') as csvfile:
+        csv_writer = csv.writer(csvfile)
+
+        # Header
+        csv_writer.writerow(["train", "stations"])
+        csv_writer.writerow(["trajecten in regeling"])
+        csv_writer.writerow(["score"])
+        
+    print(f"Output has been exported to {csv_file_path}")

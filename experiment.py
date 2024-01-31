@@ -1,14 +1,15 @@
 import sys
-
-from typing import List, Dict, Optional
-import statistics
 sys.path.append('code')
-sys.path.append('code/algorithms')
-sys.path.append('data')
+sys.path.append('code/visualisation')
+
+import statistics
 
 from code.helpers import read_csv_file, load_algorithms_dict
 
 from code.classes.algorithm import Algorithm
+
+from code.visualisation.hist import make_histogram
+
 
 """
 Experiment script.
@@ -65,9 +66,9 @@ if __name__ == "__main__":
             pass
 
     elif sys.argv[1].lower() == 'exp2':
-        alg_object = Algorithm('Simulated Annealing', stations_data, connections_data, max_trajecten_holland, max_tijd_traject_holland, alle_connecties_holland)
-
-
+        alg_object = Algorithm('simulated annealing', stations_data, connections_data, max_trajecten_holland, max_tijd_traject_holland, alle_connecties_holland)
+        alg_object.run_algorithm(alg_object, regio)
+    
     elif sys.argv[1].lower() == 'exp3':
         # random niet mogelijk want random
         alg_name = None
@@ -92,15 +93,12 @@ if __name__ == "__main__":
         index_highest_score = scores.index(max(scores))
         # print(index_highest_score)
         best_state = states[index_highest_score]
-        print(best_state)
+        # print(best_state)
         # als je experiment wilt runnen
         high_score: int = max(scores)
         average_score = statistics.mean(scores)
         print(f"Highest score: {high_score}")
         print(f"average score: {average_score}")
-        
-    else:
-        print("Geen valide naam!")
-        
 
-        
+    else:
+        print("Geen experiment met die naam gevonden!")

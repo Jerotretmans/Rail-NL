@@ -1,24 +1,19 @@
 import sys
+sys.path.append('/classes')
+
 import random
 from typing import Dict, List
 
-sys.path.append('../')
-from helpers import read_csv_file
-sys.path.append('/classes')
-from classes.stations import Station
 from classes.traject import Traject
 from classes.dienstregeling import Regeling
 
 
 """
-Implementatie van het random algoritme. Om dit algoritme aan te roepen
-kan je dit script runnen.
-
-Usage: 'python3 randalg.py holland' or 'python3 randalg.py nl' 
+Implementatie van het greedy algoritme.
 """
 
 # Eenmalige run van het random algoritme
-def run_greedy(algorithm_instance: Regeling) -> int:
+def run_greedy(algorithm_instance, regio) -> int:
     # Roep een toestand op waarin de dienstregeling zich verkeert
     State = Regeling(algorithm_instance.alle_connecties)
 
@@ -31,7 +26,7 @@ def run_greedy(algorithm_instance: Regeling) -> int:
 
         # random start station
         random_station_name: str = random.choice(list(algorithm_instance.station_objects.keys()))
-        random_station: Station = algorithm_instance.station_objects[random_station_name]
+        random_station = algorithm_instance.station_objects[random_station_name]
         
         # begin een traject
         traject: Traject = Traject(f"Traject_{i+1}")
@@ -43,7 +38,7 @@ def run_greedy(algorithm_instance: Regeling) -> int:
         connected_stations = list(random_station.connections.keys())
 
         if traject.station_counter == 1:
-            current_station: Station = random_station
+            current_station = random_station
 
         while traject.time < algorithm_instance.max_tijd_traject:
             best_time: float = float('inf')
