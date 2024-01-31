@@ -15,6 +15,8 @@ waarbij 2 van de startstations vast staan: 'bizzey' begint bij drukke stations e
 'rustaaahg' begint bij rustige stations. 
 """
 
+twee_start_stations = False
+
 def start_stations_bizzey():
     """
     Returnt de startstations de eerste twee 'bizzey' trajecten.
