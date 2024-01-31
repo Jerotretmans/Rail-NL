@@ -1,6 +1,3 @@
-import sys
-sys.path.append('../')
-
 import time
 
 from .stations import Station
@@ -50,6 +47,7 @@ class Algorithm:
         self.algorithm_instance = algorithm_instance
         self.regio = regio
 
+        # Namen van algoritmen in load_algorithm_dict() in helpers.py
         if self.name == 'random':
             return run_randalg(algorithm_instance, regio)
             
@@ -77,23 +75,30 @@ class Algorithm:
         else:
             raise AssertionError ("Geen valide naam!")
     
-
+    # Runt het algoritme voor een vaste tijd (60 sec)
     def run_algorithm_for_60_sec(self, algorithm_instance):
         start = time.time()
         n_runs = 0
         results = []
         self.algorithm_instance = algorithm_instance
-        while time.time() - start < 10:
+
+        while time.time() - start < 60:
             print(f"run: {n_runs}")
             score = self.run_algorithm(self.algorithm_instance, 'h')
             n_runs += 1
             results.append(score)
+
+        # Return tuple (state, score)
         return results
 
+    # Runt het algoritme een N aantal keren (def N in main.py)
     def run_algorithm_N_times(self, N, algorithm_instance, regio):
         results = []
         self.algorithm_instance = algorithm_instance
+
         for _ in range(N):
             score = self.run_algorithm(self.algorithm_instance, regio)
             results.append(score)
+
+        # Return tuple (state, score)
         return results

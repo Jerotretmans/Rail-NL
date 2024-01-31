@@ -1,6 +1,3 @@
-from typing import Set, Tuple, List
-
-from classes.stations import Station
 from classes.traject import Traject
 from classes.dienstregeling import Regeling
 from .depth_first import choose_start_station
@@ -12,10 +9,10 @@ kan je dit script runnen.
 Usage: 'python3 breadth_first.py holland' or 'python3 breadth_first.py nl' 
 """
 # Maken van trajecten voor breadth_first algoritme
-def compute_trajectory(algorithm_instance: Regeling, start_station: Station, all_visited_stations: Set[Station], traject_counter) -> Traject:
-    visited_stations: Set[Station] = set()
-    stack: List[Tuple[Station, int]] = [(start_station, 0)]
-    trajectory: Traject = Traject(f"Traject_{traject_counter}")
+def compute_trajectory(algorithm_instance, start_station, all_visited_stations, traject_counter, regio) -> Traject:
+    visited_stations = set()
+    stack = [(start_station, 0)]
+    trajectory = Traject(f"Traject_{traject_counter}", regio)
     time_remaining = True
 
     while stack and time_remaining:
@@ -43,12 +40,12 @@ def compute_trajectory(algorithm_instance: Regeling, start_station: Station, all
 
 # Eenmalig runnen van het breadth_first algoritme
 def run_breadth_first(algorithm_instance, regio):
-    visited_start_station: Set[Station] = set()
+    visited_start_station = set()
     all_possible_connections = {(station1, algorithm_instance.station_objects[station2]) for station1 in algorithm_instance.station_objects.values() for station2 in station1.connections}
-    used_connections: Set[Tuple[Station, Station]] = set()
+    used_connections = set()
     traject_counter = 1
 
-    state: Regeling = Regeling(algorithm_instance.alle_connecties)
+    state = Regeling(regio)
 
     # Blijf trajecten maken totdat alle connecties zijn gereden
     while used_connections != all_possible_connections:
@@ -57,7 +54,7 @@ def run_breadth_first(algorithm_instance, regio):
         visited_start_station.add(start_station)
 
         # Maak een Traject
-        trajectory = compute_trajectory(algorithm_instance, start_station, used_connections, traject_counter)
+        trajectory = compute_trajectory(algorithm_instance, start_station, used_connections, traject_counter, regio)
         traject_counter += 1
         state.add_traject(trajectory)
         
@@ -66,5 +63,5 @@ def run_breadth_first(algorithm_instance, regio):
             break
 
     # Calculate the total score
-    score: int = state.calculate_score()
+    score = state.calculate_score()
     return state, score

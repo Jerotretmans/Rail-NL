@@ -59,26 +59,21 @@ python experiment.py exp1
 
 Met deze opdracht worden twee situaties met elkaar vergeleken. In de eerste situatie begint het algoritme twee van zijn trajecten op de twee drukste stations (Leiden Centraal en Amsterdam Sloterdijk), en in de tweede situatie begint het op de rustigste stations (Den Helder en Dordrecht).
 
-Het eerste experiment werkt met een random algoritme. De bedoeling is om te kijken of rustige beginstations of drukke beginstations betere resultaten verwerven wanneer al het andere willekeurig is. Het runnen van experiment 1 zet twee loops in werking van ieder 60 seconden. Aan het einde van de loops krijgt de gebruiker achter elkaar twee histogrammen te zien met de verdeling van scores van de twee situaties. Op basis van de histogrammen mag de gebruiker zijn/haar conclusies trekken.
+Het eerste experiment werkt met een random algoritme. De bedoeling is om te kijken of rustige beginstations of drukke beginstations betere resultaten verwerven wanneer al het andere willekeurig is. Het runnen van experiment 1 zet 2 algoritmen in werking van ieder 60 seconden. Aan het einde van het runnen van de algoritmen krijgt de gebruiker achter elkaar twee histogrammen te zien met de verdeling van scores van de twee situaties. Op basis van de histogrammen mag de gebruiker zijn/haar conclusies trekken.
 
 ### Experiment 2
 
-Het tweede experiment betreft de temperatuur van het Simulated Annealing algoritme en kan worden aangeroepen met:
+Het tweede experiment is er om te bepalen welk aantal trajecten de hoogst mogelijke score wordt bereikt.
+
+Het tweede experiment kan gerund worden met:
 
 ```
 python experiment.py exp2
 ```
 
+Na het runnen van deze command komen er 2 prompts, waarin je het algoritme kiest, en waarin je het aantal trajecten kiest.
 
-
-### Experiment 3
-
-
-
-
-
-
-
+Met dit experiment kunnen dus per algoritme 7 verschillende situaties worden gemaakt, en die kunnen allemaal met elkaar worden vergeleken. Dit experiment kan op elk algoritme worden toegepast behalve op randalg, omdat daar het aantal trajecten random wordt bepaald. Experiment 2 zet 1 algortime in werking voor 60 seconden die het algoritme blijft runnen met het aangeven aantal trajecten door de gebruiker. Dat resulteert in een lijst met scores en de hoogste score. De scores van de verschillende algoritmen en trajecten kunnen vergeleken worden, en daar kan de gebruiker zijn/haar conclusies trekken.
 
 
 ## Auteurs

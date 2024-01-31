@@ -151,7 +151,7 @@ def run_randalg_bizzey(algorithm_instance: Regeling, regio) -> int:
 def run_randalg_rustaaahg(algorithm_instance: Regeling, regio) -> int:
     rustaaahg_start_stations = start_stations_rustaaahg()
 
-    State: Regeling = Regeling(algorithm_instance.alle_connecties)
+    State = Regeling(algorithm_instance.alle_connecties)
 
     aantal_trajecten: int = random.randint(2, algorithm_instance.max_trajecten)
 
