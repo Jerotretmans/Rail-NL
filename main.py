@@ -92,22 +92,25 @@ if __name__ == "__main__":
             print("Ongeldige invoer. Type 'y' voor wel een histogram of 'n' voor geen histogram.")
 
 
-    # Run het algoritme hoe vaak de gebruiker opgeeft
+    # Run het algoritme hoe vaak de gebruiker heeft opgegeven
     results = alg_object.run_algorithm_N_times(N, alg_object, regio)
-    # results = alg_object.run_algorithm_for_60_sec(alg_object)
+
+    # Return states en scores van de runs
     states = [result[0] for result in results]
     scores = [result[1] for result in results]
+
+    # Bepaal de hoogste score die behaald is
     high_score = max(scores)
-    # print(best_state.traject_list)
     print(f"Highest score: {high_score}")
 
     
-    # Plot een histogram als de gebruiker dat opgeeft
+    # Plot een histogram als de gebruiker dat heeft opgegeven
     if histogram == 'y':
         make_histogram(scores, N, sys.argv[1].lower())
     elif histogram == 'n':
         pass
 
+    # Exporteer de output van de states
     if len(sys.argv) == 3:
         if sys.argv[2] == 'f':
             export_output()

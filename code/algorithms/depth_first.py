@@ -1,5 +1,3 @@
-from typing import Dict, Set, List
-
 import random
 
 from classes.traject import Traject
@@ -10,17 +8,18 @@ Implementatie van het Depth First algoritme.
 """
 
 # Functie voor kiezen van start stations voor trajecten
-def choose_start_station(algorithm_instance: Regeling, visited_start_station):
+def choose_start_station(algorithm_instance, visited_start_station):
     return random.choice([station for station in algorithm_instance.station_objects.values() if station not in visited_start_station])
-            
+
+# 
 def can_lead_to_unvisited(station, visited_stations) -> bool:
     return any(neighbor_name not in visited_stations for neighbor_name in station.connections)
 
 # Functie voor het maken van trajecten
-def compute_trajectory(algorithm_instance: Regeling, start_station, all_visited_stations, traject_counter) -> Traject:
+def compute_trajectory(algorithm_instance: Regeling, start_station, all_visited_stations, traject_counter, regio) -> Traject:
     visited_stations = set()
     stack = [(start_station, 0)]
-    trajectory: Traject = Traject(f"Traject_{traject_counter}")
+    trajectory = Traject(f"Traject_{traject_counter}", regio)
     time_remaining = True
 
     # Loop totdat de stack leeg is of de maximale tijd is bereikt
@@ -62,7 +61,7 @@ def run_depth_first(algorithm_instance, regio):
         for station2, _ in station1.connections.items():
             all_possible_connections.add((station1, algorithm_instance.station_objects[station2]))
             
-    state: Regeling = Regeling(algorithm_instance.alle_connecties)
+    state = Regeling(regio)
 
     # Continue generating trajectories until all exact connections are made
     while used_connections != all_possible_connections:
@@ -70,7 +69,7 @@ def run_depth_first(algorithm_instance, regio):
         visited_start_station.add(start_station)
 
         # Make a trajectory
-        trajectory = compute_trajectory(algorithm_instance, start_station, used_connections, traject_counter)
+        trajectory = compute_trajectory(algorithm_instance, start_station, used_connections, traject_counter, regio)
         traject_counter += 1
         state.add_traject(trajectory)
         # print(trajectory)
