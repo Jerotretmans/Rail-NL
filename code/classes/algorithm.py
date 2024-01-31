@@ -79,7 +79,7 @@ class Algorithm:
         results = []
         self.algorithm_instance = algorithm_instance
 
-        while time.time() - start < 10:
+        while time.time() - start < 60:
             score = self.run_algorithm(self.algorithm_instance, 'h', aantal_trajecten)
             n_runs += 1
             results.append(score)
