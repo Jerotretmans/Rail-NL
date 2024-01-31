@@ -16,12 +16,9 @@ def run_greedy(algorithm_instance, regio) -> int:
     State = Regeling(regio)
 
     # Random aantal trajecten
-    aantal_trajecten: int = algorithm_instance.max_trajecten
+    aantal_trajecten: int = State.max_trajecten
     
     for i in range(aantal_trajecten):
-        # Maximale tijd per traject
-        max_tijd_per_traject: int = random.randint(40, traject.max_tijd)
-
         # random start station
         random_station_name: str = random.choice(list(algorithm_instance.station_objects.keys()))
         random_station = algorithm_instance.station_objects[random_station_name]
@@ -29,11 +26,11 @@ def run_greedy(algorithm_instance, regio) -> int:
         # begin een traject
         traject = Traject(f"Traject_{i+1}", regio)
         
+        # Maximale tijd per traject
+        max_tijd_per_traject: int = random.randint(40, traject.max_tijd)
+
         # begin met het maken van een traject
         traject.add_station(random_station)
-        
-        # Voeg een eerste verbinding toe zodat er nooit 0 verbindingen zijn
-        connected_stations = list(random_station.connections.keys())
 
         if traject.station_counter == 1:
             current_station = random_station

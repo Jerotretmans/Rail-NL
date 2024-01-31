@@ -64,10 +64,50 @@ class SimulatedAnnealing:
         # print(f"score for best_state: {best_state.calculate_score()}")
         
         for i in range(self.iterations):
-            new_state = run_hill_climb_loop(copy.deepcopy(best_state), self.algorithm_instance.max_tijd_traject, self.algorithm_instance.station_objects)
+            new_state = run_sim_ann_loop(copy.deepcopy(best_state), self.algorithm_instance.station_objects)
             # print(f"score for current best_state: {best_state.calculate_score()}")
             # print(f"score for new state: {new_state.calculate_score()}")
             # breakpoint()
             best_state = self.state_compare(new_state, best_state)
         K = best_state.calculate_score()
         return best_state, K
+    
+def run_sim_ann_loop(state, station_objects):
+    state = copy.deepcopy(state)
+    # Loop over elk traject van de dienstregeling
+    for traject in state.traject_list:
+
+        # Delete een random hoeveelheid stations van het traject
+        cut = random.randint(1, traject.station_counter)
+        number_of_deletions = traject.station_counter - cut
+        for i in range(number_of_deletions):
+            traject.delete_station()
+
+        # Voeg random stations toe zo lang ze niet boven maximale trajecttijd vallen
+        while traject.time < traject.max_tijd:
+            # Vind connecties aan het huidige station
+            connected_stations = list(traject.current_station.connections.keys())
+            connected_stations_not_in_traject = []
+
+            # Maak een lijst van stations die nog niet in het traject zitten
+            for station in connected_stations:
+                if station not in traject.stations_in_traject_name_only:
+                    connected_stations_not_in_traject.append(station)
+
+            # Wanneer er geen stations meer kunnen worden toegevoegd wordt loop geeindigd.
+            if len(connected_stations_not_in_traject) == 0:
+                break
+                    
+            # Zoek een random station met connectie aan huidig station dat nog niet in het traject staat
+            next_station_name = random.choice(connected_stations_not_in_traject)
+            next_station = station_objects[next_station_name]
+
+            # Check of totale trajecttijd niet wordt overschreden
+            additional_time = int(traject.current_station.connections[next_station_name])
+            if traject.time + additional_time > traject.max_tijd:
+                break
+            # Wanneer aan alle eisen is voldaan, kan station worden toegevoegd
+            traject.add_station(next_station)
+
+    # return de nieuwe state
+    return state
