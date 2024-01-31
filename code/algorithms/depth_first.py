@@ -7,18 +7,23 @@ from classes.dienstregeling import Regeling
 Implementatie van het Depth First algoritme. Om dit algoritme aan te roepen
 kan je dit script runnen.
 
-Usage: 'python3 depth_first.py holland' or 'python3 depth_first.py nl' 
+Usage: 'python3 depth_first.py holland' or 'python3 depth_first.py nl'
 """
 
-# Functie voor kiezen van start stations voor trajecten
 def choose_start_station(algorithm_instance: Regeling, visited_start_station):
+
+    # Functie voor kiezen van start stations voor trajecten
     return random.choice([station for station in algorithm_instance.station_objects.values() if station not in visited_start_station])
             
 def can_lead_to_unvisited(station, visited_stations) -> bool:
+
+    # Functie voor checken of er nog onbezochte stations zijn vanaf 
     return any(neighbor_name not in visited_stations for neighbor_name in station.connections)
 
-# Functie voor het maken van trajecten
+
 def compute_trajectory(algorithm_instance: Regeling, start_station, all_visited_stations, traject_counter) -> Traject:
+
+    # Functie voor het maken van trajecten
     visited_stations = set()
     stack = [(start_station, 0)]
     trajectory: Traject = Traject(f"Traject_{traject_counter}")
@@ -27,11 +32,14 @@ def compute_trajectory(algorithm_instance: Regeling, start_station, all_visited_
     # Loop totdat de stack leeg is of de maximale tijd is bereikt
     while stack and time_remaining:
         current_station, current_time = stack.pop()
+
         # Check of station al bezocht is
         if current_station not in visited_stations:
+
             # Voeg toe aan bezochte stations
             visited_stations.add(current_station)
             all_visited_stations.add(current_station)
+            
             # Voeg toe aan traject
             trajectory.add_station(current_station)
 
@@ -74,7 +82,7 @@ def run_depth_first(algorithm_instance, regio):
         trajectory = compute_trajectory(algorithm_instance, start_station, used_connections, traject_counter)
         traject_counter += 1
         state.add_traject(trajectory)
-        print(trajectory)
+        # print(trajectory)
 
         if len(state.traject_list) >= algorithm_instance.max_trajecten:
             break

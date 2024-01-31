@@ -12,6 +12,12 @@ from algorithms.depth_first import run_depth_first
 from algorithms.breadth_first import run_breadth_first
 from algorithms.simulated_annealing import run_simulated_annealing
 
+"""
+De Algorithm class roept all verschillende algoritme implementaties aan op verzoek van
+de gebruiker en laat deze algoritmes een N aantal keren - of voor een vaste hoeveelheid tijd - 
+runnen.
+"""
+
 class Algorithm:
 
     def __init__(self, name, stations_data, connections_data, max_trajecten, max_tijd_traject, alle_connecties):

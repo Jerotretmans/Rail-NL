@@ -1,11 +1,5 @@
-import sys
-import random
-from typing import Set, Tuple, List, Dict
+from typing import Set, Tuple, List
 
-sys.path.append('../')
-from helpers import read_csv_file
-
-sys.path.append('/classes')
 from classes.stations import Station
 from classes.traject import Traject
 from classes.dienstregeling import Regeling
@@ -17,7 +11,6 @@ kan je dit script runnen.
 
 Usage: 'python3 breadth_first.py holland' or 'python3 breadth_first.py nl' 
 """
-
 # Maken van trajecten voor breadth_first algoritme
 def compute_trajectory(algorithm_instance: Regeling, start_station: Station, all_visited_stations: Set[Station], traject_counter) -> Traject:
     visited_stations: Set[Station] = set()
@@ -47,7 +40,6 @@ def compute_trajectory(algorithm_instance: Regeling, start_station: Station, all
                         break
 
     return trajectory
-
 
 # Eenmalig runnen van het breadth_first algoritme
 def run_breadth_first(algorithm_instance, regio):
