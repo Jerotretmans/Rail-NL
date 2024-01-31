@@ -1,9 +1,5 @@
 import sys
 import random
-from typing import Dict, Set, List, Tuple
-
-import random
-
 from classes.traject import Traject
 from classes.dienstregeling import Regeling
 
