@@ -16,11 +16,6 @@ Gebruik de README.md als gebruiksaanwijzing!
 """
 
 
-max_trajecten_holland = 7
-max_tijd_traject_holland = 120
-alle_connecties_holland = 28
-
-
 if __name__ == "__main__":
 
     # Verzeker het correcte gebruik van de code
@@ -42,35 +37,39 @@ if __name__ == "__main__":
 
     # Run het experiment dat de gebruiker aangeeft
     if sys.argv[1].lower() == 'exp1':
-        alg_object1 = Algorithm('bizzey', stations_data, connections_data, max_trajecten_holland, max_tijd_traject_holland, alle_connecties_holland)
+        alg_object1 = Algorithm('bizzey', stations_data, connections_data)
         alg_object1.create_station_objects()
-        alg_object2 = Algorithm('rustaaahg', stations_data, connections_data, max_trajecten_holland, max_tijd_traject_holland, alle_connecties_holland)
+        alg_object2 = Algorithm('rustaaahg', stations_data, connections_data)
         alg_object2.create_station_objects()
 
         # Definieer de scores voor de twee cases van experiment 1
-        scores_list1 = alg_object1.run_algorithm_for_60_sec(alg_object1)
-        high_score = max(scores_list1)
-        print(f"Highest score: {high_score}")
+        results1 = alg_object1.run_algorithm_for_60_sec(alg_object1, aantal_trajecten=None)
+        states1 = [result[0] for result in results1]
+        scores1 = [result[1] for result in results1]
+        high_score1 = max(scores1)
+        print(f"Highest score: {high_score1}")
 
-        scores_list2 = alg_object2.run_algorithm_for_60_sec(alg_object2)
-        high_score = max(scores_list2)
-        print(f"Highest score: {high_score}")
+        results2 = alg_object1.run_algorithm_for_60_sec(alg_object1, aantal_trajecten=None)
+        states2 = [result[0] for result in results2]
+        scores2 = [result[1] for result in results2]
+        high_score2 = max(scores2)
+        print(f"Highest score: {high_score2}")
 
         # Plot een histogram
         if histogram == 'y':
-            make_histogram(scores_list1, len(scores_list1), 'br')
-            make_histogram(scores_list2, len(scores_list2), 'qr')
+            make_histogram(scores1, len(scores1), 'br')
+            make_histogram(scores2, len(scores2), 'qr')
         else:
             pass
 
     elif sys.argv[1].lower() == 'exp2':
         
-        # Vraagt de gebruiker welk algoritme hij/zij wil gebruiken voor het experiment
+        # Vraagt de gebruiker welk algoritme hij/zij wilt gebruiken voor het experiment
         alg_name = None
         while alg_name == None:
-            alg_afk = str(input("Voor welk algoritme wil je het experiment uitvoeren? <gr, hc, sa, df, bf>: ")).lower()
+            alg_afk = str(input("Voor welk algoritme wil je het experiment uitvoeren?\n {gr, hc, sa, df, bf}: ")).lower()
 
-        # Runt desbetreffende algoritme 
+            # Runt desbetreffende algoritme 
             if alg_afk.lower() in alg_dict:
                 alg_name: str = alg_dict[alg_afk.lower()]
             else:
@@ -80,12 +79,12 @@ if __name__ == "__main__":
         while aantal_trajecten < 1 or aantal_trajecten > 7:
             aantal_trajecten = int(input("Hoeveel trajecten wil je instellen? (1 - 7): "))
 
-        # Creeërt algoritme object voor aangegeven hoeveelheid trajecten
-        alg_object = Algorithm(alg_name, stations_data, connections_data, aantal_trajecten, max_tijd_traject_holland, alle_connecties_holland)
+        # Creeërt een algoritme object voor aangegeven hoeveelheid trajecten
+        alg_object = Algorithm(alg_name, stations_data, connections_data)
         alg_object.create_station_objects()
         
         # Runt algoritme voor 60 sec en creërt een lijst met alle gecreërde states met scores
-        results = alg_object.run_algorithm_for_60_sec(alg_object)
+        results = alg_object.run_algorithm_for_60_sec(alg_object, aantal_trajecten)
         states = [result[0] for result in results]
         scores = [result[1] for result in results]
 

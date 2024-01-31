@@ -40,57 +40,61 @@ class Algorithm:
         return self.station_objects
     
     # run_algorithm roept vershillende agoritmes in hun eigen script aan op verzoek van de gebruiker
-    def run_algorithm(self, algorithm_instance, regio):
+    def run_algorithm(self, algorithm_instance, regio, aantal_trajecten):
         self.algorithm_instance = algorithm_instance
         self.regio = regio
 
         # Namen van algoritmen in load_algorithm_dict() in helpers.py
         if self.name == 'random':
-            return run_randalg(algorithm_instance, regio)
+            return run_randalg(algorithm_instance, regio, aantal_trajecten=None)
             
         elif self.name == 'greedy':
             return run_greedy(algorithm_instance, regio, aantal_trajecten)
 
         elif self.name == 'hill climber':
-            return run_hill_climber(algorithm_instance, regio)
+            return run_hill_climber(algorithm_instance, regio, aantal_trajecten)
 
         elif self.name == 'depth first':
-            return run_depth_first(algorithm_instance, regio)
+            return run_depth_first(algorithm_instance, regio, aantal_trajecten=None)
 
         elif self.name == 'breadth first':
-            return run_breadth_first(algorithm_instance, regio)
+            return run_breadth_first(algorithm_instance, regio, aantal_trajecten=None)
         
         elif self.name == 'simulated annealing':
-            return run_simulated_annealing(algorithm_instance, regio)
+            return run_simulated_annealing(algorithm_instance, regio, aantal_trajecten)
         
         elif self.name == 'bizzey':
-            return run_randalg_bizzey(algorithm_instance, regio)
+            return run_randalg_bizzey(algorithm_instance, regio, aantal_trajecten=None)
             
         elif self.name == 'rustaaahg':
-            return run_randalg_rustaaahg(algorithm_instance, regio)
+            return run_randalg_rustaaahg(algorithm_instance, regio, aantal_trajecten=None)
         
         else:
             raise AssertionError ("Geen valide naam!")
     
     # Runt het algoritme voor een vaste tijd (60 sec)
-    def run_algorithm_for_60_sec(self, algorithm_instance):
+    def run_algorithm_for_60_sec(self, algorithm_instance, aantal_trajecten):
         start = time.time()
         n_runs = 0
         results = []
         self.algorithm_instance = algorithm_instance
-        while time.time() - start < 60:
-            score = self.run_algorithm(self.algorithm_instance, 'h')
+
+        while time.time() - start < 10:
+            score = self.run_algorithm(self.algorithm_instance, 'h', aantal_trajecten)
             n_runs += 1
             results.append(score)
+            print(f"Run: {n_runs}")
         print(f"Totaal aantal gemaakte runs: {n_runs}")
+
         return results
 
     # Runt het algoritme een N aantal keren (def N in main.py)
-    def run_algorithm_N_times(self, N, algorithm_instance, regio):
+    def run_algorithm_N_times(self, N, algorithm_instance, regio, aantal_trajecten):
         results = []
         self.algorithm_instance = algorithm_instance
 
         for _ in range(N):
-            score = self.run_algorithm(self.algorithm_instance, regio)
+            score = self.run_algorithm(self.algorithm_instance, regio, aantal_trajecten)
             results.append(score)
+
         return results

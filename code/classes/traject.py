@@ -4,7 +4,7 @@ from .stations import Station
 Returnt een lijst met namen van stations die aan elkaar verbonden zijn.
 Telt de totale duur van het traject op. 
 
-Constraint: max 120 min per traject
+Constraint: max 2 uur per traject in Holland, 3 uur per traject in Nederland.
 """
     
 

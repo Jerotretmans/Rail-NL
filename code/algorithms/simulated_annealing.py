@@ -9,8 +9,8 @@ from .greedy import run_greedy
 from .hill_climber import run_hill_climb_loop
 
 # Run het simulated annealing algoritme
-def run_simulated_annealing(algorithm_instance, regio):
-    sim_ann = SimulatedAnnealing(algorithm_instance)
+def run_simulated_annealing(algorithm_instance, regio, aantal_trajecten):
+    sim_ann = SimulatedAnnealing(algorithm_instance, regio, aantal_trajecten)
     State, K = sim_ann.run_sim_ann()
     return State, K
 
@@ -22,8 +22,10 @@ class SimulatedAnnealing:
     """
 
     # Initialiseer het algoritme, tempratuur, start tempratuur en iteraties
-    def __init__(self, algorithm_instance):
+    def __init__(self, algorithm_instance, regio, aantal_trajecten):
         self.algorithm_instance = algorithm_instance
+        self.aantal_trajecten = aantal_trajecten
+        self.regio = regio
         self.T0 = 80
         self.T = 120
         self.iterations = 170
@@ -59,7 +61,7 @@ class SimulatedAnnealing:
  
     def run_sim_ann(self):
         # geldige oplossing als input van het algoritme
-        start_state, K_start = run_greedy(self.algorithm_instance, 'h')
+        start_state, K_start = run_greedy(self.algorithm_instance, self.regio, self.aantal_trajecten)
         best_state = copy.deepcopy(start_state)
         # print(f"score for best_state: {best_state.calculate_score()}")
         

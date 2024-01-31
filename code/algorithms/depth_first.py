@@ -51,7 +51,7 @@ def compute_trajectory(algorithm_instance, start_station, all_visited_stations, 
     
     return trajectory
 
-def run_depth_first(algorithm_instance, regio):
+def run_depth_first(algorithm_instance, regio, aantal_trajecten):
     visited_start_station = set()
     all_possible_connections = set()
     used_connections = set()

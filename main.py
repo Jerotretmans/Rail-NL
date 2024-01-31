@@ -49,19 +49,27 @@ if __name__ == "__main__":
         stations_data = read_csv_file('data/StationsNationaal.csv')
         connections_data = read_csv_file('data/ConnectiesNationaal.csv')
 
+    T = None
+
     # Run algoritme op verzoek van de gebruiker
     if sys.argv[1].lower() in alg_dict:
-        alg_name = alg_dict[sys.argv[1].lower()]
+        alg_afk = sys.argv[1].lower()
+        alg_name = alg_dict[alg_afk]
 
         alg_object = Algorithm(alg_name, stations_data, connections_data)
         alg_object.create_station_objects()
+
+        if alg_afk == 'gr' or alg_afk == 'hc' or alg_afk == 'sa':
+            while T == None:
+                T = int(input("Hoeveel trajecten moeten er worden gemaakt? ")) 
+
     else:
         print("Geen valide naam!")
 
 
     # Vraag om een hoeveelheid runs van het algoritme
     try:
-        N = int(input("Hoe vaak moet het algoritme worden uitgevoerd "))
+        N = int(input("Hoe vaak moet het algoritme worden uitgevoerd? "))
     # Accepteer alleen integers
     except ValueError:
         print("Alleen hele getallen a.u.b.")
@@ -74,9 +82,9 @@ if __name__ == "__main__":
         if histogram not in ['y', 'n']:
             print("Ongeldige invoer. Type 'y' voor wel een histogram of 'n' voor geen histogram.")
 
-
+    
     # Run het algoritme hoe vaak de gebruiker heeft opgegeven
-    results = alg_object.run_algorithm_N_times(N, alg_object, regio)
+    results = alg_object.run_algorithm_N_times(N, alg_object, regio, T)
 
     # Return states en scores van de runs
     states = [result[0] for result in results]
@@ -92,11 +100,3 @@ if __name__ == "__main__":
         make_histogram(scores, N, sys.argv[1].lower())
     elif histogram == 'n':
         pass
-
-    # Exporteer de output van de states
-    if len(sys.argv) == 3:
-        if sys.argv[2] == 'f':
-            export_output()
-        else:
-            pass
-

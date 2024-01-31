@@ -38,7 +38,7 @@ def compute_trajectory(algorithm_instance, start_station, all_visited_stations, 
 
 
 # Eenmalig runnen van het breadth_first algoritme
-def run_breadth_first(algorithm_instance, regio):
+def run_breadth_first(algorithm_instance, regio, aantal_trajecten):
     visited_start_station = set()
     all_possible_connections = {(station1, algorithm_instance.station_objects[station2]) for station1 in algorithm_instance.station_objects.values() for station2 in station1.connections}
     used_connections = set()

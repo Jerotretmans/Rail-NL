@@ -10,22 +10,24 @@ from .greedy import run_greedy
 from classes.dienstregeling import Regeling
 
 
-def run_hill_climber(algorithm_instance: Regeling, regio) -> int:
+def run_hill_climber(algorithm_instance, regio, aantal_trajecten) -> int:
     # Creeër een begin state middels het greedy algoritme
-    start_state, K_start = run_greedy(algorithm_instance, regio)
+    start_state, K_start = run_greedy(algorithm_instance, regio, aantal_trajecten)
     # Begin state toewijzen als beste state
     best_state = start_state
 
     # Zet het aantal iteraties
     iterations = 100
-    for i in range(iterations):
+    for _ in range(iterations):
+
         # Run de loop om een nieuwe state te verkrijgen
         state = run_hill_climb_loop(copy.deepcopy(best_state), algorithm_instance.station_objects)
+        
         # Check of nieuwe state een verbetering is
         best_state = state_compare(state, best_state)
 
     # Bereken de score van de beste dienstregeling
-    K: int = best_state.calculate_score()
+    K = best_state.calculate_score()
     return best_state, K
 
 """

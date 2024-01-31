@@ -10,13 +10,13 @@ Implementatie van het greedy algoritme.
 """
 
 # Eenmalige run van het random algoritme
-def run_greedy(algorithm_instance, regio) -> int:
+def run_greedy(algorithm_instance, regio, aantal_trajecten) -> int:
 
     # Roep een toestand op waarin de dienstregeling zich verkeert
     State = Regeling(regio)
 
     # Random aantal trajecten
-    aantal_trajecten: int = State.max_trajecten
+    assert aantal_trajecten < State.max_trajecten
     
     for i in range(aantal_trajecten):
         # random start station
@@ -59,5 +59,5 @@ def run_greedy(algorithm_instance, regio) -> int:
     
 
     # Bereken de score van de gehele dienstregeling
-    K: int = State.calculate_score()
+    K = State.calculate_score()
     return State, K
