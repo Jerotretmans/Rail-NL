@@ -2,11 +2,8 @@ import sys
 import random
 from typing import Dict, Set, List, Tuple
 
-sys.path.append('../')
-from helpers import read_csv_file
+import random
 
-sys.path.append('/classes')
-from classes.stations import Station
 from classes.traject import Traject
 from classes.dienstregeling import Regeling
 
@@ -18,16 +15,16 @@ Usage: 'python3 depth_first.py holland' or 'python3 depth_first.py nl'
 """
 
 # Functie voor kiezen van start stations voor trajecten
-def choose_start_station(algorithm_instance: Regeling, visited_start_station: Set[Station]) -> Station:
+def choose_start_station(algorithm_instance: Regeling, visited_start_station):
     return random.choice([station for station in algorithm_instance.station_objects.values() if station not in visited_start_station])
             
-def can_lead_to_unvisited(station: Station, visited_stations) -> bool:
+def can_lead_to_unvisited(station, visited_stations) -> bool:
     return any(neighbor_name not in visited_stations for neighbor_name in station.connections)
 
 # Functie voor het maken van trajecten
-def compute_trajectory(algorithm_instance: Regeling, start_station: Station, all_visited_stations: Set[Station], traject_counter) -> Traject:
-    visited_stations: Set[Station] = set()
-    stack: List[Tuple[Station, int]] = [(start_station, 0)]
+def compute_trajectory(algorithm_instance: Regeling, start_station, all_visited_stations, traject_counter) -> Traject:
+    visited_stations = set()
+    stack = [(start_station, 0)]
     trajectory: Traject = Traject(f"Traject_{traject_counter}")
     time_remaining = True
 
@@ -59,10 +56,10 @@ def compute_trajectory(algorithm_instance: Regeling, start_station: Station, all
                         break
     return trajectory
 
-def run_depth_first(algorithm_instance: Regeling) -> Tuple[Regeling, int]:
-    visited_start_station: Set[Station] = set()
-    all_possible_connections: Set[Tuple[Station, Station]] = set()
-    used_connections: Set[Tuple[Station, Station]] = set()
+def run_depth_first(algorithm_instance, regio):
+    visited_start_station = set()
+    all_possible_connections = set()
+    used_connections = set()
     traject_counter = 1
 
     # Create a set of all possible connections between stations

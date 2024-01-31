@@ -1,20 +1,16 @@
 import sys
 sys.path.append('../')
-from greedy import run_greedy
+sys.path.append('/classes')
+
 import random
 import copy
 
-sys.path.append('../')
-from helpers import read_csv_file
-from hill_climber import run_hill_climber, run_hill_climb_loop
+from .greedy import run_greedy
+from .hill_climber import run_hill_climb_loop
 
-sys.path.append('/classes')
-from classes.stations import Station
-from classes.traject import Traject
-from classes.dienstregeling import Regeling
+from code.visualisation.plot import plot_scores
 
-
-def run_simulated_annealing(algorithm_instance: Regeling):
+def run_simulated_annealing(algorithm_instance, regio):
     sim_ann = SimulatedAnnealing(algorithm_instance)
     State, K = sim_ann.run_sim_ann()
     return State, K
@@ -56,7 +52,7 @@ class SimulatedAnnealing:
  
     def run_sim_ann(self):
         # geldige oplossing als input van het algoritme
-        start_state, K_start = run_greedy(self.algorithm_instance)
+        start_state, K_start = run_greedy(self.algorithm_instance, 'h')
         best_state = copy.deepcopy(start_state)
         # print(f"score for best_state: {best_state.calculate_score()}")
         

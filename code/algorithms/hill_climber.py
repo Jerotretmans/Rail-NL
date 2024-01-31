@@ -1,24 +1,23 @@
 import sys
 sys.path.append('../')
-from greedy import run_greedy
+sys.path.append('/classes')
+
 import random
 import copy
-sys.path.append('../')
-from helpers import read_csv_file
-sys.path.append('/classes')
-from classes.stations import Station
-from classes.traject import Traject
+
+from .greedy import run_greedy
+
 from classes.dienstregeling import Regeling
 
 
-def run_hill_climber(algorithm_instance: Regeling) -> int:
+def run_hill_climber(algorithm_instance: Regeling, regio) -> int:
     # State = Regeling(algorithm_instance.alle_connecties)
 
-    start_state, K_start = run_greedy(algorithm_instance)
+    start_state, K_start = run_greedy(algorithm_instance, regio)
 
     best_state, K_best = start_state, K_start
     iterations = 100
-    for i in range(iterations):
+    for _ in range(iterations):
         state = run_hill_climb_loop(best_state, algorithm_instance.max_tijd_traject, algorithm_instance.station_objects)
         K = state.calculate_score()
         best_state = state_compare(K, K_best, state, best_state)

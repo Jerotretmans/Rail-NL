@@ -15,12 +15,13 @@ class Traject:
     
     def __init__(self, name: str) -> None:
         # Initializeer het traject object, met een naam, een lijst stations en de totale tijd
-        self.name: str = name
-        self.stations_in_traject: List[Station] = []
-        self.stations_in_traject_name_only: List[str] = []
-        self.station_counter: int = 0
-        self.time: int = 0
-        self.current_station: Optional[Station] = None
+        self.name = name
+        self.stations_in_traject = []
+        self.stations_in_traject_name_only = []
+        self.station_counter = 0
+        self.time = 0
+        self.current_station = None
+        self.max_tijd: int
         
     
     def add_station(self, new_station: Station) -> None:
