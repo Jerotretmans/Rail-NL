@@ -43,6 +43,7 @@ Na het aanroepen van het commando wordt er in de terminal een aantal vragen gest
 - Hoeveel trajecten moeten er worden gecreeërd?
   - Wanneer u voor regio Holland heeft gekozen, kies voor 1 - 7 trajecten.
   - Wanneer u voor regio Nederland heeft gekozen, kies voor 1 - 20 trajecten.
+  - Zoals uit de experimenten (zie 'Experimenten') blijkt is het optima voor de algoritmes 'greedy', 'hill-climber' & 'simulated annealing' 4 trajecten voor Holland en 10 trajecten voor Nederland.
 - Hoe vaak moet het algoritme worden uitgevoerd?
   - Vul een geheel getal in boven de 0
 - Wil je een histogram van de data? (y/n):

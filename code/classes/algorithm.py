@@ -17,14 +17,14 @@ runnen.
 
 class Algorithm:
 
-    def __init__(self, name, stations_data, connections_data):
+    def __init__(self, name, stations_data, connections_data) -> None:
         self.name = name
         self.station_objects = {}
         self.stations_data = stations_data
         self.connections_data = connections_data
 
     # Voeg station objecten toe aan een lijst
-    def create_station_objects(self):
+    def create_station_objects(self) -> Station:
         for row in self.stations_data:
             station_name = row[0]
             self.station_objects[station_name] = Station(station_name)

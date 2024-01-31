@@ -2,10 +2,8 @@ import sys
 sys.path.append('code')
 sys.path.append('code/visualisation')
 
-from code.helpers import read_csv_file, load_algorithms_dict, export_output
-
+from code.helpers import read_csv_file, load_algorithms_dict
 from code.classes.algorithm import Algorithm
-
 from code.visualisation.hist import make_histogram
 
 
