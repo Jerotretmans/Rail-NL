@@ -24,7 +24,7 @@ def load_algorithms_dict() -> dict:
             'hc': 'hill climber',\
             'df': 'depth first',\
             'bf': 'breadth first',\
-            'sa': 'simmulated annealing',\
+            'sa': 'simulated annealing',\
             'br': 'bizzey',\
             'qr': 'rustaaahg'}
 

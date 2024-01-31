@@ -1,5 +1,5 @@
 {
-    "workbench.colorTheme": "Neon Vommit",
+    "workbench.colorTheme": "Default Dark Modern",
     "python.analysis.extraPaths": [
         "./code/classes",
         "./code/algorithms"
