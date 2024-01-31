@@ -38,11 +38,11 @@ class Traject:
             for connected_station_name, time in new_station.connections.items():
                 if connected_station_name == self.current_station.get_name():
                     
-                    # station toevoegen aan traject lijst
+                    # Station toevoegen aan traject lijst
                     self.stations_in_traject.append(new_station)    
                     self.stations_in_traject_name_only.append(new_station.get_name())
                     
-                    # nieuw station wordt huidig station
+                    # Nieuw station wordt huidig station
                     self.current_station = new_station  
                     time: int = int(time)
 
@@ -55,19 +55,23 @@ class Traject:
                     
     def delete_station(self) -> None:
 
-        # 
+        # Delete het laatste station van de lijst met objecten en namen
         station_to_delete = self.stations_in_traject.pop()
         self.stations_in_traject_name_only.pop()
+
+        # Check de index van station achteraan in de lijst
         self.station_counter = len(self.stations_in_traject)
         index_new = self.station_counter - 1
-        station_next_to_it = self.stations_in_traject[index_new].name
-        time = station_to_delete.connections[station_next_to_it]
+
+        # Verander het huidige station naar laatste station in de lijst na deleten
+        last_station_in_list_name = self.stations_in_traject[index_new].name
+        time = station_to_delete.connections[last_station_in_list_name]
         self.current_station = self.stations_in_traject[index_new]
 
+        # Trek tijd van verloren connectie af van totale tijd
         time: int = int(time)
         self.time -= time
 
+    # Object representatie
     def __repr__(self):
         return f"{self.name}, {self.stations_in_traject_name_only}\n"
-
-  

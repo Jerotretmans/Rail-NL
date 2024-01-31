@@ -25,11 +25,8 @@ class Regeling:
     def add_traject(self, new_traject) -> None:
         self.traject_list.append(new_traject)
 
-    def __repr__(self):
-        return f"{self.traject}: {self.traject_list}"
-
     # Berekent de kwaliteitsscore van de gehele dienstregeling
-    def calculate_score(self):
+    def calculate_score(self) -> int:
         unique_connections = set()
         traject_counter = 0
         minutes = 0
@@ -47,10 +44,12 @@ class Regeling:
         # Stel variabelen in
         p = len(unique_connections) / self.alle_connecties
         T = traject_counter
-        # print(T)
         Min = minutes
-        # print(Min)
 
         # Bereken de score
-        K = round(p * 10000 - (T * 100 + Min))     
+        K = round(p * 10000 - (T * 100 + Min))
         return K
+
+    # Object representatie
+    def __repr__(self):
+        return f"{self.traject}: {self.traject_list}"
