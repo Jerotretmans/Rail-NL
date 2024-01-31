@@ -45,9 +45,11 @@ def compute_trajectory(algorithm_instance: Regeling, start_station, all_visited_
                                         reverse=True)
 
             for next_station_name, time_to_next in sorted_connections:
+                
                 if next_station_name not in visited_stations:
                     next_station = algorithm_instance.station_objects[next_station_name]
                     time_to_next_int: int = int(time_to_next)
+
                     if current_time + time_to_next_int <= algorithm_instance.max_tijd_traject:
                         if next_station_name not in visited_stations or can_lead_to_unvisited(next_station, visited_stations, algorithm_instance):
                             stack.append((next_station, current_time + time_to_next_int))
