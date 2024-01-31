@@ -92,7 +92,7 @@ if __name__ == "__main__":
         index_highest_score = scores.index(max(scores))
         # print(index_highest_score)
         best_state = states[index_highest_score]
-        # print(best_state)
+        print(best_state)
         # als je experiment wilt runnen
         high_score: int = max(scores)
         average_score = statistics.mean(scores)

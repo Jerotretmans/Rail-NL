@@ -37,7 +37,7 @@ if __name__ == "__main__":
     alg_dict: Dict[str, str] = load_algorithms_dict()
 
     # Vraag aan de gebruiker voor welke regio het algoritme moet worden uitgevoerd
-    regio: Optional[str] = 'h'
+    regio: Optional[str] = 'nl'
     # while regio not in ['h', 'nl']:
     #     regio = str(input("Voor regio Holland of Nationaal? (h/nl): ")).lower()
 
@@ -46,7 +46,7 @@ if __name__ == "__main__":
 
     # maximaal antaal trajecten en tijd per traject gebasseerd op regio
     max_trajecten_holland = 7
-    max_trajecten_nationaal = 20
+    max_trajecten_nationaal = 10
     max_tijd_traject_holland = 120
     max_tijd_traject_nationaal = 180
     alle_connecties_holland = 28
