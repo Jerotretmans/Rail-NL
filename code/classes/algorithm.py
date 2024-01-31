@@ -70,7 +70,7 @@ class Algorithm:
         n_runs = 0
         scores_list: List[int] = []
         self.algorithm_instance = algorithm_instance
-        while time.time() - start < 2000:
+        while time.time() - start < 20:
             print(f"run: {n_runs}")
             score = self.run_algorithm(self.algorithm_instance)
             n_runs += 1

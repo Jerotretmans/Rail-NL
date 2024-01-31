@@ -1,3 +1,4 @@
+
 import csv
 from typing import List, Set
 from classes.traject import Traject
@@ -20,10 +21,6 @@ class Regeling:
         # assert len(self.traject_list) < 8, "Maximaal aantal trajecten berekit!"
         self.traject_list.append(new_traject)
 
-    def __repr__(self):
-        return f"{self.traject}: {self.traject_list}"
-            
-
     # Berekent de kwaliteitsscore van de gehele dienstregeling
     def calculate_score(self) -> int:
         unique_connections: Set[frozenset] = set()
@@ -43,7 +40,7 @@ class Regeling:
         # Stel variabelen in
         # print(self)
         p = len(unique_connections) / self.alle_connecties
-        # print(f"{len(unique_connections)} / {self.alle_connecties}")
+        # print(unique_connections)
         # print(p)
         T = traject_counter
         # print(T)
