@@ -19,7 +19,7 @@ def can_lead_to_unvisited(station, visited_stations) -> bool:
     return any(neighbor_name not in visited_stations for neighbor_name in station.connections)
 
 # Functie voor het maken van trajecten
-def compute_trajectory(algorithm_instance: Regeling, start_station, all_visited_stations, traject_counter, regio) -> Traject:
+def compute_trajectory(algorithm_instance, start_station, all_visited_stations, traject_counter, regio) -> Traject:
     visited_stations = set()
     stack = [(start_station, 0)]
     trajectory = Traject(f"Traject_{traject_counter}", regio)
@@ -49,13 +49,13 @@ def compute_trajectory(algorithm_instance: Regeling, start_station, all_visited_
                 if next_station_name not in visited_stations:
                     next_station = algorithm_instance.station_objects[next_station_name]
                     time_to_next_int: int = int(time_to_next)
-
-                    if current_time + time_to_next_int <= algorithm_instance.max_tijd_traject:
+                    if current_time + time_to_next_int <= trajectory.max_tijd:
                         if next_station_name not in visited_stations or can_lead_to_unvisited(next_station, visited_stations, algorithm_instance):
                             stack.append((next_station, current_time + time_to_next_int))
                     else:
                         time_remaining = False
                         break
+    
     return trajectory
 
 def run_depth_first(algorithm_instance, regio):
@@ -80,11 +80,10 @@ def run_depth_first(algorithm_instance, regio):
         trajectory = compute_trajectory(algorithm_instance, start_station, used_connections, traject_counter, regio)
         traject_counter += 1
         state.add_traject(trajectory)
-        # print(trajectory)
 
-        if len(state.traject_list) >= algorithm_instance.max_trajecten:
+        if len(state.traject_list) >= state.max_trajecten:
             break
 
     # Calculate the total score
-    score: int = state.calculate_score()
+    score = state.calculate_score()
     return state, score

@@ -17,14 +17,11 @@ runnen.
 
 class Algorithm:
 
-    def __init__(self, name, stations_data, connections_data, max_trajecten, max_tijd_traject, alle_connecties):
+    def __init__(self, name, stations_data, connections_data):
         self.name = name
         self.station_objects = {}
         self.stations_data = stations_data
         self.connections_data = connections_data
-        self.max_trajecten: int = max_trajecten
-        self.max_tijd_traject: int = max_tijd_traject
-        self.alle_connecties = alle_connecties
 
     # Voeg station objecten toe aan een lijst
     def create_station_objects(self):
