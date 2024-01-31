@@ -79,7 +79,7 @@ def run_breadth_first(algorithm_instance, regio):
         # Voeg de connecties toe
         used_connections.update(trajectory_used_connections)
         
-        # Update traject counter
+        # Update traject counter om aantal trajecten bij te houden voor de benaming
         traject_counter += 1
 
         # Voeg het traject toe aan de dienstregeling

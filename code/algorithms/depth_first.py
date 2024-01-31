@@ -55,7 +55,7 @@ def compute_trajectory(algorithm_instance, start_station, all_visited_stations, 
                     # Check of het toevoegen van een connectie niet te tijd overschrijd
                     if current_time + time_to_next_int <= trajectory.max_tijd:
                         if next_station_name not in visited_stations or can_lead_to_unvisited(next_station, visited_stations, algorithm_instance):
-                             if current_station.name < next_station_name:  # Ensure consistent ordering for undirected connections
+                             if current_station.name < next_station_name:
                                 used_connections.add((current_station.name, next_station_name))
                              else:
                                 used_connections.add((next_station_name, current_station.name))
@@ -76,7 +76,7 @@ def run_depth_first(algorithm_instance, regio):
     used_connections = set()
     traject_counter = 1
 
-    # Create a set of all possible connections between stations
+    # Maak een set van alle mogelijke verbindingen
     for station1 in algorithm_instance.station_objects.values():
         for station2, _ in station1.connections.items():
             all_possible_connections.add((station1, algorithm_instance.station_objects[station2]))
@@ -84,18 +84,18 @@ def run_depth_first(algorithm_instance, regio):
     # Maak een state
     state = Regeling(regio)
 
-    # Continue generating trajectories until all exact connections are made
+    # Loop totdat alle connecties zijn gemaakt
     while used_connections != all_possible_connections:
         start_station = choose_start_station(algorithm_instance, visited_start_station)
         visited_start_station.add(start_station)
 
-        # Make a trajectory
+        # Maak een traject
         trajectory, trajectory_used_connections = compute_trajectory(algorithm_instance, start_station, used_connections, traject_counter, regio)
 
         # Voeg de connecties toe
         used_connections.update(trajectory_used_connections)
 
-        # Update traject counter
+        # Update traject teller om aantal trajecten bij te houden
         traject_counter += 1
 
         # Voeg het traject toe aan de dienstregeling
@@ -109,6 +109,6 @@ def run_depth_first(algorithm_instance, regio):
             if len(state.traject_list) >= 11 or len(state.traject_list) >= state.max_trajecten:
                 break
 
-    # Calculate the total score
+    # Bereken de totale score
     score = state.calculate_score()
     return state, score
