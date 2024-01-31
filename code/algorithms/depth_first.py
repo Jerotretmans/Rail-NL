@@ -1,6 +1,4 @@
-import sys
-import random
-from typing import Dict, Set, List, Tuple
+from typing import Dict, Set, List
 
 import random
 
@@ -8,10 +6,7 @@ from classes.traject import Traject
 from classes.dienstregeling import Regeling
 
 """
-Implementatie van het Depth First algoritme. Om dit algoritme aan te roepen
-kan je dit script runnen.
-
-Usage: 'python3 depth_first.py holland' or 'python3 depth_first.py nl' 
+Implementatie van het Depth First algoritme.
 """
 
 # Functie voor kiezen van start stations voor trajecten
@@ -78,7 +73,7 @@ def run_depth_first(algorithm_instance, regio):
         trajectory = compute_trajectory(algorithm_instance, start_station, used_connections, traject_counter)
         traject_counter += 1
         state.add_traject(trajectory)
-        print(trajectory)
+        # print(trajectory)
 
         if len(state.traject_list) >= algorithm_instance.max_trajecten:
             break

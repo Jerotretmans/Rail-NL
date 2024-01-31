@@ -1,21 +1,12 @@
-import sys
-import random
-from typing import Set, Tuple, List, Dict
+from typing import Set, Tuple, List
 
-sys.path.append('../')
-from helpers import read_csv_file
-
-sys.path.append('/classes')
 from classes.stations import Station
 from classes.traject import Traject
 from classes.dienstregeling import Regeling
 from .depth_first import choose_start_station
 
 """
-Implementatie van het Breadth First algoritme. Om dit algoritme aan te roepen
-kan je dit script runnen.
-
-Usage: 'python3 breadth_first.py holland' or 'python3 breadth_first.py nl' 
+Implementatie van het Breadth First algoritme.
 """
 
 # Maken van trajecten voor breadth_first algoritme

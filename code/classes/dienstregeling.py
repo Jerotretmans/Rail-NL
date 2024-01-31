@@ -1,13 +1,15 @@
 from classes.traject import Traject
 
 
-class Regeling:
-    """
-    Een verzameling trajecten die samen zo veel mogelijk stations bereikt in zo min 
-    mogelijk tijd, en waar elke verbinding gereden wordt. Score: K = p*10000 - (T*100 + Min)
+"""
+Een verzameling trajecten die samen zo veel mogelijk stations bereikt in zo min 
+mogelijk tijd, en waar elke verbinding gereden wordt. Score: K = p*10000 - (T*100 + Min)
 
-    Constraint: max 7 trajecten in regio Holland, max 20 op nationaal niveau
-    """
+Constraint: max 7 trajecten in regio Holland, max 20 op nationaal niveau
+"""
+
+class Regeling:
+    
     def __init__(self, alle_connecties) -> None:
         self.traject_list = []
         self.traject = Traject('Name')
